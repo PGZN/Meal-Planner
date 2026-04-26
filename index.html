@@ -1,7 +1,8 @@
 <!DOCTYPE html>
-<!-- saved from url=(0050)file:///Users/ralphalarilla/Downloads/index_8.html -->
+<!-- saved from url=(0046)file:///Users/ralphalarilla/Desktop/index.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Family Meal Planner</title>
   <style>
@@ -934,16 +935,17 @@
   </header>
 
   <div class="tabs">
-    <div class="tab active" onclick="switchTab(&#39;library&#39;)">Library</div>
+    <div class="tab" onclick="switchTab(&#39;library&#39;)">Library</div>
     <div class="tab" onclick="switchTab(&#39;planner&#39;)">This Week</div>
     <div class="tab" onclick="switchTab(&#39;staples&#39;)">Staples</div>
-    <div class="tab" onclick="switchTab(&#39;discover&#39;)">Discover</div>
+    <div class="tab active" onclick="switchTab(&#39;discover&#39;)">Discover</div>
     <div class="tab" onclick="switchTab(&#39;submit&#39;)">+ Add Recipe</div>
   </div>
 
   <!-- LIBRARY -->
-  <div class="view active" id="view-library">
-    <div class="section-note">✅ Your tried &amp; tested recipes. Tap any card to view the full recipe, update ratings, or
+  <div class="view" id="view-library">
+    <div class="section-note">✅ Your tried &amp; tested recipes. Tap any card to view the full recipe, update ratings,
+      or
       add it to this week's plan.</div>
     <div class="filter-row" id="filter-row"><button class="fb active" onclick="setFilter(&#39;all&#39;)">All</button><button class="fb " onclick="setFilter(&#39;quick&#39;)">Quick</button><button class="fb " onclick="setFilter(&#39;slow&#39;)">Slow</button><button class="fb " onclick="setFilter(&#39;asian&#39;)">Asian</button><button class="fb " onclick="setFilter(&#39;mediterranean&#39;)">Mediterranean</button><button class="fb " onclick="setFilter(&#39;mexican&#39;)">Mexican</button><button class="fb " onclick="setFilter(&#39;comfort&#39;)">Comfort</button><button class="fb " onclick="setFilter(&#39;seafood&#39;)">Seafood</button></div>
     <div class="recipe-grid" id="recipe-grid"><div class="rc " onclick="openRecipe(&#39;Glazed Miso Salmon Ramen Noodles&#39;)">
@@ -1246,15 +1248,77 @@
   </div>
 
   <!-- DISCOVER -->
-  <div class="view" id="view-discover">
+  <div class="view active" id="view-discover">
     <div class="disc-header">
       <p>AI suggestions based on your actual ratings, what you've cooked recently, and gaps in your rotation.</p>
       <button class="btn btn-sage" onclick="shuffleDiscover()">🔀 Shuffle</button>
     </div>
     <div id="disc-list">
-      <div style="text-align:center;padding:30px 20px;color:var(--tl);font-size:.82rem">Hit Shuffle to get personalised
-        suggestions.</div>
-    </div>
+        <div class="disc-card">
+          <h3>Creamy Chicken and Rice Bake</h3>
+          <div class="rmeta" style="margin-bottom:6px">
+            <span class="tag tq">quick</span><span class="tag tc">comfort</span>
+            <span class="tag tsrc">RecipeTin</span>
+          </div>
+          <div class="disc-reason">Since the Glazed Miso Salmon Ramen got a perfect 5/5 from the kids but you haven't tried it yet, this kid-friendly comfort dish with familiar flavors should be a hit. It's a one-pot meal that's both creamy and satisfying for the whole family.</div>
+          <div class="disc-actions">
+            <a href="https://www.recipetineats.com/one-pot-creamy-chicken-and-rice/" target="_blank" class="btn btn-sec btn-sm">View recipe ↗</a>
+            <button class="btn btn-sage btn-sm" onclick="addDynamicToPlan(0)">+ Add to week</button>
+            <button class="btn btn-gold btn-sm" onclick="addDynamicToLibrary(0)">📚 Save to Library</button>
+          </div>
+        </div>
+        <div class="disc-card">
+          <h3>Beef and Black Bean Quesadillas</h3>
+          <div class="rmeta" style="margin-bottom:6px">
+            <span class="tag tq">quick</span><span class="tag tmx">mexican</span>
+            <span class="tag tsrc">Taste</span>
+          </div>
+          <div class="disc-reason">Your recipe library shows several untried Mexican options, and quesadillas are universally loved by kids. This gives you another quick Mexican option that's different from your taco recipes but equally family-friendly.</div>
+          <div class="disc-actions">
+            <a href="https://www.taste.com.au/recipes/beef-black-bean-quesadillas/b8f5c8c8-3a2a-4c5a-9c8a-8f5c8c8a8f5c" target="_blank" class="btn btn-sec btn-sm">View recipe ↗</a>
+            <button class="btn btn-sage btn-sm" onclick="addDynamicToPlan(1)">+ Add to week</button>
+            <button class="btn btn-gold btn-sm" onclick="addDynamicToLibrary(1)">📚 Save to Library</button>
+          </div>
+        </div>
+        <div class="disc-card">
+          <h3>Honey Soy Chicken Stir Fry</h3>
+          <div class="rmeta" style="margin-bottom:6px">
+            <span class="tag tq">quick</span><span class="tag ta">asian</span>
+            <span class="tag tsrc">RecipeTin</span>
+          </div>
+          <div class="disc-reason">Given that your kids rated the Asian salmon dish 5/5, this sweet and savory stir fry should appeal to their taste preferences. It's quick to make and uses simple ingredients that work well for family dinners.</div>
+          <div class="disc-actions">
+            <a href="https://www.recipetineats.com/honey-soy-chicken-stir-fry/" target="_blank" class="btn btn-sec btn-sm">View recipe ↗</a>
+            <button class="btn btn-sage btn-sm" onclick="addDynamicToPlan(2)">+ Add to week</button>
+            <button class="btn btn-gold btn-sm" onclick="addDynamicToLibrary(2)">📚 Save to Library</button>
+          </div>
+        </div>
+        <div class="disc-card">
+          <h3>Baked Fish and Chips</h3>
+          <div class="rmeta" style="margin-bottom:6px">
+            <span class="tag tq">quick</span><span class="tag tc">comfort</span><span class="tag tf">seafood</span>
+            <span class="tag tsrc">Taste</span>
+          </div>
+          <div class="disc-reason">You have some seafood options but they lean Asian - this classic comfort food version gives you a different way to serve fish that kids typically love. It's also much healthier than traditional fried versions.</div>
+          <div class="disc-actions">
+            <a href="https://www.taste.com.au/recipes/baked-fish-chips/c7f5c8c8-3a2a-4c5a-9c8a-8f5c8c8a8f5c" target="_blank" class="btn btn-sec btn-sm">View recipe ↗</a>
+            <button class="btn btn-sage btn-sm" onclick="addDynamicToPlan(3)">+ Add to week</button>
+            <button class="btn btn-gold btn-sm" onclick="addDynamicToLibrary(3)">📚 Save to Library</button>
+          </div>
+        </div>
+        <div class="disc-card">
+          <h3>Slow Cooker Beef and Vegetable Stew</h3>
+          <div class="rmeta" style="margin-bottom:6px">
+            <span class="tag tslow">slow</span><span class="tag tc">comfort</span>
+            <span class="tag tsrc">S.H.E.</span>
+          </div>
+          <div class="disc-reason">Your library has limited slow cooker comfort options, and this hearty stew is perfect for busy families. It's a great way to get vegetables into kids while providing the satisfying, homey flavors that make comfort food so appealing.</div>
+          <div class="disc-actions">
+            <a href="https://www.simplehomeedit.com/slow-cooker-beef-stew/" target="_blank" class="btn btn-sec btn-sm">View recipe ↗</a>
+            <button class="btn btn-sage btn-sm" onclick="addDynamicToPlan(4)">+ Add to week</button>
+            <button class="btn btn-gold btn-sm" onclick="addDynamicToLibrary(4)">📚 Save to Library</button>
+          </div>
+        </div></div>
   </div>
 
   <!-- SUBMIT RECIPE -->
@@ -1317,7 +1381,8 @@
   <div class="overlay" id="modal-recipe" onclick="closeRDOutside(event)">
     <div class="sheet" id="rd-sheet">
       <div class="rd-name" id="rd-name"></div>
-      <a id="rd-link" href="file:///Users/ralphalarilla/Downloads/index_8.html#" target="_blank" class="rd-link">View full recipe →</a>
+      <a id="rd-link" href="file:///Users/ralphalarilla/Downloads/index_8.html#" target="_blank" class="rd-link">View
+        full recipe →</a>
       <div class="rd-tags" id="rd-tags"></div>
 
       <div class="rd-section">
@@ -1363,8 +1428,9 @@
     import { getFirestore, doc, onSnapshot, setDoc } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
     // ═══════════════════════════════════════════════════════════════════
-    //  🔥 FIREBASE CONFIG
+    //  🔥 FIREBASE AND CLAUDE API CONFIG
     // ═══════════════════════════════════════════════════════════════════
+    const ANTHROPIC_API_KEY = "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";
     const firebaseConfig = {
       apiKey: "AIzaSyCkz-no9UEXus8bdDAfjyvMHRwUfDP2rfw",
       authDomain: "meal-planner-caf86.firebaseapp.com",
@@ -1471,7 +1537,7 @@
 
       if (!DATA_DOC) {
         const offline = localStorage.getItem('mealplan_offline');
-        if (offline) { try { applyRemoteData(JSON.parse(offline)); } catch (e) {} }
+        if (offline) { try { applyRemoteData(JSON.parse(offline)); } catch (e) { } }
         renderAll();
         setSyncStatus('err');
         document.getElementById('sync-label').textContent = 'local mode';
@@ -1482,7 +1548,7 @@
         onSnapshot(DATA_DOC, (snap) => {
           if (!snap.exists()) {
             const offline = localStorage.getItem('mealplan_offline');
-            if (offline) { try { applyRemoteData(JSON.parse(offline)); commitToFirestore(); } catch (e) {} }
+            if (offline) { try { applyRemoteData(JSON.parse(offline)); commitToFirestore(); } catch (e) { } }
             setSyncStatus('ok');
             renderAll();
             return;
@@ -1494,7 +1560,7 @@
           console.error('Firestore error:', err);
           setSyncStatus('err');
           const offline = localStorage.getItem('mealplan_offline');
-          if (offline) { try { applyRemoteData(JSON.parse(offline)); } catch (e) {} }
+          if (offline) { try { applyRemoteData(JSON.parse(offline)); } catch (e) { } }
           renderAll();
         });
       } catch (e) {
@@ -1531,7 +1597,7 @@
     }
     function esc(s) { return (s || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'"); }
     function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
-    function shuffle(arr) { for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
+    function shuffle(arr) { for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1));[arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
 
     // ─── LIBRARY ─────────────────────────────────────────────────────────────────
     function renderLibrary() {
@@ -1571,8 +1637,8 @@
           </div>
           <div class="day-meal ${meal ? '' : 'empty'}" onclick="${meal ? `openRecipe('${esc(meal.name)}')` : `openDayModal('${esc(day)}')`}">
             ${meal
-              ? `<div><div class="day-meal-name">${meal.name}</div><div class="day-meal-src">${meal.source}</div></div><span style="font-size:.8rem;color:var(--tl)">›</span>`
-              : '<span>+ Tap to add a meal</span>'}
+            ? `<div><div class="day-meal-name">${meal.name}</div><div class="day-meal-src">${meal.source}</div></div><span style="font-size:.8rem;color:var(--tl)">›</span>`
+            : '<span>+ Tap to add a meal</span>'}
           </div>
         </div>`;
       }).join('');
@@ -1664,7 +1730,8 @@
           headers: {
             'Content-Type': 'application/json',
             'anthropic-version': '2023-06-01',
-            'anthropic-dangerous-direct-browser-access': 'true'
+            'anthropic-dangerous-direct-browser-access': 'true',
+            'x-api-key': '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'
           },
           body: JSON.stringify({
             model: 'claude-sonnet-4-20250514',
@@ -1746,7 +1813,7 @@
       });
       content.innerHTML = Object.entries(cats).filter(([, it]) => it.length).map(([cat, items]) =>
         `<div class="shop-category"><div class="shop-cat-title">${cat}</div>${items.map((ing, i) => {
-          const id = `shop_${i}_${cat.slice(0,3)}`;
+          const id = `shop_${i}_${cat.slice(0, 3)}`;
           const ck = shopChecked.has(id);
           return `<div class="shop-item ${ck ? 'checked' : ''}" onclick="toggleShopItem(this,'${id}')"><div class="shop-cb"></div><span>${ing.raw}</span></div>`;
         }).join('')}</div>`
@@ -1948,7 +2015,8 @@
           headers: {
             'Content-Type': 'application/json',
             'anthropic-version': '2023-06-01',
-            'anthropic-dangerous-direct-browser-access': 'true'
+            'anthropic-dangerous-direct-browser-access': 'true',
+            'x-api-key': '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'
           },
           body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1000, messages: [{ role: 'user', content: prompt }] })
         });
@@ -2034,6 +2102,8 @@
     renderLibrary();
     startSync();
   </script>
+
+
 
 
 </body></html>
