@@ -1,10 +1,7 @@
 <!DOCTYPE html>
-<!-- saved from url=(0046)file:///Users/ralphalarilla/Desktop/index.html -->
-<html lang="en">
-
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<!-- saved from url=(0050)file:///Users/ralphalarilla/Downloads/index_9.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Family Meal Planner</title>
@@ -939,9 +936,9 @@
 
   <div class="tabs">
     <div class="tab" onclick="switchTab(&#39;library&#39;)">Library</div>
-    <div class="tab" onclick="switchTab(&#39;planner&#39;)">This Week</div>
+    <div class="tab active" onclick="switchTab(&#39;planner&#39;)">This Week</div>
     <div class="tab" onclick="switchTab(&#39;staples&#39;)">Staples</div>
-    <div class="tab active" onclick="switchTab(&#39;discover&#39;)">Discover</div>
+    <div class="tab" onclick="switchTab(&#39;discover&#39;)">Discover</div>
     <div class="tab" onclick="switchTab(&#39;submit&#39;)">+ Add Recipe</div>
   </div>
 
@@ -950,332 +947,294 @@
     <div class="section-note">✅ Your tried &amp; tested recipes. Tap any card to view the full recipe, update ratings,
       or
       add it to this week's plan.</div>
-    <div class="filter-row" id="filter-row"><button class="fb active"
-        onclick="setFilter(&#39;all&#39;)">All</button><button class="fb "
-        onclick="setFilter(&#39;quick&#39;)">Quick</button><button class="fb "
-        onclick="setFilter(&#39;slow&#39;)">Slow</button><button class="fb "
-        onclick="setFilter(&#39;asian&#39;)">Asian</button><button class="fb "
-        onclick="setFilter(&#39;mediterranean&#39;)">Mediterranean</button><button class="fb "
-        onclick="setFilter(&#39;mexican&#39;)">Mexican</button><button class="fb "
-        onclick="setFilter(&#39;comfort&#39;)">Comfort</button><button class="fb "
-        onclick="setFilter(&#39;seafood&#39;)">Seafood</button></div>
-    <div class="recipe-grid" id="recipe-grid">
-      <div class="rc " onclick="openRecipe(&#39;Glazed Miso Salmon Ramen Noodles&#39;)">
-        <div class="rname">Glazed Miso Salmon Ramen Noodles</div>
-        <div class="rmeta">
-          <span class="tag tq">quick</span><span class="tag ta">asian</span><span class="tag tf">seafood</span>
-          <span class="tag tsrc">S.H.E.</span>
-        </div>
-        <div class="rating-mini">
-          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">★★★★★</span> kids
-        </div>
-
-      </div>
-      <div class="rc " onclick="openRecipe(&#39;Baked Chorizo Fried Rice&#39;)">
-        <div class="rname">Baked Chorizo Fried Rice</div>
-        <div class="rmeta">
-          <span class="tag tq">quick</span><span class="tag ta">asian</span>
-          <span class="tag tsrc">S.H.E.</span>
-        </div>
-        <div class="rating-mini">
-          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
-        </div>
-
-      </div>
-      <div class="rc " onclick="openRecipe(&#39;Easy Homemade Sausage Rolls&#39;)">
-        <div class="rname">Easy Homemade Sausage Rolls</div>
-        <div class="rmeta">
-          <span class="tag tc">comfort</span>
-          <span class="tag tsrc">S.H.E.</span>
-        </div>
-        <div class="rating-mini">
-          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
-        </div>
-
-      </div>
-      <div class="rc " onclick="openRecipe(&#39;Cheeseburger Pasta&#39;)">
-        <div class="rname">Cheeseburger Pasta</div>
-        <div class="rmeta">
-          <span class="tag tq">quick</span><span class="tag tc">comfort</span>
-          <span class="tag tsrc">S.H.E.</span>
-        </div>
-        <div class="rating-mini">
-          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
-        </div>
-
-      </div>
-      <div class="rc " onclick="openRecipe(&#39;Juicy Oven Baked Kebabs&#39;)">
-        <div class="rname">Juicy Oven Baked Kebabs</div>
-        <div class="rmeta">
-          <span class="tag tmed">mediterranean</span><span class="tag tq">quick</span>
-          <span class="tag tsrc">S.H.E.</span>
-        </div>
-        <div class="rating-mini">
-          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
-        </div>
-
-      </div>
-      <div class="rc " onclick="openRecipe(&#39;Chicken Fajitas&#39;)">
-        <div class="rname">Chicken Fajitas</div>
-        <div class="rmeta">
-          <span class="tag tq">quick</span><span class="tag tmx">mexican</span>
-          <span class="tag tsrc">RecipeTin</span>
-        </div>
-        <div class="rating-mini">
-          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
-        </div>
-
-      </div>
-      <div class="rc " onclick="openRecipe(&#39;Filipino Beef Tapa&#39;)">
-        <div class="rname">Filipino Beef Tapa</div>
-        <div class="rmeta">
-          <span class="tag ta">asian</span>
-          <span class="tag tsrc">Iankewks</span>
-        </div>
-        <div class="rating-mini">
-          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
-        </div>
-
-      </div>
-      <div class="rc " onclick="openRecipe(&#39;Slow Cooker Chipotle-Honey Chicken Tacos&#39;)">
-        <div class="rname">Slow Cooker Chipotle-Honey Chicken Tacos</div>
-        <div class="rmeta">
-          <span class="tag tslow">slow</span><span class="tag tmx">mexican</span>
-          <span class="tag tsrc">NYT</span>
-        </div>
-        <div class="rating-mini">
-          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
-        </div>
-
-      </div>
-      <div class="rc " onclick="openRecipe(&#39;One-Pan Salmon and Broccoli Bake&#39;)">
-        <div class="rname">One-Pan Salmon and Broccoli Bake</div>
-        <div class="rmeta">
-          <span class="tag tq">quick</span><span class="tag tf">seafood</span>
-          <span class="tag tsrc">Taste</span>
-        </div>
-        <div class="rating-mini">
-          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
-        </div>
-
-      </div>
-      <div class="rc " onclick="openRecipe(&#39;Soy-Glazed Mushroom Rice Bowl&#39;)">
-        <div class="rname">Soy-Glazed Mushroom Rice Bowl</div>
-        <div class="rmeta">
-          <span class="tag tq">quick</span><span class="tag ta">asian</span>
-          <span class="tag tsrc">NYT</span>
-        </div>
-        <div class="rating-mini">
-          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
-        </div>
-
-      </div>
-      <div class="rc " onclick="openRecipe(&#39;One-Pan Greek Chicken and Orzo&#39;)">
-        <div class="rname">One-Pan Greek Chicken and Orzo</div>
-        <div class="rmeta">
-          <span class="tag tmed">mediterranean</span>
-          <span class="tag tsrc">S.H.E.</span>
-        </div>
-        <div class="rating-mini">
-          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
-        </div>
-
-      </div>
-      <div class="rc " onclick="openRecipe(&#39;Loaded Potato Taco Bowl&#39;)">
-        <div class="rname">Loaded Potato Taco Bowl</div>
-        <div class="rmeta">
-          <span class="tag tq">quick</span><span class="tag tmx">mexican</span>
-          <span class="tag tsrc">S.H.E.</span>
-        </div>
-        <div class="rating-mini">
-          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
-        </div>
-
-      </div>
-      <div class="rc " onclick="openRecipe(&#39;Slow-Cooked Sticky Pork Belly&#39;)">
-        <div class="rname">Slow-Cooked Sticky Pork Belly</div>
-        <div class="rmeta">
-          <span class="tag tslow">slow</span><span class="tag ta">asian</span>
-          <span class="tag tsrc">S.H.E.</span>
-        </div>
-        <div class="rating-mini">
-          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
-        </div>
-
-      </div>
-      <div class="rc " onclick="openRecipe(&#39;Gyros Smashed Tacos&#39;)">
-        <div class="rname">Gyros Smashed Tacos</div>
-        <div class="rmeta">
-          <span class="tag tmed">mediterranean</span><span class="tag tq">quick</span>
-          <span class="tag tsrc">S.H.E.</span>
-        </div>
-        <div class="rating-mini">
-          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
-        </div>
-
-      </div>
-      <div class="rc " onclick="openRecipe(&#39;Chicken Caesar Smashed Tacos&#39;)">
-        <div class="rname">Chicken Caesar Smashed Tacos</div>
-        <div class="rmeta">
-          <span class="tag tq">quick</span>
-          <span class="tag tsrc">S.H.E.</span>
-        </div>
-        <div class="rating-mini">
-          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
-        </div>
-
-      </div>
-      <div class="rc " onclick="openRecipe(&#39;Quick Coconut Chicken Curry&#39;)">
-        <div class="rname">Quick Coconut Chicken Curry</div>
-        <div class="rmeta">
-          <span class="tag tq">quick</span><span class="tag ta">asian</span>
-          <span class="tag tsrc">S.H.E.</span>
-        </div>
-        <div class="rating-mini">
-          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
-        </div>
-
-      </div>
-      <div class="rc " onclick="openRecipe(&#39;Slow-Cooked Beef Ragù&#39;)">
-        <div class="rname">Slow-Cooked Beef Ragù</div>
-        <div class="rmeta">
-          <span class="tag tslow">slow</span><span class="tag tc">comfort</span>
-          <span class="tag tsrc">S.H.E.</span>
-        </div>
-        <div class="rating-mini">
-          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
-        </div>
-
-      </div>
-      <div class="rc " onclick="openRecipe(&#39;One-Pan Lemon Garlic Chicken and Potatoes&#39;)">
-        <div class="rname">One-Pan Lemon Garlic Chicken and Potatoes</div>
-        <div class="rmeta">
-          <span class="tag tq">quick</span><span class="tag tmed">mediterranean</span>
-          <span class="tag tsrc">S.H.E.</span>
-        </div>
-        <div class="rating-mini">
-          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
-        </div>
-
-      </div>
-      <div class="rc " onclick="openRecipe(&#39;Comforting Chunky Minestrone&#39;)">
-        <div class="rname">Comforting Chunky Minestrone</div>
-        <div class="rmeta">
-          <span class="tag tc">comfort</span>
-          <span class="tag tsrc">S.H.E.</span>
-        </div>
-        <div class="rating-mini">
-          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
-        </div>
-
-      </div>
-      <div class="rc " onclick="openRecipe(&#39;Sticky Beef Noodles&#39;)">
-        <div class="rname">Sticky Beef Noodles</div>
-        <div class="rmeta">
-          <span class="tag tq">quick</span><span class="tag ta">asian</span>
-          <span class="tag tsrc">S.H.E.</span>
-        </div>
-        <div class="rating-mini">
-          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
-        </div>
-
-      </div>
-      <div class="rc " onclick="openRecipe(&#39;Marry Me Chicken Meatballs with Orzo&#39;)">
-        <div class="rname">Marry Me Chicken Meatballs with Orzo</div>
-        <div class="rmeta">
-          <span class="tag tc">comfort</span><span class="tag tq">quick</span>
-          <span class="tag tsrc">S.H.E.</span>
-        </div>
-        <div class="rating-mini">
-          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
-        </div>
-
-      </div>
-    </div>
+    <div class="filter-row" id="filter-row"><button class="fb active" onclick="setFilter(&#39;all&#39;)">All</button><button class="fb " onclick="setFilter(&#39;quick&#39;)">Quick</button><button class="fb " onclick="setFilter(&#39;slow&#39;)">Slow</button><button class="fb " onclick="setFilter(&#39;asian&#39;)">Asian</button><button class="fb " onclick="setFilter(&#39;mediterranean&#39;)">Mediterranean</button><button class="fb " onclick="setFilter(&#39;mexican&#39;)">Mexican</button><button class="fb " onclick="setFilter(&#39;comfort&#39;)">Comfort</button><button class="fb " onclick="setFilter(&#39;seafood&#39;)">Seafood</button></div>
+    <div class="recipe-grid" id="recipe-grid"><div class="rc " onclick="openRecipe(&#39;Glazed Miso Salmon Ramen Noodles&#39;)">
+          <div class="rname">Glazed Miso Salmon Ramen Noodles</div>
+          <div class="rmeta">
+            <span class="tag tq">quick</span><span class="tag ta">asian</span><span class="tag tf">seafood</span>
+            <span class="tag tsrc">S.H.E.</span>
+          </div>
+          <div class="rating-mini">
+            <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">★★★★★</span> kids
+          </div>
+          
+        </div><div class="rc " onclick="openRecipe(&#39;Baked Chorizo Fried Rice&#39;)">
+          <div class="rname">Baked Chorizo Fried Rice</div>
+          <div class="rmeta">
+            <span class="tag tq">quick</span><span class="tag ta">asian</span>
+            <span class="tag tsrc">S.H.E.</span>
+          </div>
+          <div class="rating-mini">
+            <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+          </div>
+          
+        </div><div class="rc " onclick="openRecipe(&#39;Easy Homemade Sausage Rolls&#39;)">
+          <div class="rname">Easy Homemade Sausage Rolls</div>
+          <div class="rmeta">
+            <span class="tag tc">comfort</span>
+            <span class="tag tsrc">S.H.E.</span>
+          </div>
+          <div class="rating-mini">
+            <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+          </div>
+          
+        </div><div class="rc in-plan" onclick="openRecipe(&#39;Cheeseburger Pasta&#39;)">
+          <div class="rname">Cheeseburger Pasta</div>
+          <div class="rmeta">
+            <span class="tag tq">quick</span><span class="tag tc">comfort</span>
+            <span class="tag tsrc">S.H.E.</span>
+          </div>
+          <div class="rating-mini">
+            <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+          </div>
+          
+        </div><div class="rc " onclick="openRecipe(&#39;Juicy Oven Baked Kebabs&#39;)">
+          <div class="rname">Juicy Oven Baked Kebabs</div>
+          <div class="rmeta">
+            <span class="tag tmed">mediterranean</span><span class="tag tq">quick</span>
+            <span class="tag tsrc">S.H.E.</span>
+          </div>
+          <div class="rating-mini">
+            <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+          </div>
+          
+        </div><div class="rc " onclick="openRecipe(&#39;Chicken Fajitas&#39;)">
+          <div class="rname">Chicken Fajitas</div>
+          <div class="rmeta">
+            <span class="tag tq">quick</span><span class="tag tmx">mexican</span>
+            <span class="tag tsrc">RecipeTin</span>
+          </div>
+          <div class="rating-mini">
+            <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+          </div>
+          
+        </div><div class="rc " onclick="openRecipe(&#39;Filipino Beef Tapa&#39;)">
+          <div class="rname">Filipino Beef Tapa</div>
+          <div class="rmeta">
+            <span class="tag ta">asian</span>
+            <span class="tag tsrc">Iankewks</span>
+          </div>
+          <div class="rating-mini">
+            <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+          </div>
+          
+        </div><div class="rc in-plan" onclick="openRecipe(&#39;Slow Cooker Chipotle-Honey Chicken Tacos&#39;)">
+          <div class="rname">Slow Cooker Chipotle-Honey Chicken Tacos</div>
+          <div class="rmeta">
+            <span class="tag tslow">slow</span><span class="tag tmx">mexican</span>
+            <span class="tag tsrc">NYT</span>
+          </div>
+          <div class="rating-mini">
+            <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+          </div>
+          
+        </div><div class="rc " onclick="openRecipe(&#39;One-Pan Salmon and Broccoli Bake&#39;)">
+          <div class="rname">One-Pan Salmon and Broccoli Bake</div>
+          <div class="rmeta">
+            <span class="tag tq">quick</span><span class="tag tf">seafood</span>
+            <span class="tag tsrc">Taste</span>
+          </div>
+          <div class="rating-mini">
+            <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+          </div>
+          
+        </div><div class="rc " onclick="openRecipe(&#39;Soy-Glazed Mushroom Rice Bowl&#39;)">
+          <div class="rname">Soy-Glazed Mushroom Rice Bowl</div>
+          <div class="rmeta">
+            <span class="tag tq">quick</span><span class="tag ta">asian</span>
+            <span class="tag tsrc">NYT</span>
+          </div>
+          <div class="rating-mini">
+            <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+          </div>
+          
+        </div><div class="rc " onclick="openRecipe(&#39;One-Pan Greek Chicken and Orzo&#39;)">
+          <div class="rname">One-Pan Greek Chicken and Orzo</div>
+          <div class="rmeta">
+            <span class="tag tmed">mediterranean</span>
+            <span class="tag tsrc">S.H.E.</span>
+          </div>
+          <div class="rating-mini">
+            <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+          </div>
+          
+        </div><div class="rc " onclick="openRecipe(&#39;Loaded Potato Taco Bowl&#39;)">
+          <div class="rname">Loaded Potato Taco Bowl</div>
+          <div class="rmeta">
+            <span class="tag tq">quick</span><span class="tag tmx">mexican</span>
+            <span class="tag tsrc">S.H.E.</span>
+          </div>
+          <div class="rating-mini">
+            <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+          </div>
+          
+        </div><div class="rc " onclick="openRecipe(&#39;Slow-Cooked Sticky Pork Belly&#39;)">
+          <div class="rname">Slow-Cooked Sticky Pork Belly</div>
+          <div class="rmeta">
+            <span class="tag tslow">slow</span><span class="tag ta">asian</span>
+            <span class="tag tsrc">S.H.E.</span>
+          </div>
+          <div class="rating-mini">
+            <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+          </div>
+          
+        </div><div class="rc " onclick="openRecipe(&#39;Gyros Smashed Tacos&#39;)">
+          <div class="rname">Gyros Smashed Tacos</div>
+          <div class="rmeta">
+            <span class="tag tmed">mediterranean</span><span class="tag tq">quick</span>
+            <span class="tag tsrc">S.H.E.</span>
+          </div>
+          <div class="rating-mini">
+            <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+          </div>
+          
+        </div><div class="rc " onclick="openRecipe(&#39;Chicken Caesar Smashed Tacos&#39;)">
+          <div class="rname">Chicken Caesar Smashed Tacos</div>
+          <div class="rmeta">
+            <span class="tag tq">quick</span>
+            <span class="tag tsrc">S.H.E.</span>
+          </div>
+          <div class="rating-mini">
+            <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+          </div>
+          
+        </div><div class="rc " onclick="openRecipe(&#39;Quick Coconut Chicken Curry&#39;)">
+          <div class="rname">Quick Coconut Chicken Curry</div>
+          <div class="rmeta">
+            <span class="tag tq">quick</span><span class="tag ta">asian</span>
+            <span class="tag tsrc">S.H.E.</span>
+          </div>
+          <div class="rating-mini">
+            <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+          </div>
+          
+        </div><div class="rc in-plan" onclick="openRecipe(&#39;Slow-Cooked Beef Ragù&#39;)">
+          <div class="rname">Slow-Cooked Beef Ragù</div>
+          <div class="rmeta">
+            <span class="tag tslow">slow</span><span class="tag tc">comfort</span>
+            <span class="tag tsrc">S.H.E.</span>
+          </div>
+          <div class="rating-mini">
+            <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+          </div>
+          
+        </div><div class="rc in-plan" onclick="openRecipe(&#39;One-Pan Lemon Garlic Chicken and Potatoes&#39;)">
+          <div class="rname">One-Pan Lemon Garlic Chicken and Potatoes</div>
+          <div class="rmeta">
+            <span class="tag tq">quick</span><span class="tag tmed">mediterranean</span>
+            <span class="tag tsrc">S.H.E.</span>
+          </div>
+          <div class="rating-mini">
+            <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+          </div>
+          
+        </div><div class="rc " onclick="openRecipe(&#39;Comforting Chunky Minestrone&#39;)">
+          <div class="rname">Comforting Chunky Minestrone</div>
+          <div class="rmeta">
+            <span class="tag tc">comfort</span>
+            <span class="tag tsrc">S.H.E.</span>
+          </div>
+          <div class="rating-mini">
+            <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+          </div>
+          
+        </div><div class="rc in-plan" onclick="openRecipe(&#39;Sticky Beef Noodles&#39;)">
+          <div class="rname">Sticky Beef Noodles</div>
+          <div class="rmeta">
+            <span class="tag tq">quick</span><span class="tag ta">asian</span>
+            <span class="tag tsrc">S.H.E.</span>
+          </div>
+          <div class="rating-mini">
+            <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+          </div>
+          
+        </div><div class="rc " onclick="openRecipe(&#39;Marry Me Chicken Meatballs with Orzo&#39;)">
+          <div class="rname">Marry Me Chicken Meatballs with Orzo</div>
+          <div class="rmeta">
+            <span class="tag tc">comfort</span><span class="tag tq">quick</span>
+            <span class="tag tsrc">S.H.E.</span>
+          </div>
+          <div class="rating-mini">
+            <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+          </div>
+          
+        </div></div>
   </div>
 
   <!-- PLANNER -->
-  <div class="view" id="view-planner">
+  <div class="view active" id="view-planner">
     <div class="stats-bar">
-      <div class="stat"><strong id="planned-count">0</strong>planned</div>
+      <div class="stat"><strong id="planned-count">5</strong>planned</div>
       <div class="stat"><strong>2</strong>leftover nights</div>
-      <div class="stat"><strong id="free-count">7</strong>free nights</div>
+      <div class="stat"><strong id="free-count">2</strong>free nights</div>
     </div>
     <div class="plan-actions">
       <button class="btn btn-sec" onclick="clearPlan()">Clear week</button>
       <button class="btn btn-sage" onclick="autoPlan()">✦ Surprise me</button>
       <button class="btn btn-rust" onclick="toggleShoppingList()">🛒 Shopping List</button>
     </div>
-    <div class="week-grid" id="week-grid">
-      <div class="day-row">
-        <div class="day-hdr">
-          <span>Monday</span>
-
-        </div>
-        <div class="day-meal empty" onclick="openDayModal(&#39;Monday&#39;)">
-          <span>+ Tap to add a meal</span>
-        </div>
-      </div>
-      <div class="day-row">
-        <div class="day-hdr">
-          <span>Tuesday</span>
-
-        </div>
-        <div class="day-meal empty" onclick="openDayModal(&#39;Tuesday&#39;)">
-          <span>+ Tap to add a meal</span>
-        </div>
-      </div>
-      <div class="day-row">
-        <div class="day-hdr">
-          <span>Wednesday</span>
-
-        </div>
-        <div class="day-meal empty" onclick="openDayModal(&#39;Wednesday&#39;)">
-          <span>+ Tap to add a meal</span>
-        </div>
-      </div>
-      <div class="day-row">
-        <div class="day-hdr">
-          <span>Thursday</span>
-
-        </div>
-        <div class="day-meal empty" onclick="openDayModal(&#39;Thursday&#39;)">
-          <span>+ Tap to add a meal</span>
-        </div>
-      </div>
-      <div class="day-row">
-        <div class="day-hdr">
-          <span>Friday</span>
-
-        </div>
-        <div class="day-meal empty" onclick="openDayModal(&#39;Friday&#39;)">
-          <span>+ Tap to add a meal</span>
-        </div>
-      </div>
-      <div class="day-row">
-        <div class="day-hdr">
-          <span>Saturday</span>
-
-        </div>
-        <div class="day-meal empty" onclick="openDayModal(&#39;Saturday&#39;)">
-          <span>+ Tap to add a meal</span>
-        </div>
-      </div>
-      <div class="day-row">
-        <div class="day-hdr">
-          <span>Sunday</span>
-
-        </div>
-        <div class="day-meal empty" onclick="openDayModal(&#39;Sunday&#39;)">
-          <span>+ Tap to add a meal</span>
-        </div>
-      </div>
-    </div>
-    <div class="shop-section" id="shop-section" style="display:none">
+    <div class="week-grid" id="week-grid"><div class="day-row">
+          <div class="day-hdr">
+            <span>Monday</span>
+            <button class="rmv" onclick="removeMeal(&#39;Monday&#39;)">✕ remove</button>
+          </div>
+          <div class="day-meal " onclick="openRecipe(&#39;Slow-Cooked Beef Ragù&#39;)">
+            <div><div class="day-meal-name">Slow-Cooked Beef Ragù</div><div class="day-meal-src">Simple Home Edit</div></div><span style="font-size:.8rem;color:var(--tl)">›</span>
+          </div>
+        </div><div class="day-row">
+          <div class="day-hdr">
+            <span>Tuesday</span>
+            <button class="rmv" onclick="removeMeal(&#39;Tuesday&#39;)">✕ remove</button>
+          </div>
+          <div class="day-meal " onclick="openRecipe(&#39;Cheeseburger Pasta&#39;)">
+            <div><div class="day-meal-name">Cheeseburger Pasta</div><div class="day-meal-src">Simple Home Edit</div></div><span style="font-size:.8rem;color:var(--tl)">›</span>
+          </div>
+        </div><div class="day-row">
+          <div class="day-hdr">
+            <span>Wednesday</span>
+            <button class="rmv" onclick="removeMeal(&#39;Wednesday&#39;)">✕ remove</button>
+          </div>
+          <div class="day-meal " onclick="openRecipe(&#39;Sticky Beef Noodles&#39;)">
+            <div><div class="day-meal-name">Sticky Beef Noodles</div><div class="day-meal-src">Simple Home Edit</div></div><span style="font-size:.8rem;color:var(--tl)">›</span>
+          </div>
+        </div><div class="day-row">
+          <div class="day-hdr">
+            <span>Thursday</span>
+            <button class="rmv" onclick="removeMeal(&#39;Thursday&#39;)">✕ remove</button>
+          </div>
+          <div class="day-meal " onclick="openRecipe(&#39;One-Pan Lemon Garlic Chicken and Potatoes&#39;)">
+            <div><div class="day-meal-name">One-Pan Lemon Garlic Chicken and Potatoes</div><div class="day-meal-src">Simple Home Edit</div></div><span style="font-size:.8rem;color:var(--tl)">›</span>
+          </div>
+        </div><div class="day-row">
+          <div class="day-hdr">
+            <span>Friday</span>
+            
+          </div>
+          <div class="day-meal empty" onclick="openDayModal(&#39;Friday&#39;)">
+            <span>+ Tap to add a meal</span>
+          </div>
+        </div><div class="day-row">
+          <div class="day-hdr">
+            <span>Saturday</span>
+            <button class="rmv" onclick="removeMeal(&#39;Saturday&#39;)">✕ remove</button>
+          </div>
+          <div class="day-meal " onclick="openRecipe(&#39;Slow Cooker Chipotle-Honey Chicken Tacos&#39;)">
+            <div><div class="day-meal-name">Slow Cooker Chipotle-Honey Chicken Tacos</div><div class="day-meal-src">NYT Cooking</div></div><span style="font-size:.8rem;color:var(--tl)">›</span>
+          </div>
+        </div><div class="day-row">
+          <div class="day-hdr">
+            <span>Sunday</span>
+            
+          </div>
+          <div class="day-meal empty" onclick="openDayModal(&#39;Sunday&#39;)">
+            <span>+ Tap to add a meal</span>
+          </div>
+        </div></div>
+    <div class="shop-section" id="shop-section" style="display: block;">
       <h3>🛒 This Week's Shopping List</h3>
       <p class="shop-note">Based on your planned meals. Tap items to check them off. Staples you always have are
         excluded.</p>
-      <div id="shop-list-content"></div>
+      <div id="shop-list-content"><div class="shop-category"><div class="shop-cat-title">🥩 Meat &amp; Fish</div><div class="shop-item " onclick="toggleShopItem(this,&#39;shop_0_🥩 &#39;)"><div class="shop-cb"></div><span>800g beef chuck or blade</span></div><div class="shop-item " onclick="toggleShopItem(this,&#39;shop_5_🥩 &#39;)"><div class="shop-cb"></div><span>26 garlic cloves (×5 recipes)</span></div><div class="shop-item " onclick="toggleShopItem(this,&#39;shop_8_🥩 &#39;)"><div class="shop-cb"></div><span>1000g beef mince (×2 recipes)</span></div><div class="shop-item " onclick="toggleShopItem(this,&#39;shop_18_🥩 &#39;)"><div class="shop-cb"></div><span>8 bone-in chicken thighs</span></div><div class="shop-item " onclick="toggleShopItem(this,&#39;shop_22_🥩 &#39;)"><div class="shop-cb"></div><span>800g chicken thighs</span></div><div class="shop-item " onclick="toggleShopItem(this,&#39;shop_23_🥩 &#39;)"><div class="shop-cb"></div><span>2 chipotle chillies in adobo</span></div></div><div class="shop-category"><div class="shop-cat-title">🥦 Produce</div><div class="shop-item " onclick="toggleShopItem(this,&#39;shop_1_🥦 &#39;)"><div class="shop-cb"></div><span>800g cans crushed tomatoes</span></div><div class="shop-item " onclick="toggleShopItem(this,&#39;shop_2_🥦 &#39;)"><div class="shop-cb"></div><span>2 onion (×2 recipes)</span></div><div class="shop-item " onclick="toggleShopItem(this,&#39;shop_3_🥦 &#39;)"><div class="shop-cb"></div><span>2 carrot (×2 recipes)</span></div><div class="shop-item " onclick="toggleShopItem(this,&#39;shop_4_🥦 &#39;)"><div class="shop-cb"></div><span>2 celery stalks</span></div><div class="shop-item " onclick="toggleShopItem(this,&#39;shop_10_🥦 &#39;)"><div class="shop-cb"></div><span>1 celery stalk</span></div><div class="shop-item " onclick="toggleShopItem(this,&#39;shop_14_🥦 &#39;)"><div class="shop-cb"></div><span>1tbsp fresh ginger</span></div><div class="shop-item " onclick="toggleShopItem(this,&#39;shop_15_🥦 &#39;)"><div class="shop-cb"></div><span>5 spring onions</span></div><div class="shop-item " onclick="toggleShopItem(this,&#39;shop_17_🥦 &#39;)"><div class="shop-cb"></div><span>200g bok choy or broccolini</span></div><div class="shop-item " onclick="toggleShopItem(this,&#39;shop_19_🥦 &#39;)"><div class="shop-cb"></div><span>700g baby potatoes</span></div><div class="shop-item " onclick="toggleShopItem(this,&#39;shop_20_🥦 &#39;)"><div class="shop-cb"></div><span>2 lemons (zest + juice)</span></div><div class="shop-item " onclick="toggleShopItem(this,&#39;shop_25_🥦 &#39;)"><div class="shop-cb"></div><span>1 lime (zest + juice)</span></div></div><div class="shop-category"><div class="shop-cat-title">🛍️ Other</div><div class="shop-item " onclick="toggleShopItem(this,&#39;shop_6_🛍️&#39;)"><div class="shop-cb"></div><span>1cup red wine</span></div><div class="shop-item " onclick="toggleShopItem(this,&#39;shop_11_🛍️&#39;)"><div class="shop-cb"></div><span>1cup shredded cheddar</span></div><div class="shop-item " onclick="toggleShopItem(this,&#39;shop_16_🛍️&#39;)"><div class="shop-cb"></div><span>1 long red chilli</span></div><div class="shop-item " onclick="toggleShopItem(this,&#39;shop_21_🛍️&#39;)"><div class="shop-cb"></div><span>2tsp fresh rosemary or thyme</span></div><div class="shop-item " onclick="toggleShopItem(this,&#39;shop_27_🛍️&#39;)"><div class="shop-cb"></div><span>2 cups shredded cabbage slaw</span></div></div><div class="shop-category"><div class="shop-cat-title">🍝 Pantry &amp; Dry</div><div class="shop-item " onclick="toggleShopItem(this,&#39;shop_7_🍝 &#39;)"><div class="shop-cb"></div><span>400g pappardelle or pasta</span></div><div class="shop-item " onclick="toggleShopItem(this,&#39;shop_9_🍝 &#39;)"><div class="shop-cb"></div><span>300g short pasta (penne/macaroni)</span></div><div class="shop-item " onclick="toggleShopItem(this,&#39;shop_13_🍝 &#39;)"><div class="shop-cb"></div><span>300g noodles (hokkien or udon)</span></div><div class="shop-item " onclick="toggleShopItem(this,&#39;shop_26_🍝 &#39;)"><div class="shop-cb"></div><span>8 flour tortillas</span></div></div><div class="shop-category"><div class="shop-cat-title">🧀 Dairy &amp; Eggs</div><div class="shop-item " onclick="toggleShopItem(this,&#39;shop_12_🧀 &#39;)"><div class="shop-cb"></div><span>100g cream cheese</span></div></div><div class="shop-category"><div class="shop-cat-title">🧂 Sauces</div><div class="shop-item " onclick="toggleShopItem(this,&#39;shop_24_🧂 &#39;)"><div class="shop-cb"></div><span>2tbsp adobo sauce</span></div></div></div>
       <button class="btn btn-sec btn-sm" style="margin-top:10px" onclick="copyShoppingList()">📋 Copy to
         clipboard</button>
     </div>
@@ -1289,93 +1248,77 @@
   </div>
 
   <!-- DISCOVER -->
-  <div class="view active" id="view-discover">
+  <div class="view" id="view-discover">
     <div class="disc-header">
       <p>AI suggestions based on your actual ratings, what you've cooked recently, and gaps in your rotation.</p>
       <button class="btn btn-sage" onclick="shuffleDiscover()">🔀 Shuffle</button>
     </div>
     <div id="disc-list">
-      <div class="disc-card">
-        <h3>Creamy Chicken and Rice Bake</h3>
-        <div class="rmeta" style="margin-bottom:6px">
-          <span class="tag tq">quick</span><span class="tag tc">comfort</span>
-          <span class="tag tsrc">RecipeTin</span>
+        <div class="disc-card">
+          <h3>Creamy Chicken and Rice Bake</h3>
+          <div class="rmeta" style="margin-bottom:6px">
+            <span class="tag tq">quick</span><span class="tag tc">comfort</span>
+            <span class="tag tsrc">RecipeTin</span>
+          </div>
+          <div class="disc-reason">Since the Glazed Miso Salmon Ramen got a perfect 5/5 from the kids but you haven't tried it yet, this kid-friendly comfort dish with familiar flavors should be a hit. It's a one-pot meal that's both creamy and satisfying for the whole family.</div>
+          <div class="disc-actions">
+            <a href="https://www.recipetineats.com/one-pot-creamy-chicken-and-rice/" target="_blank" class="btn btn-sec btn-sm">View recipe ↗</a>
+            <button class="btn btn-sage btn-sm" onclick="addDynamicToPlan(0)">+ Add to week</button>
+            <button class="btn btn-gold btn-sm" onclick="addDynamicToLibrary(0)">📚 Save to Library</button>
+          </div>
         </div>
-        <div class="disc-reason">Since the Glazed Miso Salmon Ramen got a perfect 5/5 from the kids but you haven't
-          tried it yet, this kid-friendly comfort dish with familiar flavors should be a hit. It's a one-pot meal that's
-          both creamy and satisfying for the whole family.</div>
-        <div class="disc-actions">
-          <a href="https://www.recipetineats.com/one-pot-creamy-chicken-and-rice/" target="_blank"
-            class="btn btn-sec btn-sm">View recipe ↗</a>
-          <button class="btn btn-sage btn-sm" onclick="addDynamicToPlan(0)">+ Add to week</button>
-          <button class="btn btn-gold btn-sm" onclick="addDynamicToLibrary(0)">📚 Save to Library</button>
+        <div class="disc-card">
+          <h3>Beef and Black Bean Quesadillas</h3>
+          <div class="rmeta" style="margin-bottom:6px">
+            <span class="tag tq">quick</span><span class="tag tmx">mexican</span>
+            <span class="tag tsrc">Taste</span>
+          </div>
+          <div class="disc-reason">Your recipe library shows several untried Mexican options, and quesadillas are universally loved by kids. This gives you another quick Mexican option that's different from your taco recipes but equally family-friendly.</div>
+          <div class="disc-actions">
+            <a href="https://www.taste.com.au/recipes/beef-black-bean-quesadillas/b8f5c8c8-3a2a-4c5a-9c8a-8f5c8c8a8f5c" target="_blank" class="btn btn-sec btn-sm">View recipe ↗</a>
+            <button class="btn btn-sage btn-sm" onclick="addDynamicToPlan(1)">+ Add to week</button>
+            <button class="btn btn-gold btn-sm" onclick="addDynamicToLibrary(1)">📚 Save to Library</button>
+          </div>
         </div>
-      </div>
-      <div class="disc-card">
-        <h3>Beef and Black Bean Quesadillas</h3>
-        <div class="rmeta" style="margin-bottom:6px">
-          <span class="tag tq">quick</span><span class="tag tmx">mexican</span>
-          <span class="tag tsrc">Taste</span>
+        <div class="disc-card">
+          <h3>Honey Soy Chicken Stir Fry</h3>
+          <div class="rmeta" style="margin-bottom:6px">
+            <span class="tag tq">quick</span><span class="tag ta">asian</span>
+            <span class="tag tsrc">RecipeTin</span>
+          </div>
+          <div class="disc-reason">Given that your kids rated the Asian salmon dish 5/5, this sweet and savory stir fry should appeal to their taste preferences. It's quick to make and uses simple ingredients that work well for family dinners.</div>
+          <div class="disc-actions">
+            <a href="https://www.recipetineats.com/honey-soy-chicken-stir-fry/" target="_blank" class="btn btn-sec btn-sm">View recipe ↗</a>
+            <button class="btn btn-sage btn-sm" onclick="addDynamicToPlan(2)">+ Add to week</button>
+            <button class="btn btn-gold btn-sm" onclick="addDynamicToLibrary(2)">📚 Save to Library</button>
+          </div>
         </div>
-        <div class="disc-reason">Your recipe library shows several untried Mexican options, and quesadillas are
-          universally loved by kids. This gives you another quick Mexican option that's different from your taco recipes
-          but equally family-friendly.</div>
-        <div class="disc-actions">
-          <a href="https://www.taste.com.au/recipes/beef-black-bean-quesadillas/b8f5c8c8-3a2a-4c5a-9c8a-8f5c8c8a8f5c"
-            target="_blank" class="btn btn-sec btn-sm">View recipe ↗</a>
-          <button class="btn btn-sage btn-sm" onclick="addDynamicToPlan(1)">+ Add to week</button>
-          <button class="btn btn-gold btn-sm" onclick="addDynamicToLibrary(1)">📚 Save to Library</button>
+        <div class="disc-card">
+          <h3>Baked Fish and Chips</h3>
+          <div class="rmeta" style="margin-bottom:6px">
+            <span class="tag tq">quick</span><span class="tag tc">comfort</span><span class="tag tf">seafood</span>
+            <span class="tag tsrc">Taste</span>
+          </div>
+          <div class="disc-reason">You have some seafood options but they lean Asian - this classic comfort food version gives you a different way to serve fish that kids typically love. It's also much healthier than traditional fried versions.</div>
+          <div class="disc-actions">
+            <a href="https://www.taste.com.au/recipes/baked-fish-chips/c7f5c8c8-3a2a-4c5a-9c8a-8f5c8c8a8f5c" target="_blank" class="btn btn-sec btn-sm">View recipe ↗</a>
+            <button class="btn btn-sage btn-sm" onclick="addDynamicToPlan(3)">+ Add to week</button>
+            <button class="btn btn-gold btn-sm" onclick="addDynamicToLibrary(3)">📚 Save to Library</button>
+          </div>
         </div>
-      </div>
-      <div class="disc-card">
-        <h3>Honey Soy Chicken Stir Fry</h3>
-        <div class="rmeta" style="margin-bottom:6px">
-          <span class="tag tq">quick</span><span class="tag ta">asian</span>
-          <span class="tag tsrc">RecipeTin</span>
-        </div>
-        <div class="disc-reason">Given that your kids rated the Asian salmon dish 5/5, this sweet and savory stir fry
-          should appeal to their taste preferences. It's quick to make and uses simple ingredients that work well for
-          family dinners.</div>
-        <div class="disc-actions">
-          <a href="https://www.recipetineats.com/honey-soy-chicken-stir-fry/" target="_blank"
-            class="btn btn-sec btn-sm">View recipe ↗</a>
-          <button class="btn btn-sage btn-sm" onclick="addDynamicToPlan(2)">+ Add to week</button>
-          <button class="btn btn-gold btn-sm" onclick="addDynamicToLibrary(2)">📚 Save to Library</button>
-        </div>
-      </div>
-      <div class="disc-card">
-        <h3>Baked Fish and Chips</h3>
-        <div class="rmeta" style="margin-bottom:6px">
-          <span class="tag tq">quick</span><span class="tag tc">comfort</span><span class="tag tf">seafood</span>
-          <span class="tag tsrc">Taste</span>
-        </div>
-        <div class="disc-reason">You have some seafood options but they lean Asian - this classic comfort food version
-          gives you a different way to serve fish that kids typically love. It's also much healthier than traditional
-          fried versions.</div>
-        <div class="disc-actions">
-          <a href="https://www.taste.com.au/recipes/baked-fish-chips/c7f5c8c8-3a2a-4c5a-9c8a-8f5c8c8a8f5c"
-            target="_blank" class="btn btn-sec btn-sm">View recipe ↗</a>
-          <button class="btn btn-sage btn-sm" onclick="addDynamicToPlan(3)">+ Add to week</button>
-          <button class="btn btn-gold btn-sm" onclick="addDynamicToLibrary(3)">📚 Save to Library</button>
-        </div>
-      </div>
-      <div class="disc-card">
-        <h3>Slow Cooker Beef and Vegetable Stew</h3>
-        <div class="rmeta" style="margin-bottom:6px">
-          <span class="tag tslow">slow</span><span class="tag tc">comfort</span>
-          <span class="tag tsrc">S.H.E.</span>
-        </div>
-        <div class="disc-reason">Your library has limited slow cooker comfort options, and this hearty stew is perfect
-          for busy families. It's a great way to get vegetables into kids while providing the satisfying, homey flavors
-          that make comfort food so appealing.</div>
-        <div class="disc-actions">
-          <a href="https://www.simplehomeedit.com/slow-cooker-beef-stew/" target="_blank"
-            class="btn btn-sec btn-sm">View recipe ↗</a>
-          <button class="btn btn-sage btn-sm" onclick="addDynamicToPlan(4)">+ Add to week</button>
-          <button class="btn btn-gold btn-sm" onclick="addDynamicToLibrary(4)">📚 Save to Library</button>
-        </div>
-      </div>
-    </div>
+        <div class="disc-card">
+          <h3>Slow Cooker Beef and Vegetable Stew</h3>
+          <div class="rmeta" style="margin-bottom:6px">
+            <span class="tag tslow">slow</span><span class="tag tc">comfort</span>
+            <span class="tag tsrc">S.H.E.</span>
+          </div>
+          <div class="disc-reason">Your library has limited slow cooker comfort options, and this hearty stew is perfect for busy families. It's a great way to get vegetables into kids while providing the satisfying, homey flavors that make comfort food so appealing.</div>
+          <div class="disc-actions">
+            <a href="https://www.simplehomeedit.com/slow-cooker-beef-stew/" target="_blank" class="btn btn-sec btn-sm">View recipe ↗</a>
+            <button class="btn btn-sage btn-sm" onclick="addDynamicToPlan(4)">+ Add to week</button>
+            <button class="btn btn-gold btn-sm" onclick="addDynamicToLibrary(4)">📚 Save to Library</button>
+          </div>
+        </div></div>
   </div>
 
   <!-- SUBMIT RECIPE -->
@@ -1383,47 +1326,35 @@
     <div class="section-note">Paste any recipe URL and we'll extract the details for you. Review before saving to your
       Library.</div>
     <div style="margin-top:4px">
-      <label
-        style="font-size:.72rem;font-weight:700;color:var(--tl);display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em">Recipe
+      <label style="font-size:.72rem;font-weight:700;color:var(--tl);display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em">Recipe
         URL</label>
-      <input id="submit-url" type="url" placeholder="https://simplehomeedit.com/recipe/..."
-        style="width:100%;border:1.5px solid var(--mist);border-radius:8px;padding:11px 13px;font-family:&#39;DM Sans&#39;,sans-serif;font-size:.85rem;background:white;color:var(--text);margin-bottom:10px"
-        onfocus="this.style.borderColor=&#39;var(--gold)&#39;" onblur="this.style.borderColor=&#39;var(--mist)&#39;">
+      <input id="submit-url" type="url" placeholder="https://simplehomeedit.com/recipe/..." style="width:100%;border:1.5px solid var(--mist);border-radius:8px;padding:11px 13px;font-family:&#39;DM Sans&#39;,sans-serif;font-size:.85rem;background:white;color:var(--text);margin-bottom:10px" onfocus="this.style.borderColor=&#39;var(--gold)&#39;" onblur="this.style.borderColor=&#39;var(--mist)&#39;">
       <button class="btn btn-rust" onclick="extractRecipe()" id="extract-btn" style="width:100%;justify-content:center">
         ✨ Extract Recipe Details
       </button>
     </div>
 
     <div id="submit-preview" style="display:none;margin-top:18px">
-      <div
-        style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--tl);margin-bottom:12px">
+      <div style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--tl);margin-bottom:12px">
         Review &amp; Edit Before Saving</div>
       <div style="margin-bottom:10px">
         <label style="font-size:.7rem;font-weight:600;color:var(--tl);display:block;margin-bottom:4px">Recipe
           Name</label>
-        <input id="pre-name" type="text"
-          style="width:100%;border:1.5px solid var(--mist);border-radius:8px;padding:9px 12px;font-family:&#39;Fraunces&#39;,serif;font-size:.9rem;font-weight:600;background:white;color:var(--text)"
-          onfocus="this.style.borderColor=&#39;var(--gold)&#39;" onblur="this.style.borderColor=&#39;var(--mist)&#39;">
+        <input id="pre-name" type="text" style="width:100%;border:1.5px solid var(--mist);border-radius:8px;padding:9px 12px;font-family:&#39;Fraunces&#39;,serif;font-size:.9rem;font-weight:600;background:white;color:var(--text)" onfocus="this.style.borderColor=&#39;var(--gold)&#39;" onblur="this.style.borderColor=&#39;var(--mist)&#39;">
       </div>
       <div style="margin-bottom:10px">
         <label style="font-size:.7rem;font-weight:600;color:var(--tl);display:block;margin-bottom:4px">Source /
           Website</label>
-        <input id="pre-source" type="text"
-          style="width:100%;border:1.5px solid var(--mist);border-radius:8px;padding:9px 12px;font-family:&#39;DM Sans&#39;,sans-serif;font-size:.82rem;background:white;color:var(--text)"
-          onfocus="this.style.borderColor=&#39;var(--gold)&#39;" onblur="this.style.borderColor=&#39;var(--mist)&#39;">
+        <input id="pre-source" type="text" style="width:100%;border:1.5px solid var(--mist);border-radius:8px;padding:9px 12px;font-family:&#39;DM Sans&#39;,sans-serif;font-size:.82rem;background:white;color:var(--text)" onfocus="this.style.borderColor=&#39;var(--gold)&#39;" onblur="this.style.borderColor=&#39;var(--mist)&#39;">
       </div>
       <div style="margin-bottom:10px">
-        <label
-          style="font-size:.7rem;font-weight:600;color:var(--tl);display:block;margin-bottom:6px">Categories</label>
+        <label style="font-size:.7rem;font-weight:600;color:var(--tl);display:block;margin-bottom:6px">Categories</label>
         <div id="pre-tags" style="display:flex;flex-wrap:wrap;gap:6px"></div>
       </div>
       <div style="margin-bottom:14px">
         <label style="font-size:.7rem;font-weight:600;color:var(--tl);display:block;margin-bottom:4px">Ingredients (4
           serves)</label>
-        <textarea id="pre-ings" rows="8"
-          style="width:100%;border:1.5px solid var(--mist);border-radius:8px;padding:10px;font-family:&#39;DM Sans&#39;,sans-serif;font-size:.75rem;background:white;color:var(--text);resize:none"
-          onfocus="this.style.borderColor=&#39;var(--gold)&#39;"
-          onblur="this.style.borderColor=&#39;var(--mist)&#39;"></textarea>
+        <textarea id="pre-ings" rows="8" style="width:100%;border:1.5px solid var(--mist);border-radius:8px;padding:10px;font-family:&#39;DM Sans&#39;,sans-serif;font-size:.75rem;background:white;color:var(--text);resize:none" onfocus="this.style.borderColor=&#39;var(--gold)&#39;" onblur="this.style.borderColor=&#39;var(--mist)&#39;"></textarea>
         <div style="font-size:.65rem;color:var(--tl);margin-top:3px">One ingredient per line. Edit freely.</div>
       </div>
       <button class="btn btn-sage" onclick="saveExtractedRecipe()" style="width:100%;justify-content:center">📚 Save to
@@ -1432,8 +1363,7 @@
         over</button>
     </div>
 
-    <div id="submit-error"
-      style="display:none;margin-top:14px;padding:12px;background:#fff0ed;border-radius:8px;border-left:3px solid var(--rust);font-size:.78rem;color:var(--rust)">
+    <div id="submit-error" style="display:none;margin-top:14px;padding:12px;background:#fff0ed;border-radius:8px;border-left:3px solid var(--rust);font-size:.78rem;color:var(--rust)">
     </div>
   </div>
 
@@ -1482,8 +1412,7 @@
 
       <div class="rd-section">
         <h4>Notes</h4>
-        <textarea class="notes-area" id="rd-notes" rows="3"
-          placeholder="e.g. kids prefer less spice, double the sauce next time…" onchange="saveNote()"></textarea>
+        <textarea class="notes-area" id="rd-notes" rows="3" placeholder="e.g. kids prefer less spice, double the sauce next time…" onchange="saveNote()"></textarea>
       </div>
 
       <div class="rd-actions" id="rd-actions"></div>
@@ -1503,7 +1432,7 @@
     // ═══════════════════════════════════════════════════════════════════
     // ─── API PROXY ───────────────────────────────────────────────────────────────
     // Point this at your Cloudflare Worker URL after deploying worker.js
-    const PROXY_URL = 'https://jolly-haze-ce38.ralph-alarilla.workers.dev';
+    const PROXY_URL = 'https://PASTE_YOUR_WORKER_URL.workers.dev';
     const firebaseConfig = {
       apiKey: "AIzaSyCkz-no9UEXus8bdDAfjyvMHRwUfDP2rfw",
       authDomain: "meal-planner-caf86.firebaseapp.com",
@@ -1863,6 +1792,8 @@
       const planned = Object.values(plan).filter(Boolean);
       const content = document.getElementById('shop-list-content');
       if (!planned.length) { content.innerHTML = '<div class="shop-empty">No meals planned yet.</div>'; return; }
+
+      // Collect raw ingredients, skipping staples
       const allIngs = [];
       planned.forEach(r => {
         (r.ings4 || []).forEach(ing => {
@@ -1873,17 +1804,82 @@
           }
         });
       });
-      const cats = {};
+
+      // Deduplicate: extract quantity + unit + ingredient name, sum matching items
+      function parseIng(raw) {
+        // Match leading quantity like "800g", "2 x 400g", "4", "½", "1½", "2 tbsp", "¼ cup"
+        const m = raw.match(/^([\d½¼¾⅓⅔x\s\.×]+(?:g|kg|ml|l|tbsp?|tsp?|cup|cloves?|heads?|bunches?|rashers?|sheets?|packets?|cans?)?)\s+(.+)/i);
+        if (!m) return { qty: null, unit: null, name: raw.toLowerCase().trim() };
+        const qtyStr = m[1].trim();
+        const name = m[2].toLowerCase().trim();
+        // Try to parse a number from qtyStr
+        const numMatch = qtyStr.replace(/×|x/gi, '*').replace('½', '0.5').replace('¼', '0.25').replace('¾', '0.75').replace('⅓', '0.333').replace('⅔', '0.667').replace('1½', '1.5');
+        let qty = null;
+        try {
+          const cleaned = numMatch.replace(/[a-z]+/gi, '').trim();
+          // Safe eval replacement: handle simple arithmetic (multiplication only)
+          if (cleaned.includes('*')) {
+            const parts = cleaned.split('*').map(p => parseFloat(p.trim()));
+            qty = parts.reduce((a, b) => a * b, 1) || null;
+          } else {
+            qty = parseFloat(cleaned) || null;
+          }
+        } catch (e) {}
+        const unitMatch = qtyStr.match(/(g|kg|ml|l|tbsp?|tsp?|cups?|cloves?|heads?|bunches?|rashers?|sheets?|packets?|cans?)/i);
+        const unit = unitMatch ? unitMatch[1].toLowerCase() : null;
+        return { qty, unit, name };
+      }
+
+      // Group by normalised ingredient name
+      const merged = {};
       allIngs.forEach(ing => {
+        const { qty, unit, name } = parseIng(ing.raw);
+        // Normalise key: strip trailing punctuation, collapse common variants
+        const key = name.replace(/,.*$/, '').trim(); // "garlic cloves, minced" → "garlic cloves"
+        if (!merged[key]) {
+          merged[key] = { raws: [], qty: 0, unit, name: key, clean: ing.clean };
+        }
+        merged[key].raws.push(ing.raw);
+        if (qty) merged[key].qty += qty;
+      });
+
+      // Format merged entries back to display strings
+      const deduped = Object.values(merged).map(m => {
+        let display;
+        if (m.qty && m.qty > 0) {
+          // Round nicely
+          const q = Math.round(m.qty * 4) / 4;
+          const fracs = [[0.25,'¼'],[0.5,'½'],[0.75,'¾'],[0.333,'⅓'],[0.667,'⅔']];
+          const whole = Math.floor(q);
+          const frac = q - whole;
+          let qStr = '';
+          const fracSym = fracs.find(([v]) => Math.abs(frac - v) < 0.05);
+          if (fracSym) qStr = (whole ? whole + fracSym[1] : fracSym[1]);
+          else qStr = q % 1 === 0 ? String(q) : String(Math.round(q * 10) / 10);
+          display = `${qStr}${m.unit || ''} ${m.name}`;
+          // If multiple recipes contribute, note it
+          if (m.raws.length > 1) display += ` (×${m.raws.length} recipes)`;
+        } else {
+          // Couldn't parse qty — just use first raw entry
+          display = m.raws[0];
+          if (m.raws.length > 1) display += ` (×${m.raws.length})`;
+        }
+        return { display, clean: m.clean };
+      });
+
+      // Categorise
+      const cats = {};
+      deduped.forEach((ing, i) => {
         for (const [cat, test] of Object.entries(SHOP_CATS)) {
-          if (test(ing.clean)) { if (!cats[cat]) cats[cat] = []; cats[cat].push(ing); break; }
+          if (test(ing.clean)) { if (!cats[cat]) cats[cat] = []; cats[cat].push({ ...ing, idx: i }); break; }
         }
       });
+
       content.innerHTML = Object.entries(cats).filter(([, it]) => it.length).map(([cat, items]) =>
-        `<div class="shop-category"><div class="shop-cat-title">${cat}</div>${items.map((ing, i) => {
-          const id = `shop_${i}_${cat.slice(0, 3)}`;
+        `<div class="shop-category"><div class="shop-cat-title">${cat}</div>${items.map(ing => {
+          const id = `shop_${ing.idx}_${cat.slice(0, 3)}`;
           const ck = shopChecked.has(id);
-          return `<div class="shop-item ${ck ? 'checked' : ''}" onclick="toggleShopItem(this,'${id}')"><div class="shop-cb"></div><span>${ing.raw}</span></div>`;
+          return `<div class="shop-item ${ck ? 'checked' : ''}" onclick="toggleShopItem(this,'${id}')"><div class="shop-cb"></div><span>${ing.display}</span></div>`;
         }).join('')}</div>`
       ).join('');
     }
@@ -1953,7 +1949,9 @@
     function scaleIngredient(ing, factor) {
       if (factor === 1) return ing;
       return ing.replace(/(\d+(?:\.\d+)?(?:\/\d+)?)/g, (match) => {
-        const num = eval(match);
+        const num = parseFloat(match.replace('/', '/').includes('/') 
+          ? match.split('/').reduce((a, b) => parseFloat(a) / parseFloat(b))
+          : match) || parseFloat(match);
         const scaled = num * factor;
         if (Number.isInteger(scaled)) return scaled;
         const fracs = [[1 / 4, '¼'], [1 / 3, '⅓'], [1 / 2, '½'], [2 / 3, '⅔'], [3 / 4, '¾']];
@@ -2169,6 +2167,4 @@
 
 
 
-</body>
-
-</html>
+</body></html>
