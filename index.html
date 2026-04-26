@@ -1273,8 +1273,7 @@
     </div>
     <div class="shop-section" id="shop-section" style="display:none">
       <h3>🛒 This Week's Shopping List</h3>
-      <p class="shop-note">Based on your planned meals. Tap items to check them off. Staples you always have are
-        excluded.</p>
+      <p class="shop-note">Based on your planned meals. Tap items to check them off.</p>
       <div id="shop-list-content"></div>
       <button class="btn btn-sec btn-sm" style="margin-top:10px" onclick="copyShoppingList()">📋 Copy to
         clipboard</button>
@@ -1528,7 +1527,7 @@
       { name: "Baked Chorizo Fried Rice", source: "Simple Home Edit", url: "https://simplehomeedit.com/recipe/baked-chorizo-fried-rice/", tags: ["quick", "asian"], ings4: ["200g chorizo, sliced", "3 cups cooked rice (day-old)", "4 eggs", "1 cup frozen peas", "1 cup frozen corn", "3 tbsp soy sauce", "1 tbsp sesame oil", "4 spring onions, sliced", "3 garlic cloves, minced", "2 tbsp neutral oil", "Crispy chilli oil to serve (optional)"] },
       { name: "Easy Homemade Sausage Rolls", source: "Simple Home Edit", url: "https://simplehomeedit.com/recipe/easy-homemade-sausage-rolls/", tags: ["comfort"], ings4: ["500g pork mince", "4 sheets puff pastry", "1 onion, grated", "3 garlic cloves, minced", "½ cup breadcrumbs", "1 egg (+ 1 for egg wash)", "2 tbsp Worcestershire sauce", "1 tbsp Dijon mustard", "1 tsp dried herbs (thyme/parsley)", "Salt & pepper", "Sesame seeds for topping", "Tomato sauce to serve"] },
       { name: "Cheeseburger Pasta", source: "Simple Home Edit", url: "https://simplehomeedit.com/recipe/cheeseburger-pasta/", tags: ["quick", "comfort"], ings4: ["500g beef mince", "300g short pasta (penne/macaroni)", "1 onion, diced", "1 celery stalk, diced", "1 carrot, grated", "4 garlic cloves, minced", "2 tbsp tomato paste", "3 cups beef stock", "1 cup shredded cheddar", "100g cream cheese", "1 tbsp Dijon mustard", "1 tbsp Worcestershire sauce", "Salt & pepper"] },
-      { name: "Juicy Oven Baked Kebabs", source: "Simple Home Edit", url: "https://simplehomeedit.com/recipe/juicy-oven-baked-kebabs/", tags: ["mediterranean", "quick"], ings4: ["600g beef or lamb mince", "1 onion, grated", "4 garlic cloves, minced", "¼ cup fresh parsley, chopped", "1½ tsp cumin", "1 tsp paprika", "1 tsp coriander", "Salt & pepper", "1 cup Greek yoghurt", "1 tsp sumac", "1 red onion, thinly sliced", "Pita bread to serve", "Fresh parsley & lemon to serve"] },
+      { name: "Juicy Oven Baked Kebabs", source: "Simple Home Edit", url: "https://simplehomeedit.com/recipe/juicy-oven-baked-kebabs/", tags: ["mediterranean", "quick"], ings4: ["600g beef or lamb mince", "1 onion, grated", "4 garlic cloves, minced", "¼ cup fresh parsley, chopped", "1½ tsp cumin", "1 tsp paprika", "1 tsp coriander", "Salt & pepper", "1 cup Greek yoghurt", "1 tsp sumac", "1 red onion, thinly sliced", "4 pita breads", "1 lemon"] },
       { name: "Chicken Fajitas", source: "RecipeTin Eats", url: "https://www.recipetineats.com/chicken-fajitas/", tags: ["quick", "mexican"], ings4: ["600g chicken thighs", "2 capsicums (mixed colours), sliced", "2 onions, sliced", "8 flour tortillas", "2 limes (zest + juice)", "¼ cup olive oil", "1½ tsp cumin", "1 tsp smoked paprika", "1 tsp garlic powder", "1 tsp dried oregano", "¼ tsp chilli powder", "Sour cream & avocado to serve"] },
       { name: "Filipino Beef Tapa", source: "Iankewks", url: "https://www.iankewks.com/filipino-beef-tapa/", tags: ["asian"], ings4: ["600g beef sirloin or rib eye, thinly sliced", "3 tbsp soy sauce", "2 tbsp white cane vinegar (or rice wine vinegar)", "1½ tbsp sugar", "6 garlic cloves, minced", "½ tsp black pepper", "Salt to taste", "2 tbsp neutral oil", "4 cups cooked garlic rice (sinangag)", "4 eggs", "Sliced tomatoes & cucumbers to serve"] },
       { name: "Slow Cooker Chipotle-Honey Chicken Tacos", source: "NYT Cooking", url: "https://cooking.nytimes.com/recipes/1016832-slow-cooker-chipotle-honey-chicken-tacos", tags: ["slow", "mexican"], ings4: ["800g chicken thighs", "2 chipotle chillies in adobo, minced", "2 tbsp adobo sauce", "3 tbsp honey", "4 garlic cloves, minced", "1 tsp cumin", "1 tsp coriander", "1 lime (zest + juice)", "Salt & pepper", "8 flour tortillas", "2 cups shredded cabbage slaw", "Sour cream & lime to serve"] },
@@ -1842,14 +1841,14 @@
     // ─── SHOPPING LIST ────────────────────────────────────────────────────────────
     let shopChecked = new Set();
     let shopVisible = false;
-    const ALWAYS_HAVE = new Set(['salt', 'pepper', 'salt & pepper', 'olive oil', 'neutral oil', 'water', 'oil', 'soy sauce', 'sesame oil', 'fish sauce', 'oyster sauce', 'hoisin sauce', 'miso paste', 'rice wine vinegar', 'tomato paste', 'chicken stock', 'beef stock', 'vegetable stock', 'cumin', 'paprika', 'smoked paprika', 'coriander', 'oregano', 'dried oregano', 'chinese five spice', 'chilli flakes', 'garlic powder', 'onion powder', 'sugar', 'brown sugar', 'honey', 'dijon mustard', 'worcestershire sauce', 'taco seasoning']);
     const SHOP_CATS = {
-      '🥩 Meat & Fish': r => /salmon|chicken|beef|lamb|pork|prawn|mince|fillet|thigh|sirloin|rib eye|chorizo/i.test(r),
-      '🥦 Produce': r => /broccoli|zucchini|carrot|celery|onion|garlic|ginger|lemon|lime|tomato|capsicum|bok choy|spinach|lettuce|cucumber|potato|parsley|coriander|basil|spring onion|avocado|mushroom/i.test(r),
-      '🧀 Dairy & Eggs': r => /egg|cheese|cream|parmesan|feta|yoghurt|sour cream|butter|milk/i.test(r),
-      '🍝 Pantry & Dry': r => /pasta|rice|noodle|orzo|risoni|breadcrumb|coconut milk|canned|can |beans|stock|puff pastry|tortilla|pita/i.test(r),
-      '🧂 Sauces': r => /caesar dressing|salsa|chilli oil|adobo sauce|sun-dried/i.test(r),
-      '🧊 Freezer': r => /frozen/i.test(r),
+      '🥩 Meat & Fish': r => /\b(salmon|chicken|beef(?! stock)|lamb|pork(?! belly)|prawn|fillet|thigh|sirloin|rib eye|chorizo|bacon)\b/i.test(r) || /\b(pork belly|beef chuck|beef blade|beef mince|pork mince|chicken mince)\b/i.test(r),
+      '🥦 Produce': r => /\b(broccoli|broccolini|zucchini|carrots?|celery|onions?|garlic|ginger|lemons?|limes?|cherry tomato|tomatoes?|capsicums?|bok choy|spinach|lettuce|cucumber|potatoes?|parsley|fresh coriander|coriander leaves|basil|avocados?|mushrooms?|cabbage|kale|chillis?|chillies|rosemary|thyme|olives?|leek|beetroot|asparagus)\b/i.test(r) || /spring onion/i.test(r),
+      '🧀 Dairy & Eggs': r => /\b(eggs?|cheddar|cheese|parmesan|feta|yoghurt|sour cream|butter|milk|cream cheese|thickened cream|mozzarella)\b/i.test(r),
+      '🍝 Pantry & Dry': r => /\b(pasta|rice|noodles?|ramen|udon|hokkien|orzo|risoni|breadcrumbs?|croutons?|coconut milk|canned|cannellini|beans|stock|broth|puff pastry|tortillas?|pita|flatbread|miso|soy sauce|tamari|sesame oil|fish sauce|oyster sauce|hoisin|rice wine|vinegar|tomato paste|tomatoes|honey|mirin|sesame seeds?|red wine|wine|curry paste|flour|cornstarch|bicarbonate|olive oil|neutral oil|vegetable oil)\b/i.test(r),
+      '🧂 Sauces & Condiments': r => /\b(caesar dressing|salsa|chilli oil|adobo|sun-dried|mustard|worcestershire|hot sauce|tzatziki|curry paste)\b/i.test(r),
+      '🌿 Herbs & Spices': r => /\b(coriander(?! leaves)|dried herb|mixed herb|dried thyme|dried rosemary|bay leaf|sumac|za.atar|paprika|cumin|oregano|five spice|sesame seeds?|spice|chilli flakes|salt|pepper)\b/i.test(r) || /\b(tsp|tbsp)\b.*(herb|spice|seed|powder|ground|dried)/i.test(r),
+      '🧊 Freezer': r => /\bfrozen\b/i.test(r),
       '🛍️ Other': () => true
     };
 
@@ -1864,13 +1863,13 @@
       const content = document.getElementById('shop-list-content');
       if (!planned.length) { content.innerHTML = '<div class="shop-empty">No meals planned yet.</div>'; return; }
 
-      // Collect raw ingredients, skipping staples
+      // Collect all ingredients — no exclusions
       const allIngs = [];
       planned.forEach(r => {
         (r.ings4 || []).forEach(ing => {
           const cl = ing.toLowerCase().replace(/\(.*?\)/g, '').trim();
-          const skip = [...ALWAYS_HAVE].some(s => cl.includes(s));
-          if (!skip && !cl.includes('to serve') && !cl.includes('to taste') && !cl.includes('optional')) {
+          // Only skip pure garnish lines
+          if (!cl.includes('to serve') && !cl.includes('to taste') && !cl.includes('optional') && !cl.includes('to garnish')) {
             allIngs.push({ raw: ing, clean: cl });
           }
         });
@@ -2013,24 +2012,70 @@
     function renderIngredients(r, servings) {
       const factor = servings / 4;
       const grid = document.getElementById('rd-ings');
-      if (!r.ings4 || !r.ings4.length) { grid.innerHTML = `<div class="loading-ings">No ingredients saved — visit the recipe link above.</div>`; return; }
-      grid.innerHTML = r.ings4.map(ing => `<div class="ing"><div class="ing-dot"></div>${scaleIngredient(ing, factor)}</div>`).join('');
+      if (!r.ings4 || !r.ings4.length) {
+        grid.innerHTML = `<div class="loading-ings">No ingredients saved — visit the recipe link above.</div>`;
+        return;
+      }
+      const note = factor !== 1
+        ? `<div style="font-size:.68rem;color:var(--tl);margin-bottom:8px;font-style:italic">Scaled from 4 serves × ${factor === Math.floor(factor) ? factor : factor.toFixed(2)}</div>`
+        : `<div style="font-size:.68rem;color:var(--tl);margin-bottom:8px;font-style:italic">Ingredients as written for 4 serves</div>`;
+      grid.innerHTML = note + r.ings4.map(ing =>
+        `<div class="ing"><div class="ing-dot"></div>${scaleIngredient(ing, factor)}</div>`
+      ).join('');
     }
 
     function scaleIngredient(ing, factor) {
       if (factor === 1) return ing;
-      return ing.replace(/(\d+(?:\.\d+)?(?:\/\d+)?)/g, (match) => {
-        const num = parseFloat(match.replace('/', '/').includes('/')
+
+      let result = ing.replace(/(\d+(?:\.\d+)?(?:\/\d+)?)/g, (match) => {
+        const num = match.includes('/')
           ? match.split('/').reduce((a, b) => parseFloat(a) / parseFloat(b))
-          : match) || parseFloat(match);
+          : parseFloat(match);
         const scaled = num * factor;
-        if (Number.isInteger(scaled)) return scaled;
-        const fracs = [[1 / 4, '¼'], [1 / 3, '⅓'], [1 / 2, '½'], [2 / 3, '⅔'], [3 / 4, '¾']];
+        if (Number.isInteger(scaled)) return String(scaled);
+        const fracs = [[1/4,'¼'],[1/3,'⅓'],[1/2,'½'],[2/3,'⅔'],[3/4,'¾']];
         const whole = Math.floor(scaled);
         const frac = scaled - whole;
-        for (const [val, sym] of fracs) { if (Math.abs(frac - val) < 0.05) return (whole ? whole + sym : sym); }
-        return Math.round(scaled * 10) / 10;
+        for (const [val, sym] of fracs) {
+          if (Math.abs(frac - val) < 0.05) return (whole ? whole + sym : sym);
+        }
+        return String(Math.round(scaled * 10) / 10);
       });
+
+      // tbsp < 1 → tsp
+      result = result.replace(/^([\d¼⅓½⅔¾]+(?:\.\d+)?)\s*tbsp\b/g, (m, q) => {
+        const val = parseFrac(q);
+        if (val < 1) return `${formatFrac(val * 3)} tsp`;
+        return m;
+      });
+      // 1000g+ → kg
+      result = result.replace(/(\d+)g\b/g, (m, n) => {
+        const v = parseInt(n);
+        if (v >= 1000 && v % 100 === 0) return `${v / 1000}kg`;
+        if (v >= 1000) return `${(v / 1000).toFixed(1)}kg`;
+        return m;
+      });
+
+      return result;
+    }
+
+    function parseFrac(s) {
+      const map = {'¼':0.25,'⅓':0.333,'½':0.5,'⅔':0.667,'¾':0.75};
+      for (const [sym, val] of Object.entries(map)) {
+        if (s === sym) return val;
+        if (s.endsWith(sym)) return parseInt(s) + val;
+      }
+      return parseFloat(s) || 0;
+    }
+
+    function formatFrac(n) {
+      const fracs = [[0.25,'¼'],[0.333,'⅓'],[0.5,'½'],[0.667,'⅔'],[0.75,'¾']];
+      const whole = Math.floor(n);
+      const frac = n - whole;
+      for (const [val, sym] of fracs) {
+        if (Math.abs(frac - val) < 0.05) return whole ? `${whole}${sym}` : sym;
+      }
+      return String(Math.round(n * 10) / 10);
     }
 
     function changeServings(delta) {
