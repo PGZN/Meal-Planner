@@ -1,625 +1,1627 @@
 <!DOCTYPE html>
+<!-- saved from url=(0050)file:///Users/ralphalarilla/Downloads/index_2.html -->
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Family Meal Planner</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600&display=swap');
-*{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --cream:#f5f0e8;--warm:#faf8f4;--bark:#3d2b1f;--rust:#c0522a;
-  --sage:#5a7a5c;--gold:#c9973a;--mist:#e8e2d8;--text:#2a1f17;--tl:#6b5a4e;
-  --purple:#6d4faa;
-}
-body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--text);min-height:100vh;max-width:600px;margin:0 auto}
-header{background:var(--bark);color:var(--cream);padding:18px 20px 0}
-header h1{font-family:'Fraunces',serif;font-size:1.5rem;font-weight:700}
-header p{font-size:.72rem;opacity:.5;font-style:italic;margin-top:2px;padding-bottom:14px}
-.tabs{display:flex;background:var(--bark);padding:0 20px;overflow-x:auto;gap:2px}
-.tab{padding:9px 14px;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(245,240,232,.4);cursor:pointer;border-bottom:2px solid transparent;transition:all .2s;white-space:nowrap;flex-shrink:0}
-.tab.active{color:var(--cream);border-bottom-color:var(--gold)}
-.view{display:none;padding:16px 18px 80px}
-.view.active{display:block}
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-/* LIBRARY */
-.section-note{font-size:.78rem;color:var(--tl);margin-bottom:12px;line-height:1.5;padding:10px 12px;background:var(--warm);border-radius:8px;border-left:3px solid var(--gold)}
-.filter-row{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
-.fb{padding:4px 12px;border-radius:20px;border:1.5px solid var(--mist);background:transparent;font-size:.7rem;font-weight:700;color:var(--tl);cursor:pointer;transition:all .2s;font-family:'DM Sans',sans-serif}
-.fb.active,.fb:hover{background:var(--bark);color:var(--cream);border-color:var(--bark)}
-.recipe-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.rc{background:var(--warm);border-radius:10px;padding:12px;border:1.5px solid var(--mist);cursor:pointer;transition:all .2s;position:relative}
-.rc:hover{border-color:var(--rust);transform:translateY(-1px);box-shadow:0 4px 12px rgba(61,43,31,.1)}
-.rc.in-plan{border-color:var(--sage);background:#f0f5f0}
-.rc.in-plan::after{content:'✓ In Plan';position:absolute;top:8px;right:8px;color:var(--sage);font-weight:700;font-size:.58rem;background:#d4ead4;padding:1px 5px;border-radius:4px}
-.rname{font-family:'Fraunces',serif;font-size:.84rem;font-weight:600;line-height:1.3;margin-bottom:5px}
-.rmeta{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
-.tag{font-size:.6rem;font-weight:700;padding:2px 6px;border-radius:8px;text-transform:uppercase;letter-spacing:.03em}
-.tq{background:#fef3c7;color:#92400e}.tslow{background:#ede9fe;color:#5b21b6}
-.ta{background:#fce7f3;color:#9d174d}.tmed{background:#d1fae5;color:#065f46}
-.tmx{background:#ffedd5;color:#9a3412}.tc{background:#e0f2fe;color:#075985}
-.tf{background:#ecfeff;color:#155e75}.tsrc{background:var(--mist);color:var(--tl)}
-.rating-mini{font-size:.72rem;margin-top:5px;color:var(--tl)}
-.stars-gold{color:var(--gold)}
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Family Meal Planner</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@400;500;600&display=swap');
 
-/* PLANNER */
-.stats-bar{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
-.stat{background:var(--warm);border:1.5px solid var(--mist);border-radius:8px;padding:7px 12px;font-size:.7rem}
-.stat strong{font-size:1rem;font-family:'Fraunces',serif;display:block}
-.plan-actions{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
-.btn{padding:8px 16px;border-radius:8px;border:none;font-family:'DM Sans',sans-serif;font-size:.78rem;font-weight:600;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:5px}
-.btn-sec{background:var(--mist);color:var(--text)}.btn-sec:hover{background:#d8d0c4}
-.btn-sage{background:var(--sage);color:white}.btn-sage:hover{background:#4a6a4c}
-.btn-rust{background:var(--rust);color:white}.btn-rust:hover{background:#a8441f}
-.btn-gold{background:var(--gold);color:white}.btn-gold:hover{background:#b8862a}
-.btn-purple{background:var(--purple);color:white}.btn-purple:hover{background:#5a3d90}
-.btn-sm{padding:5px 10px;font-size:.7rem}
-.week-grid{display:flex;flex-direction:column;gap:7px}
-.day-row{background:var(--warm);border-radius:10px;border:1.5px solid var(--mist);overflow:hidden}
-.day-hdr{background:var(--bark);color:var(--cream);padding:7px 12px;font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;display:flex;justify-content:space-between;align-items:center}
-.day-meal{padding:11px 12px;min-height:50px;display:flex;align-items:center;justify-content:space-between}
-.day-meal.empty{color:var(--tl);font-size:.78rem;font-style:italic;cursor:pointer}
-.day-meal-name{font-family:'Fraunces',serif;font-size:.84rem;font-weight:600;flex:1}
-.day-meal-src{font-size:.62rem;color:var(--tl);margin-top:2px}
-.rmv{background:none;border:none;color:var(--tl);cursor:pointer;font-size:.85rem;padding:2px 4px;opacity:.5;transition:opacity .2s}
-.rmv:hover{opacity:1;color:var(--rust)}
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
 
-/* STAPLES */
-.staples-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}
-.staples-card{background:var(--warm);border-radius:10px;padding:12px;border:1.5px solid var(--mist)}
-.staples-card h3{font-family:'Fraunces',serif;font-size:.88rem;font-weight:700;margin-bottom:8px;color:var(--bark)}
-.staple-item{font-size:.72rem;padding:3px 0;border-bottom:1px solid var(--mist);display:flex;align-items:center;gap:5px}
-.staple-item:last-child{border:none}
-.s-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);flex-shrink:0}
+    :root {
+      --cream: #f5f0e8;
+      --warm: #faf8f4;
+      --bark: #3d2b1f;
+      --rust: #c0522a;
+      --sage: #5a7a5c;
+      --gold: #c9973a;
+      --mist: #e8e2d8;
+      --text: #2a1f17;
+      --tl: #6b5a4e;
+      --purple: #6d4faa;
+    }
 
-/* DISCOVER */
-.disc-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
-.disc-header p{font-size:.78rem;color:var(--tl);line-height:1.4;flex:1;margin-right:10px}
-.disc-card{background:var(--warm);border-radius:10px;padding:14px;border:1.5px solid var(--mist);margin-bottom:9px}
-.disc-card h3{font-family:'Fraunces',serif;font-size:.92rem;font-weight:700;margin-bottom:4px}
-.disc-reason{font-size:.72rem;color:var(--tl);margin-bottom:10px;line-height:1.5}
-.disc-actions{display:flex;gap:6px;flex-wrap:wrap}
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      min-height: 100vh;
+      max-width: 600px;
+      margin: 0 auto
+    }
 
-/* MODALS */
-.overlay{display:none;position:fixed;inset:0;background:rgba(42,31,23,.65);z-index:100;align-items:flex-end;justify-content:center}
-.overlay.open{display:flex}
-.sheet{background:var(--warm);border-radius:16px 16px 0 0;padding:20px 20px 32px;width:100%;max-width:600px;max-height:88vh;overflow-y:auto}
-.sheet h3{font-family:'Fraunces',serif;font-size:1.1rem;margin-bottom:4px}
-.sheet-sub{font-size:.75rem;color:var(--tl);margin-bottom:14px}
-.mlist{display:flex;flex-direction:column;gap:5px}
-.mitem{padding:10px 12px;border-radius:8px;border:1.5px solid var(--mist);cursor:pointer;font-family:'Fraunces',serif;font-size:.84rem;font-weight:600;transition:all .2s;background:white}
-.mitem:hover{border-color:var(--rust);background:#fff5f2}
-.mitem small{font-family:'DM Sans',sans-serif;font-weight:400;font-style:italic;color:var(--tl);font-size:.67rem;display:block;margin-top:1px}
-.sheet-close{width:100%;margin-top:12px;background:var(--mist);color:var(--text)}
+    header {
+      background: var(--bark);
+      color: var(--cream);
+      padding: 18px 20px 0
+    }
 
-/* RECIPE DETAIL */
-.rd-name{font-family:'Fraunces',serif;font-size:1.2rem;font-weight:700;margin-bottom:3px}
-.rd-link{font-size:.72rem;color:var(--rust);text-decoration:none;font-weight:600;display:inline-block;margin-bottom:10px}
-.rd-link:hover{text-decoration:underline}
-.rd-tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:14px}
-.rd-section{margin-bottom:16px}
-.rd-section h4{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--tl);margin-bottom:8px}
-.ing-grid{display:grid;grid-template-columns:1fr 1fr;gap:5px}
-.ing{font-size:.75rem;padding:5px 8px;background:var(--cream);border-radius:6px;display:flex;align-items:flex-start;gap:5px;line-height:1.3}
-.ing-dot{width:5px;height:5px;border-radius:50%;background:var(--rust);flex-shrink:0;margin-top:4px}
-.servings-control{display:flex;align-items:center;gap:10px;margin-bottom:12px}
-.servings-control label{font-size:.72rem;font-weight:600;color:var(--tl)}
-.svc-btn{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--mist);background:var(--warm);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--bark)}
-.svc-btn:hover{background:var(--bark);color:var(--cream)}
-.svc-num{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:700;min-width:24px;text-align:center}
-.loading-ings{text-align:center;padding:20px;color:var(--tl);font-size:.8rem;font-style:italic}
-.rating-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.rating-box{background:var(--cream);border-radius:8px;padding:10px;text-align:center}
-.rating-box label{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--tl);display:block;margin-bottom:6px}
-.star-btns{display:flex;justify-content:center;gap:2px}
-.sbtn{background:none;border:none;font-size:1.4rem;cursor:pointer;opacity:.25;transition:all .15s;padding:1px;line-height:1}
-.sbtn.lit{opacity:1;color:var(--gold)}
-.rd-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
+    header h1 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.5rem;
+      font-weight: 700
+    }
 
-/* NOTES */
-.notes-area{width:100%;border:1.5px solid var(--mist);border-radius:8px;padding:10px;font-family:'DM Sans',sans-serif;font-size:.78rem;background:white;color:var(--text);resize:none;margin-bottom:8px}
-.notes-area:focus{outline:none;border-color:var(--gold)}
+    header p {
+      font-size: .72rem;
+      opacity: .5;
+      font-style: italic;
+      margin-top: 2px;
+      padding-bottom: 14px
+    }
 
-/* TOAST */
-.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(70px);background:var(--bark);color:var(--cream);padding:9px 18px;border-radius:20px;font-size:.78rem;font-weight:600;transition:transform .3s;z-index:400;max-width:280px;text-align:center}
-.toast.show{transform:translateX(-50%) translateY(0)}
+    .tabs {
+      display: flex;
+      background: var(--bark);
+      padding: 0 20px;
+      overflow-x: auto;
+      gap: 2px
+    }
 
-/* SPINNER */
-.spin{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.3);border-top-color:white;border-radius:50%;animation:spin .6s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-</style>
+    .tab {
+      padding: 9px 14px;
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: rgba(245, 240, 232, .4);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all .2s;
+      white-space: nowrap;
+      flex-shrink: 0
+    }
+
+    .tab.active {
+      color: var(--cream);
+      border-bottom-color: var(--gold)
+    }
+
+    .view {
+      display: none;
+      padding: 16px 18px 80px
+    }
+
+    .view.active {
+      display: block
+    }
+
+    /* LIBRARY */
+    .section-note {
+      font-size: .78rem;
+      color: var(--tl);
+      margin-bottom: 12px;
+      line-height: 1.5;
+      padding: 10px 12px;
+      background: var(--warm);
+      border-radius: 8px;
+      border-left: 3px solid var(--gold)
+    }
+
+    .filter-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 14px
+    }
+
+    .fb {
+      padding: 4px 12px;
+      border-radius: 20px;
+      border: 1.5px solid var(--mist);
+      background: transparent;
+      font-size: .7rem;
+      font-weight: 700;
+      color: var(--tl);
+      cursor: pointer;
+      transition: all .2s;
+      font-family: 'DM Sans', sans-serif
+    }
+
+    .fb.active,
+    .fb:hover {
+      background: var(--bark);
+      color: var(--cream);
+      border-color: var(--bark)
+    }
+
+    .recipe-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px
+    }
+
+    .rc {
+      background: var(--warm);
+      border-radius: 10px;
+      padding: 12px;
+      border: 1.5px solid var(--mist);
+      cursor: pointer;
+      transition: all .2s;
+      position: relative
+    }
+
+    .rc:hover {
+      border-color: var(--rust);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(61, 43, 31, .1)
+    }
+
+    .rc.in-plan {
+      border-color: var(--sage);
+      background: #f0f5f0
+    }
+
+    .rc.in-plan::after {
+      content: '✓ In Plan';
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      color: var(--sage);
+      font-weight: 700;
+      font-size: .58rem;
+      background: #d4ead4;
+      padding: 1px 5px;
+      border-radius: 4px
+    }
+
+    .rname {
+      font-family: 'Fraunces', serif;
+      font-size: .84rem;
+      font-weight: 600;
+      line-height: 1.3;
+      margin-bottom: 5px
+    }
+
+    .rmeta {
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+      align-items: center
+    }
+
+    .tag {
+      font-size: .6rem;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 8px;
+      text-transform: uppercase;
+      letter-spacing: .03em
+    }
+
+    .tq {
+      background: #fef3c7;
+      color: #92400e
+    }
+
+    .tslow {
+      background: #ede9fe;
+      color: #5b21b6
+    }
+
+    .ta {
+      background: #fce7f3;
+      color: #9d174d
+    }
+
+    .tmed {
+      background: #d1fae5;
+      color: #065f46
+    }
+
+    .tmx {
+      background: #ffedd5;
+      color: #9a3412
+    }
+
+    .tc {
+      background: #e0f2fe;
+      color: #075985
+    }
+
+    .tf {
+      background: #ecfeff;
+      color: #155e75
+    }
+
+    .tsrc {
+      background: var(--mist);
+      color: var(--tl)
+    }
+
+    .rating-mini {
+      font-size: .72rem;
+      margin-top: 5px;
+      color: var(--tl)
+    }
+
+    .stars-gold {
+      color: var(--gold)
+    }
+
+    /* PLANNER */
+    .stats-bar {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+      flex-wrap: wrap
+    }
+
+    .stat {
+      background: var(--warm);
+      border: 1.5px solid var(--mist);
+      border-radius: 8px;
+      padding: 7px 12px;
+      font-size: .7rem
+    }
+
+    .stat strong {
+      font-size: 1rem;
+      font-family: 'Fraunces', serif;
+      display: block
+    }
+
+    .plan-actions {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+      flex-wrap: wrap
+    }
+
+    .btn {
+      padding: 8px 16px;
+      border-radius: 8px;
+      border: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px
+    }
+
+    .btn-sec {
+      background: var(--mist);
+      color: var(--text)
+    }
+
+    .btn-sec:hover {
+      background: #d8d0c4
+    }
+
+    .btn-sage {
+      background: var(--sage);
+      color: white
+    }
+
+    .btn-sage:hover {
+      background: #4a6a4c
+    }
+
+    .btn-rust {
+      background: var(--rust);
+      color: white
+    }
+
+    .btn-rust:hover {
+      background: #a8441f
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: white
+    }
+
+    .btn-gold:hover {
+      background: #b8862a
+    }
+
+    .btn-purple {
+      background: var(--purple);
+      color: white
+    }
+
+    .btn-purple:hover {
+      background: #5a3d90
+    }
+
+    .btn-sm {
+      padding: 5px 10px;
+      font-size: .7rem
+    }
+
+    .week-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 7px
+    }
+
+    .day-row {
+      background: var(--warm);
+      border-radius: 10px;
+      border: 1.5px solid var(--mist);
+      overflow: hidden
+    }
+
+    .day-hdr {
+      background: var(--bark);
+      color: var(--cream);
+      padding: 7px 12px;
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: space-between;
+      align-items: center
+    }
+
+    .day-meal {
+      padding: 11px 12px;
+      min-height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between
+    }
+
+    .day-meal.empty {
+      color: var(--tl);
+      font-size: .78rem;
+      font-style: italic;
+      cursor: pointer
+    }
+
+    .day-meal-name {
+      font-family: 'Fraunces', serif;
+      font-size: .84rem;
+      font-weight: 600;
+      flex: 1
+    }
+
+    .day-meal-src {
+      font-size: .62rem;
+      color: var(--tl);
+      margin-top: 2px
+    }
+
+    .rmv {
+      background: none;
+      border: none;
+      color: var(--tl);
+      cursor: pointer;
+      font-size: .85rem;
+      padding: 2px 4px;
+      opacity: .5;
+      transition: opacity .2s
+    }
+
+    .rmv:hover {
+      opacity: 1;
+      color: var(--rust)
+    }
+
+    /* STAPLES */
+    .staples-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 4px
+    }
+
+    .staples-card {
+      background: var(--warm);
+      border-radius: 10px;
+      padding: 12px;
+      border: 1.5px solid var(--mist)
+    }
+
+    .staples-card h3 {
+      font-family: 'Fraunces', serif;
+      font-size: .88rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--bark)
+    }
+
+    .staple-item {
+      font-size: .72rem;
+      padding: 3px 0;
+      border-bottom: 1px solid var(--mist);
+      display: flex;
+      align-items: center;
+      gap: 5px
+    }
+
+    .staple-item:last-child {
+      border: none
+    }
+
+    .s-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0
+    }
+
+    /* DISCOVER */
+    .disc-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px
+    }
+
+    .disc-header p {
+      font-size: .78rem;
+      color: var(--tl);
+      line-height: 1.4;
+      flex: 1;
+      margin-right: 10px
+    }
+
+    .disc-card {
+      background: var(--warm);
+      border-radius: 10px;
+      padding: 14px;
+      border: 1.5px solid var(--mist);
+      margin-bottom: 9px
+    }
+
+    .disc-card h3 {
+      font-family: 'Fraunces', serif;
+      font-size: .92rem;
+      font-weight: 700;
+      margin-bottom: 4px
+    }
+
+    .disc-reason {
+      font-size: .72rem;
+      color: var(--tl);
+      margin-bottom: 10px;
+      line-height: 1.5
+    }
+
+    .disc-actions {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap
+    }
+
+    /* MODALS */
+    .overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(42, 31, 23, .65);
+      z-index: 100;
+      align-items: flex-end;
+      justify-content: center
+    }
+
+    .overlay.open {
+      display: flex
+    }
+
+    .sheet {
+      background: var(--warm);
+      border-radius: 16px 16px 0 0;
+      padding: 20px 20px 32px;
+      width: 100%;
+      max-width: 600px;
+      max-height: 88vh;
+      overflow-y: auto
+    }
+
+    .sheet h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 1.1rem;
+      margin-bottom: 4px
+    }
+
+    .sheet-sub {
+      font-size: .75rem;
+      color: var(--tl);
+      margin-bottom: 14px
+    }
+
+    .mlist {
+      display: flex;
+      flex-direction: column;
+      gap: 5px
+    }
+
+    .mitem {
+      padding: 10px 12px;
+      border-radius: 8px;
+      border: 1.5px solid var(--mist);
+      cursor: pointer;
+      font-family: 'Fraunces', serif;
+      font-size: .84rem;
+      font-weight: 600;
+      transition: all .2s;
+      background: white
+    }
+
+    .mitem:hover {
+      border-color: var(--rust);
+      background: #fff5f2
+    }
+
+    .mitem small {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--tl);
+      font-size: .67rem;
+      display: block;
+      margin-top: 1px
+    }
+
+    .sheet-close {
+      width: 100%;
+      margin-top: 12px;
+      background: var(--mist);
+      color: var(--text)
+    }
+
+    /* RECIPE DETAIL */
+    .rd-name {
+      font-family: 'Fraunces', serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 3px
+    }
+
+    .rd-link {
+      font-size: .72rem;
+      color: var(--rust);
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 10px
+    }
+
+    .rd-link:hover {
+      text-decoration: underline
+    }
+
+    .rd-tags {
+      display: flex;
+      gap: 5px;
+      flex-wrap: wrap;
+      margin-bottom: 14px
+    }
+
+    .rd-section {
+      margin-bottom: 16px
+    }
+
+    .rd-section h4 {
+      font-size: .65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .09em;
+      color: var(--tl);
+      margin-bottom: 8px
+    }
+
+    .ing-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px
+    }
+
+    .ing {
+      font-size: .75rem;
+      padding: 5px 8px;
+      background: var(--cream);
+      border-radius: 6px;
+      display: flex;
+      align-items: flex-start;
+      gap: 5px;
+      line-height: 1.3
+    }
+
+    .ing-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--rust);
+      flex-shrink: 0;
+      margin-top: 4px
+    }
+
+    .servings-control {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px
+    }
+
+    .servings-control label {
+      font-size: .72rem;
+      font-weight: 600;
+      color: var(--tl)
+    }
+
+    .svc-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1.5px solid var(--mist);
+      background: var(--warm);
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--bark)
+    }
+
+    .svc-btn:hover {
+      background: var(--bark);
+      color: var(--cream)
+    }
+
+    .svc-num {
+      font-family: 'Fraunces', serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      min-width: 24px;
+      text-align: center
+    }
+
+    .loading-ings {
+      text-align: center;
+      padding: 20px;
+      color: var(--tl);
+      font-size: .8rem;
+      font-style: italic
+    }
+
+    .rating-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px
+    }
+
+    .rating-box {
+      background: var(--cream);
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center
+    }
+
+    .rating-box label {
+      font-size: .62rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--tl);
+      display: block;
+      margin-bottom: 6px
+    }
+
+    .star-btns {
+      display: flex;
+      justify-content: center;
+      gap: 2px
+    }
+
+    .sbtn {
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      opacity: .25;
+      transition: all .15s;
+      padding: 1px;
+      line-height: 1
+    }
+
+    .sbtn.lit {
+      opacity: 1;
+      color: var(--gold)
+    }
+
+    .rd-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 4px
+    }
+
+    /* SHOPPING LIST */
+    .shop-section {
+      margin-top: 18px
+    }
+
+    .shop-section h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 4px
+    }
+
+    .shop-note {
+      font-size: .72rem;
+      color: var(--tl);
+      margin-bottom: 12px
+    }
+
+    .shop-category {
+      margin-bottom: 14px
+    }
+
+    .shop-cat-title {
+      font-size: .65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .09em;
+      color: var(--tl);
+      margin-bottom: 6px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--mist)
+    }
+
+    .shop-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding: 5px 0;
+      border-bottom: 1px solid var(--mist);
+      font-size: .78rem;
+      cursor: pointer
+    }
+
+    .shop-item:last-child {
+      border: none
+    }
+
+    .shop-cb {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      border: 1.5px solid var(--mist);
+      flex-shrink: 0;
+      margin-top: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all .2s
+    }
+
+    .shop-item.checked .shop-cb {
+      background: var(--sage);
+      border-color: var(--sage)
+    }
+
+    .shop-item.checked .shop-cb::after {
+      content: '✓';
+      color: white;
+      font-size: .65rem;
+      font-weight: 700
+    }
+
+    .shop-item.checked span {
+      text-decoration: line-through;
+      color: var(--tl)
+    }
+
+    .shop-empty {
+      font-size: .82rem;
+      color: var(--tl);
+      font-style: italic;
+      padding: 16px 0;
+      text-align: center
+    }
+
+    .notes-area {
+      width: 100%;
+      border: 1.5px solid var(--mist);
+      border-radius: 8px;
+      padding: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .78rem;
+      background: white;
+      color: var(--text);
+      resize: none;
+      margin-bottom: 8px
+    }
+
+    .notes-area:focus {
+      outline: none;
+      border-color: var(--gold)
+    }
+
+    /* SYNC STATUS */
+    .sync-dot {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--mist);
+      margin-right: 5px;
+      vertical-align: middle;
+      transition: background .4s
+    }
+
+    .sync-dot.syncing {
+      background: var(--gold);
+      animation: pulse .8s infinite
+    }
+
+    .sync-dot.ok {
+      background: var(--sage)
+    }
+
+    .sync-dot.err {
+      background: var(--rust)
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: .4
+      }
+    }
+
+    .sync-label {
+      font-size: .62rem;
+      opacity: .7;
+      vertical-align: middle
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(70px);
+      background: var(--bark);
+      color: var(--cream);
+      padding: 9px 18px;
+      border-radius: 20px;
+      font-size: .78rem;
+      font-weight: 600;
+      transition: transform .3s;
+      z-index: 400;
+      max-width: 280px;
+      text-align: center
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0)
+    }
+
+    /* SPINNER */
+    .spin {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(255, 255, 255, .3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin .6s linear infinite
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg)
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<header>
-  <h1>🍽️ Family Meal Planner</h1>
-  <p>Tap a recipe to view details, rate it, and add to your week</p>
-</header>
+  <header>
+    <h1>🍽️ Family Meal Planner</h1>
+    <p><span class="sync-dot syncing" id="sync-dot"></span><span class="sync-label" id="sync-label">syncing…</span></p>
+  </header>
 
-<div class="tabs">
-  <div class="tab active" onclick="switchTab('library')">Library</div>
-  <div class="tab" onclick="switchTab('planner')">This Week</div>
-  <div class="tab" onclick="switchTab('staples')">Staples</div>
-  <div class="tab" onclick="switchTab('discover')">Discover</div>
-</div>
-
-<!-- LIBRARY -->
-<div class="view active" id="view-library">
-  <div class="section-note">✅ Your tried & tested recipes. Tap any card to view the full recipe, update ratings, or add it to this week's plan.</div>
-  <div class="filter-row" id="filter-row"></div>
-  <div class="recipe-grid" id="recipe-grid"></div>
-</div>
-
-<!-- PLANNER -->
-<div class="view" id="view-planner">
-  <div class="stats-bar">
-    <div class="stat"><strong id="planned-count">0</strong>planned</div>
-    <div class="stat"><strong>2</strong>leftover nights</div>
-    <div class="stat"><strong id="free-count">7</strong>free nights</div>
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab(&#39;library&#39;)">Library</div>
+    <div class="tab" onclick="switchTab(&#39;planner&#39;)">This Week</div>
+    <div class="tab" onclick="switchTab(&#39;staples&#39;)">Staples</div>
+    <div class="tab" onclick="switchTab(&#39;discover&#39;)">Discover</div>
+    <div class="tab" onclick="switchTab(&#39;submit&#39;)">+ Add Recipe</div>
   </div>
-  <div class="plan-actions">
-    <button class="btn btn-sec" onclick="clearPlan()">Clear week</button>
-    <button class="btn btn-sage" onclick="autoPlan()">✦ Surprise me</button>
-  </div>
-  <div class="week-grid" id="week-grid"></div>
-</div>
 
-<!-- STAPLES -->
-<div class="view" id="view-staples">
-  <div class="section-note" style="margin-bottom:14px">Keep these stocked and you only need a fresh protein + veg run each week.</div>
-  <div class="staples-grid" id="staples-grid"></div>
-</div>
+  <!-- LIBRARY -->
+  <div class="view active" id="view-library">
+    <div class="section-note">✅ Your tried &amp; tested recipes. Tap any card to view the full recipe, update ratings,
+      or add it to this week's plan.</div>
+    <div class="filter-row" id="filter-row"><button class="fb active"
+        onclick="setFilter(&#39;all&#39;)">All</button><button class="fb "
+        onclick="setFilter(&#39;quick&#39;)">Quick</button><button class="fb "
+        onclick="setFilter(&#39;slow&#39;)">Slow</button><button class="fb "
+        onclick="setFilter(&#39;asian&#39;)">Asian</button><button class="fb "
+        onclick="setFilter(&#39;mediterranean&#39;)">Mediterranean</button><button class="fb "
+        onclick="setFilter(&#39;mexican&#39;)">Mexican</button><button class="fb "
+        onclick="setFilter(&#39;comfort&#39;)">Comfort</button><button class="fb "
+        onclick="setFilter(&#39;seafood&#39;)">Seafood</button></div>
+    <div class="recipe-grid" id="recipe-grid">
+      <div class="rc " onclick="openRecipe(&#39;Glazed Miso Salmon Ramen Noodles&#39;)">
+        <div class="rname">Glazed Miso Salmon Ramen Noodles</div>
+        <div class="rmeta">
+          <span class="tag tq">quick</span><span class="tag ta">asian</span><span class="tag tf">seafood</span>
+          <span class="tag tsrc">S.H.E.</span>
+        </div>
+        <div class="rating-mini">
+          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+        </div>
 
-<!-- DISCOVER -->
-<div class="view" id="view-discover">
-  <div class="disc-header">
-    <p>Recipes you'd probably love, based on your library. Add to your plan or save to Library once you've tried them.</p>
-    <button class="btn btn-sage" onclick="shuffleDiscover()">🔀 Shuffle</button>
-  </div>
-  <div id="disc-list"></div>
-</div>
-
-<!-- Day picker modal -->
-<div class="overlay" id="modal-day" onclick="closeDayModalOutside(event)">
-  <div class="sheet">
-    <h3>Pick a meal</h3>
-    <p class="sheet-sub" id="modal-day-label">Choose for this day</p>
-    <div class="mlist" id="modal-list"></div>
-    <button class="btn sheet-close" onclick="closeDayModal()">Cancel</button>
-  </div>
-</div>
-
-<!-- Recipe detail modal -->
-<div class="overlay" id="modal-recipe" onclick="closeRDOutside(event)">
-  <div class="sheet" id="rd-sheet">
-    <div class="rd-name" id="rd-name"></div>
-    <a id="rd-link" href="#" target="_blank" class="rd-link">View full recipe →</a>
-    <div class="rd-tags" id="rd-tags"></div>
-
-    <div class="rd-section">
-      <h4>Ingredients</h4>
-      <div class="servings-control">
-        <label>Servings:</label>
-        <button class="svc-btn" onclick="changeServings(-1)">−</button>
-        <span class="svc-num" id="svc-num">4</span>
-        <button class="svc-btn" onclick="changeServings(1)">+</button>
       </div>
-      <div class="ing-grid" id="rd-ings"><div class="loading-ings">Loading ingredients…</div></div>
-    </div>
+      <div class="rc " onclick="openRecipe(&#39;Baked Chorizo Fried Rice&#39;)">
+        <div class="rname">Baked Chorizo Fried Rice</div>
+        <div class="rmeta">
+          <span class="tag tq">quick</span><span class="tag ta">asian</span>
+          <span class="tag tsrc">S.H.E.</span>
+        </div>
+        <div class="rating-mini">
+          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+        </div>
 
-    <div class="rd-section">
-      <h4>Family Ratings</h4>
-      <div class="rating-row">
-        <div class="rating-box"><label>👨‍👩‍👧 Parents</label><div class="star-btns" id="p-stars"></div></div>
-        <div class="rating-box"><label>👦 Kids</label><div class="star-btns" id="k-stars"></div></div>
+      </div>
+      <div class="rc " onclick="openRecipe(&#39;Easy Homemade Sausage Rolls&#39;)">
+        <div class="rname">Easy Homemade Sausage Rolls</div>
+        <div class="rmeta">
+          <span class="tag tc">comfort</span>
+          <span class="tag tsrc">S.H.E.</span>
+        </div>
+        <div class="rating-mini">
+          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+        </div>
+
+      </div>
+      <div class="rc " onclick="openRecipe(&#39;Cheeseburger Pasta&#39;)">
+        <div class="rname">Cheeseburger Pasta</div>
+        <div class="rmeta">
+          <span class="tag tq">quick</span><span class="tag tc">comfort</span>
+          <span class="tag tsrc">S.H.E.</span>
+        </div>
+        <div class="rating-mini">
+          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+        </div>
+
+      </div>
+      <div class="rc " onclick="openRecipe(&#39;Juicy Oven Baked Kebabs&#39;)">
+        <div class="rname">Juicy Oven Baked Kebabs</div>
+        <div class="rmeta">
+          <span class="tag tmed">mediterranean</span><span class="tag tq">quick</span>
+          <span class="tag tsrc">S.H.E.</span>
+        </div>
+        <div class="rating-mini">
+          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+        </div>
+
+      </div>
+      <div class="rc " onclick="openRecipe(&#39;Chicken Fajitas&#39;)">
+        <div class="rname">Chicken Fajitas</div>
+        <div class="rmeta">
+          <span class="tag tq">quick</span><span class="tag tmx">mexican</span>
+          <span class="tag tsrc">RecipeTin</span>
+        </div>
+        <div class="rating-mini">
+          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+        </div>
+
+      </div>
+      <div class="rc " onclick="openRecipe(&#39;Filipino Beef Tapa&#39;)">
+        <div class="rname">Filipino Beef Tapa</div>
+        <div class="rmeta">
+          <span class="tag ta">asian</span>
+          <span class="tag tsrc">Iankewks</span>
+        </div>
+        <div class="rating-mini">
+          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+        </div>
+
+      </div>
+      <div class="rc " onclick="openRecipe(&#39;Slow Cooker Chipotle-Honey Chicken Tacos&#39;)">
+        <div class="rname">Slow Cooker Chipotle-Honey Chicken Tacos</div>
+        <div class="rmeta">
+          <span class="tag tslow">slow</span><span class="tag tmx">mexican</span>
+          <span class="tag tsrc">NYT</span>
+        </div>
+        <div class="rating-mini">
+          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+        </div>
+
+      </div>
+      <div class="rc " onclick="openRecipe(&#39;One-Pan Salmon and Broccoli Bake&#39;)">
+        <div class="rname">One-Pan Salmon and Broccoli Bake</div>
+        <div class="rmeta">
+          <span class="tag tq">quick</span><span class="tag tf">seafood</span>
+          <span class="tag tsrc">Taste</span>
+        </div>
+        <div class="rating-mini">
+          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+        </div>
+
+      </div>
+      <div class="rc " onclick="openRecipe(&#39;Soy-Glazed Mushroom Rice Bowl&#39;)">
+        <div class="rname">Soy-Glazed Mushroom Rice Bowl</div>
+        <div class="rmeta">
+          <span class="tag tq">quick</span><span class="tag ta">asian</span>
+          <span class="tag tsrc">NYT</span>
+        </div>
+        <div class="rating-mini">
+          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+        </div>
+
+      </div>
+      <div class="rc " onclick="openRecipe(&#39;One-Pan Greek Chicken and Orzo&#39;)">
+        <div class="rname">One-Pan Greek Chicken and Orzo</div>
+        <div class="rmeta">
+          <span class="tag tmed">mediterranean</span>
+          <span class="tag tsrc">S.H.E.</span>
+        </div>
+        <div class="rating-mini">
+          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+        </div>
+
+      </div>
+      <div class="rc " onclick="openRecipe(&#39;Loaded Potato Taco Bowl&#39;)">
+        <div class="rname">Loaded Potato Taco Bowl</div>
+        <div class="rmeta">
+          <span class="tag tq">quick</span><span class="tag tmx">mexican</span>
+          <span class="tag tsrc">S.H.E.</span>
+        </div>
+        <div class="rating-mini">
+          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+        </div>
+
+      </div>
+      <div class="rc " onclick="openRecipe(&#39;Slow-Cooked Sticky Pork Belly&#39;)">
+        <div class="rname">Slow-Cooked Sticky Pork Belly</div>
+        <div class="rmeta">
+          <span class="tag tslow">slow</span><span class="tag ta">asian</span>
+          <span class="tag tsrc">S.H.E.</span>
+        </div>
+        <div class="rating-mini">
+          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+        </div>
+
+      </div>
+      <div class="rc " onclick="openRecipe(&#39;Gyros Smashed Tacos&#39;)">
+        <div class="rname">Gyros Smashed Tacos</div>
+        <div class="rmeta">
+          <span class="tag tmed">mediterranean</span><span class="tag tq">quick</span>
+          <span class="tag tsrc">S.H.E.</span>
+        </div>
+        <div class="rating-mini">
+          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+        </div>
+
+      </div>
+      <div class="rc " onclick="openRecipe(&#39;Chicken Caesar Smashed Tacos&#39;)">
+        <div class="rname">Chicken Caesar Smashed Tacos</div>
+        <div class="rmeta">
+          <span class="tag tq">quick</span>
+          <span class="tag tsrc">S.H.E.</span>
+        </div>
+        <div class="rating-mini">
+          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+        </div>
+
+      </div>
+      <div class="rc " onclick="openRecipe(&#39;Quick Coconut Chicken Curry&#39;)">
+        <div class="rname">Quick Coconut Chicken Curry</div>
+        <div class="rmeta">
+          <span class="tag tq">quick</span><span class="tag ta">asian</span>
+          <span class="tag tsrc">S.H.E.</span>
+        </div>
+        <div class="rating-mini">
+          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+        </div>
+
+      </div>
+      <div class="rc " onclick="openRecipe(&#39;Slow-Cooked Beef Ragù&#39;)">
+        <div class="rname">Slow-Cooked Beef Ragù</div>
+        <div class="rmeta">
+          <span class="tag tslow">slow</span><span class="tag tc">comfort</span>
+          <span class="tag tsrc">S.H.E.</span>
+        </div>
+        <div class="rating-mini">
+          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+        </div>
+
+      </div>
+      <div class="rc " onclick="openRecipe(&#39;One-Pan Lemon Garlic Chicken and Potatoes&#39;)">
+        <div class="rname">One-Pan Lemon Garlic Chicken and Potatoes</div>
+        <div class="rmeta">
+          <span class="tag tq">quick</span><span class="tag tmed">mediterranean</span>
+          <span class="tag tsrc">S.H.E.</span>
+        </div>
+        <div class="rating-mini">
+          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+        </div>
+
+      </div>
+      <div class="rc " onclick="openRecipe(&#39;Comforting Chunky Minestrone&#39;)">
+        <div class="rname">Comforting Chunky Minestrone</div>
+        <div class="rmeta">
+          <span class="tag tc">comfort</span>
+          <span class="tag tsrc">S.H.E.</span>
+        </div>
+        <div class="rating-mini">
+          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+        </div>
+
+      </div>
+      <div class="rc " onclick="openRecipe(&#39;Sticky Beef Noodles&#39;)">
+        <div class="rname">Sticky Beef Noodles</div>
+        <div class="rmeta">
+          <span class="tag tq">quick</span><span class="tag ta">asian</span>
+          <span class="tag tsrc">S.H.E.</span>
+        </div>
+        <div class="rating-mini">
+          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+        </div>
+
+      </div>
+      <div class="rc " onclick="openRecipe(&#39;Marry Me Chicken Meatballs with Orzo&#39;)">
+        <div class="rname">Marry Me Chicken Meatballs with Orzo</div>
+        <div class="rmeta">
+          <span class="tag tc">comfort</span><span class="tag tq">quick</span>
+          <span class="tag tsrc">S.H.E.</span>
+        </div>
+        <div class="rating-mini">
+          <span class="stars-gold">—</span> parents &nbsp;·&nbsp; <span class="stars-gold">—</span> kids
+        </div>
+
       </div>
     </div>
+  </div>
 
-    <div class="rd-section">
-      <h4>Notes</h4>
-      <textarea class="notes-area" id="rd-notes" rows="3" placeholder="e.g. kids prefer less spice, double the sauce next time…" onchange="saveNote()"></textarea>
+  <!-- PLANNER -->
+  <div class="view" id="view-planner">
+    <div class="stats-bar">
+      <div class="stat"><strong id="planned-count">0</strong>planned</div>
+      <div class="stat"><strong>2</strong>leftover nights</div>
+      <div class="stat"><strong id="free-count">7</strong>free nights</div>
+    </div>
+    <div class="plan-actions">
+      <button class="btn btn-sec" onclick="clearPlan()">Clear week</button>
+      <button class="btn btn-sage" onclick="autoPlan()">✦ Surprise me</button>
+      <button class="btn btn-rust" onclick="toggleShoppingList()">🛒 Shopping List</button>
+    </div>
+    <div class="week-grid" id="week-grid"></div>
+    <div class="shop-section" id="shop-section" style="display:none">
+      <h3>🛒 This Week's Shopping List</h3>
+      <p class="shop-note">Based on your planned meals. Tap items to check them off. Staples you always have are
+        excluded.</p>
+      <div id="shop-list-content"></div>
+      <button class="btn btn-sec btn-sm" style="margin-top:10px" onclick="copyShoppingList()">📋 Copy to
+        clipboard</button>
+    </div>
+  </div>
+
+  <!-- STAPLES -->
+  <div class="view" id="view-staples">
+    <div class="section-note" style="margin-bottom:14px">Keep these stocked and you only need a fresh protein + veg run
+      each week.</div>
+    <div class="staples-grid" id="staples-grid"></div>
+  </div>
+
+  <!-- DISCOVER -->
+  <div class="view" id="view-discover">
+    <div class="disc-header">
+      <p>Recipes you'd probably love, based on your library. Add to your plan or save to Library once you've tried them.
+      </p>
+      <button class="btn btn-sage" onclick="shuffleDiscover()">🔀 Shuffle</button>
+    </div>
+    <div id="disc-list"></div>
+  </div>
+
+  <!-- SUBMIT RECIPE -->
+  <div class="view" id="view-submit">
+    <div class="section-note">Paste any recipe URL and we'll extract the details for you. Review before saving to your
+      Library.</div>
+    <div style="margin-top:4px">
+      <label
+        style="font-size:.72rem;font-weight:700;color:var(--tl);display:block;margin-bottom:6px;text-transform:uppercase;letter-spacing:.06em">Recipe
+        URL</label>
+      <input id="submit-url" type="url" placeholder="https://simplehomeedit.com/recipe/..."
+        style="width:100%;border:1.5px solid var(--mist);border-radius:8px;padding:11px 13px;font-family:&#39;DM Sans&#39;,sans-serif;font-size:.85rem;background:white;color:var(--text);margin-bottom:10px"
+        onfocus="this.style.borderColor=&#39;var(--gold)&#39;" onblur="this.style.borderColor=&#39;var(--mist)&#39;">
+      <button class="btn btn-rust" onclick="extractRecipe()" id="extract-btn" style="width:100%;justify-content:center">
+        ✨ Extract Recipe Details
+      </button>
     </div>
 
-    <div class="rd-actions" id="rd-actions"></div>
-    <button class="btn sheet-close" onclick="closeRD()">Done</button>
+    <div id="submit-preview" style="display:none;margin-top:18px">
+      <div
+        style="font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.09em;color:var(--tl);margin-bottom:12px">
+        Review &amp; Edit Before Saving</div>
+      <div style="margin-bottom:10px">
+        <label style="font-size:.7rem;font-weight:600;color:var(--tl);display:block;margin-bottom:4px">Recipe
+          Name</label>
+        <input id="pre-name" type="text"
+          style="width:100%;border:1.5px solid var(--mist);border-radius:8px;padding:9px 12px;font-family:&#39;Fraunces&#39;,serif;font-size:.9rem;font-weight:600;background:white;color:var(--text)"
+          onfocus="this.style.borderColor=&#39;var(--gold)&#39;" onblur="this.style.borderColor=&#39;var(--mist)&#39;">
+      </div>
+      <div style="margin-bottom:10px">
+        <label style="font-size:.7rem;font-weight:600;color:var(--tl);display:block;margin-bottom:4px">Source /
+          Website</label>
+        <input id="pre-source" type="text"
+          style="width:100%;border:1.5px solid var(--mist);border-radius:8px;padding:9px 12px;font-family:&#39;DM Sans&#39;,sans-serif;font-size:.82rem;background:white;color:var(--text)"
+          onfocus="this.style.borderColor=&#39;var(--gold)&#39;" onblur="this.style.borderColor=&#39;var(--mist)&#39;">
+      </div>
+      <div style="margin-bottom:10px">
+        <label
+          style="font-size:.7rem;font-weight:600;color:var(--tl);display:block;margin-bottom:6px">Categories</label>
+        <div id="pre-tags" style="display:flex;flex-wrap:wrap;gap:6px"></div>
+      </div>
+      <div style="margin-bottom:14px">
+        <label style="font-size:.7rem;font-weight:600;color:var(--tl);display:block;margin-bottom:4px">Ingredients (4
+          serves)</label>
+        <textarea id="pre-ings" rows="8"
+          style="width:100%;border:1.5px solid var(--mist);border-radius:8px;padding:10px;font-family:&#39;DM Sans&#39;,sans-serif;font-size:.75rem;background:white;color:var(--text);resize:none"
+          onfocus="this.style.borderColor=&#39;var(--gold)&#39;"
+          onblur="this.style.borderColor=&#39;var(--mist)&#39;"></textarea>
+        <div style="font-size:.65rem;color:var(--tl);margin-top:3px">One ingredient per line. Edit freely.</div>
+      </div>
+      <button class="btn btn-sage" onclick="saveExtractedRecipe()" style="width:100%;justify-content:center">📚 Save to
+        Library</button>
+      <button class="btn btn-sec" onclick="resetSubmit()" style="width:100%;justify-content:center;margin-top:8px">Start
+        over</button>
+    </div>
+
+    <div id="submit-error"
+      style="display:none;margin-top:14px;padding:12px;background:#fff0ed;border-radius:8px;border-left:3px solid var(--rust);font-size:.78rem;color:var(--rust)">
+    </div>
   </div>
-</div>
 
-<div class="toast" id="toast"></div>
+  <!-- Day picker modal -->
+  <div class="overlay" id="modal-day" onclick="closeDayModalOutside(event)">
+    <div class="sheet">
+      <h3>Pick a meal</h3>
+      <p class="sheet-sub" id="modal-day-label">Choose for this day</p>
+      <div class="mlist" id="modal-list"></div>
+      <button class="btn sheet-close" onclick="closeDayModal()">Cancel</button>
+    </div>
+  </div>
 
-<script>
-// ─── DATA ────────────────────────────────────────────────────────────────────
-const RECIPES = [
-  {
-    name:"Glazed Miso Salmon Ramen Noodles",source:"Simple Home Edit",
-    url:"https://simplehomeedit.com/recipe/glazed-miso-salmon-ramen-noodles/",
-    tags:["quick","asian","seafood"],
-    ings4:[
-      "4 salmon fillets (about 500g)","2 tbsp miso paste","2 tbsp tamari or soy sauce",
-      "1 tbsp sesame oil","1 tbsp brown sugar","2 tbsp rice wine vinegar",
-      "360g ramen noodles","1 bunch Chinese broccoli (gai lan)","5 spring onions",
-      "1 tbsp fresh garlic, grated","1 tbsp fresh ginger, grated",
-      "½ cup neutral oil (for sauce)","3 tbsp soy sauce (for sauce)","1 tbsp sesame oil (for sauce)"
-    ]
-  },
-  {
-    name:"Baked Chorizo Fried Rice",source:"Simple Home Edit",
-    url:"https://simplehomeedit.com/recipe/baked-chorizo-fried-rice/",
-    tags:["quick","asian"],
-    ings4:[
-      "200g chorizo, sliced","3 cups cooked rice (day-old)","4 eggs",
-      "1 cup frozen peas","1 cup frozen corn","3 tbsp soy sauce",
-      "1 tbsp sesame oil","4 spring onions, sliced","3 garlic cloves, minced",
-      "2 tbsp neutral oil","Crispy chilli oil to serve (optional)"
-    ]
-  },
-  {
-    name:"Easy Homemade Sausage Rolls",source:"Simple Home Edit",
-    url:"https://simplehomeedit.com/recipe/easy-homemade-sausage-rolls/",
-    tags:["comfort"],
-    ings4:[
-      "500g pork mince","4 sheets puff pastry","1 onion, grated","3 garlic cloves, minced",
-      "½ cup breadcrumbs","1 egg (+ 1 for egg wash)","2 tbsp Worcestershire sauce",
-      "1 tbsp Dijon mustard","1 tsp dried herbs (thyme/parsley)","Salt & pepper",
-      "Sesame seeds for topping","Tomato sauce to serve"
-    ]
-  },
-  {
-    name:"Cheeseburger Pasta",source:"Simple Home Edit",
-    url:"https://simplehomeedit.com/recipe/cheeseburger-pasta/",
-    tags:["quick","comfort"],
-    ings4:[
-      "500g beef mince","300g short pasta (penne/macaroni)","1 onion, diced",
-      "1 celery stalk, diced","1 carrot, grated","4 garlic cloves, minced",
-      "2 tbsp tomato paste","3 cups beef stock","1 cup shredded cheddar",
-      "100g cream cheese","1 tbsp Dijon mustard","1 tbsp Worcestershire sauce",
-      "Salt & pepper"
-    ]
-  },
-  {
-    name:"Juicy Oven Baked Kebabs",source:"Simple Home Edit",
-    url:"https://simplehomeedit.com/recipe/juicy-oven-baked-kebabs/",
-    tags:["mediterranean","quick"],
-    ings4:[
-      "600g beef or lamb mince","1 onion, grated","4 garlic cloves, minced",
-      "¼ cup fresh parsley, chopped","1½ tsp cumin","1 tsp paprika",
-      "1 tsp coriander","Salt & pepper","1 cup Greek yoghurt",
-      "1 tsp sumac","1 red onion, thinly sliced","Pita bread to serve",
-      "Fresh parsley & lemon to serve"
-    ]
-  },
-  {
-    name:"Chicken Fajitas",source:"RecipeTin Eats",
-    url:"https://www.recipetineats.com/chicken-fajitas/",
-    tags:["quick","mexican"],
-    ings4:[
-      "600g chicken thighs","2 capsicums (mixed colours), sliced","2 onions, sliced",
-      "8 flour tortillas","2 limes (zest + juice)","¼ cup olive oil",
-      "1½ tsp cumin","1 tsp smoked paprika","1 tsp garlic powder",
-      "1 tsp dried oregano","¼ tsp chilli powder","Sour cream & avocado to serve"
-    ]
-  },
-  {
-    name:"Filipino Beef Tapa",source:"Iankewks",
-    url:"https://www.iankewks.com/filipino-beef-tapa/",
-    tags:["asian"],
-    ings4:[
-      "600g beef sirloin or rib eye, thinly sliced","3 tbsp soy sauce",
-      "2 tbsp white cane vinegar (or rice wine vinegar)","1½ tbsp sugar",
-      "6 garlic cloves, minced","½ tsp black pepper","Salt to taste",
-      "2 tbsp neutral oil","4 cups cooked garlic rice (sinangag)","4 eggs",
-      "Sliced tomatoes & cucumbers to serve"
-    ]
-  },
-  {
-    name:"Slow Cooker Chipotle-Honey Chicken Tacos",source:"NYT Cooking",
-    url:"https://cooking.nytimes.com/recipes/1016832-slow-cooker-chipotle-honey-chicken-tacos",
-    tags:["slow","mexican"],
-    ings4:[
-      "800g chicken thighs","2 chipotle chillies in adobo, minced","2 tbsp adobo sauce",
-      "3 tbsp honey","4 garlic cloves, minced","1 tsp cumin","1 tsp coriander",
-      "1 lime (zest + juice)","Salt & pepper","8 flour tortillas",
-      "2 cups shredded cabbage slaw","Sour cream & lime to serve"
-    ]
-  },
-  {
-    name:"One-Pan Salmon and Broccoli Bake",source:"—",
-    url:"",
-    tags:["quick","seafood"],
-    ings4:[
-      "4 salmon fillets","400g broccoli, cut into florets","3 tbsp olive oil",
-      "4 garlic cloves, minced","1 lemon (zest + juice)","2 tbsp soy sauce",
-      "1 tbsp honey","1 tbsp sesame seeds","Salt & pepper"
-    ]
-  },
-  {
-    name:"Soy-Glazed Mushroom Rice Bowl",source:"NYT Cooking",
-    url:"https://cooking.nytimes.com/recipes/1021166-soy-glazed-mushrooms-with-bok-choy-and-rice",
-    tags:["quick","asian"],
-    ings4:[
-      "600g mixed mushrooms (shiitake, cremini)","3 heads bok choy, halved",
-      "2 cups jasmine rice","3 tbsp soy sauce","2 tbsp sesame oil",
-      "1 tbsp mirin","4 garlic cloves, minced","1 tbsp fresh ginger, grated",
-      "4 spring onions, sliced","2 tbsp sesame seeds","2 tbsp neutral oil"
-    ]
-  },
-  {
-    name:"One-Pan Greek Chicken and Orzo",source:"Simple Home Edit",
-    url:"https://simplehomeedit.com/recipe/one-pan-greek-chicken-and-risoni/",
-    tags:["mediterranean"],
-    ings4:[
-      "8 bone-in chicken thighs","300g orzo/risoni","2 cups chicken stock",
-      "400g cherry tomatoes","100g baby spinach","½ cup kalamata olives",
-      "1 lemon (zest + juice)","6 garlic cloves, minced","1 onion, diced",
-      "2 tsp dried oregano","100g feta, crumbled","2 tbsp olive oil","Salt & pepper"
-    ]
-  },
-  {
-    name:"Loaded Potato Taco Bowl",source:"Simple Home Edit",
-    url:"https://simplehomeedit.com/recipe/loaded-potato-taco-bowl/",
-    tags:["quick","mexican"],
-    ings4:[
-      "800g potatoes, diced","500g beef mince","1 packet (35g) taco seasoning",
-      "400g canned diced tomatoes","½ cup beef stock","1 cup shredded cheese",
-      "½ cup sour cream","1 avocado, diced","½ cup salsa",
-      "4 spring onions, sliced","2 tbsp olive oil","Fresh coriander to serve"
-    ]
-  },
-  {
-    name:"Slow-Cooked Sticky Pork Belly",source:"Simple Home Edit",
-    url:"https://simplehomeedit.com/recipe/slow-cooked-sticky-pork-belly/",
-    tags:["slow","asian"],
-    ings4:[
-      "1kg pork belly, cut into pieces","3 tbsp soy sauce","2 tbsp hoisin sauce",
-      "2 tbsp honey","6 garlic cloves, minced","1 tbsp fresh ginger, grated",
-      "1 tsp Chinese five spice","½ cup chicken stock","4 heads bok choy",
-      "Steamed rice to serve","Sesame seeds & spring onions to garnish"
-    ]
-  },
-  {
-    name:"Gyros Smashed Tacos",source:"Simple Home Edit",
-    url:"https://simplehomeedit.com/recipe/gyros-smashed-tacos/",
-    tags:["mediterranean","quick"],
-    ings4:[
-      "600g lamb or beef mince","8 small flour tortillas","1 cup Greek yoghurt / tzatziki",
-      "2 tomatoes, diced","1 cucumber, diced","½ red onion, thinly sliced",
-      "2 tsp dried oregano","4 garlic cloves, minced","1 lemon (juice)",
-      "1 tbsp olive oil","Fresh parsley","Salt & pepper"
-    ]
-  },
-  {
-    name:"Chicken Caesar Smashed Tacos",source:"Simple Home Edit",
-    url:"https://simplehomeedit.com/recipe/chicken-caesar-smashed-tacos/",
-    tags:["quick"],
-    ings4:[
-      "600g chicken thighs","8 small flour tortillas","2 cups cos/romaine lettuce, shredded",
-      "½ cup Caesar dressing","½ cup parmesan, grated","4 bacon rashers",
-      "1 cup croutons","3 garlic cloves","1 lemon (squeeze)","2 tbsp olive oil","Salt & pepper"
-    ]
-  },
-  {
-    name:"Quick Coconut Chicken Curry",source:"Simple Home Edit",
-    url:"https://simplehomeedit.com/recipe/quick-coconut-chicken-curry/",
-    tags:["quick","asian"],
-    ings4:[
-      "700g chicken thighs, diced","2 x 400ml cans coconut milk","3 tbsp red or green curry paste",
-      "1 onion, diced","4 garlic cloves, minced","1 tbsp fresh ginger, grated",
-      "1 tbsp fish sauce","1 lime (juice)","Large handful fresh coriander",
-      "2 cups jasmine rice","2 cups baby spinach","2 tbsp neutral oil"
-    ]
-  },
-  {
-    name:"Slow-Cooked Beef Ragù",source:"Simple Home Edit",
-    url:"https://simplehomeedit.com/recipe/slow-cooked-beef-ragu/",
-    tags:["slow","comfort"],
-    ings4:[
-      "800g beef chuck or blade, whole","2 x 400g cans crushed tomatoes","1 onion, diced",
-      "1 carrot, diced","2 celery stalks, diced","6 garlic cloves, minced",
-      "1 cup red wine","1 cup beef stock","2 tbsp tomato paste",
-      "400g pappardelle or pasta","Parmesan to serve","2 tbsp olive oil",
-      "Salt, pepper, fresh basil"
-    ]
-  },
-  {
-    name:"One-Pan Lemon Garlic Chicken and Potatoes",source:"Simple Home Edit",
-    url:"https://simplehomeedit.com/recipe/one-pan-lemon-garlic-chicken-and-potatoes/",
-    tags:["quick","mediterranean"],
-    ings4:[
-      "8 bone-in chicken thighs","700g baby potatoes, halved","8 garlic cloves, minced",
-      "2 lemons (zest + juice)","3 tbsp olive oil","2 tbsp Dijon mustard",
-      "½ cup chicken stock","2 tsp fresh rosemary or thyme","Fresh parsley to serve","Salt & pepper"
-    ]
-  },
-  {
-    name:"Comforting Chunky Minestrone",source:"Simple Home Edit",
-    url:"https://simplehomeedit.com/recipe/comforting-chunky-minestrone/",
-    tags:["comfort"],
-    ings4:[
-      "2 x 400g cans crushed tomatoes","1.5L chicken or vegetable stock","150g small pasta (ditalini)",
-      "400g can cannellini beans, drained","2 zucchini, diced","2 carrots, diced",
-      "2 celery stalks, diced","1 onion, diced","4 garlic cloves, minced",
-      "Parmesan rind (optional)","Parmesan to serve","3 tbsp olive oil",
-      "Fresh basil","Salt & pepper"
-    ]
-  },
-  {
-    name:"Sticky Beef Noodles",source:"Simple Home Edit",
-    url:"https://simplehomeedit.com/recipe/sticky-beef-noodles/",
-    tags:["quick","asian"],
-    ings4:[
-      "500g beef mince","300g noodles (hokkien or udon)","3 tbsp soy sauce",
-      "2 tbsp oyster sauce","1 tbsp hoisin sauce","1 tbsp sesame oil",
-      "4 garlic cloves, minced","1 tbsp fresh ginger, grated","5 spring onions",
-      "1 long red chilli, sliced","200g bok choy or broccolini","1 tbsp neutral oil"
-    ]
-  },
-  {
-    name:"Marry Me Chicken Meatballs with Orzo",source:"Simple Home Edit",
-    url:"https://simplehomeedit.com/recipe/marry-me-chicken-meatballs-with-risoni/",
-    tags:["comfort","quick"],
-    ings4:[
-      "600g chicken mince","300g orzo/risoni","½ cup sun-dried tomatoes, chopped",
-      "1 cup thickened cream","1 cup parmesan, grated (+ extra to serve)","2 cups chicken stock",
-      "4 garlic cloves, minced","1 onion, diced","Large handful fresh basil",
-      "1 egg","½ cup breadcrumbs","2 cups baby spinach","2 tbsp olive oil","Salt & pepper"
-    ]
-  }
-];
+  <!-- Recipe detail modal -->
+  <div class="overlay" id="modal-recipe" onclick="closeRDOutside(event)">
+    <div class="sheet" id="rd-sheet">
+      <div class="rd-name" id="rd-name"></div>
+      <a id="rd-link" href="file:///Users/ralphalarilla/Downloads/index_2.html#" target="_blank" class="rd-link">View
+        full recipe →</a>
+      <div class="rd-tags" id="rd-tags"></div>
 
-const ALL_DISCOVER = [
-  {name:"Butter Chicken",reason:"You love Quick Coconut Chicken Curry — butter chicken uses the same easy formula but with a richer, tomato-cream base. Guaranteed kid favourite.",url:"https://www.recipetineats.com/butter-chicken/",source:"RecipeTin Eats",tags:["quick","asian"]},
-  {name:"Korean Ground Beef Rice Bowl",reason:"Shares the same 15-min pantry-magic DNA as your Sticky Beef Noodles and Beef Tapa. Marinated beef over rice, huge family hit.",url:"https://simplehomeedit.com/recipe/korean-beef-rice-bowl/",source:"Simple Home Edit",tags:["quick","asian"]},
-  {name:"Spatchcock Lemon Herb Chicken",reason:"Weekend upgrade from your Lemon Garlic Chicken. One tray, looks impressive, same pantry basics you already own.",url:"https://www.recipetineats.com/spatchcock-chicken/",source:"RecipeTin Eats",tags:["mediterranean"]},
-  {name:"Birria Tacos",reason:"You've got Gyros, Caesar & Chipotle tacos — birria is the next level. Slow-cooked beef, crispy-dipped tortillas. Weekend project, very rewarding.",url:"https://www.recipetineats.com/birria-tacos/",source:"RecipeTin Eats",tags:["slow","mexican"]},
-  {name:"Shakshuka",reason:"Your one blind spot: no egg-forward dinners. Shakshuka is a 20-min one-pan classic totally unlike anything else you make.",url:"https://simplehomeedit.com/recipe/shakshuka/",source:"Simple Home Edit",tags:["quick","mediterranean"]},
-  {name:"Chicken Shawarma",reason:"Bridges your Mediterranean and quick-cook love — marinated thighs, flatbread, garlic sauce. Same vibe as your gyros smashed tacos.",url:"https://simplehomeedit.com/recipe/chicken-shawarma/",source:"Simple Home Edit",tags:["quick","mediterranean"]},
-  {name:"Hainanese Chicken Rice",reason:"If your family loves Filipino Beef Tapa, they'll love this — poached chicken over silky flavoured rice, simple but deeply satisfying.",url:"https://www.recipetineats.com/hainanese-chicken-rice/",source:"RecipeTin Eats",tags:["asian"]},
-  {name:"Baked Feta Pasta",reason:"One of the easiest pasta dishes ever. No browning, no stirring — just bake and toss. Different from your other pasta dishes in a good way.",url:"https://simplehomeedit.com/recipe/baked-feta-pasta/",source:"Simple Home Edit",tags:["quick","mediterranean"]},
-  {name:"Thai Basil Chicken (Pad Kra Pao)",reason:"If you love your Coconut Curry and Sticky Beef Noodles, this is the next Asian weeknight staple. 15 mins, pantry ingredients, addictive.",url:"https://www.recipetineats.com/thai-basil-chicken/",source:"RecipeTin Eats",tags:["quick","asian"]},
-  {name:"Slow Cooker Lamb Shoulder",reason:"You already do slow-cooked Pork Belly and Beef Ragù — lamb shoulder is the weekend centrepiece you're missing. Falls apart, kids love it.",url:"https://simplehomeedit.com/recipe/slow-cooker-lamb-shoulder/",source:"Simple Home Edit",tags:["slow","mediterranean"]},
-  {name:"Crispy Smashed Potatoes",reason:"A killer side dish for your kebabs or Greek chicken — but honestly so good people eat it as a main.",url:"https://www.recipetineats.com/crispy-smashed-potatoes/",source:"RecipeTin Eats",tags:["quick","comfort"]},
-  {name:"One-Pan Creamy Tomato Chicken",reason:"Dead simple, one pan, everything you love about your Marry Me Meatballs but even faster. Great mid-week rotation add.",url:"https://simplehomeedit.com/recipe/one-pan-creamy-tomato-chicken/",source:"Simple Home Edit",tags:["quick","comfort"]}
-];
+      <div class="rd-section">
+        <h4>Ingredients</h4>
+        <div class="servings-control">
+          <label>Servings:</label>
+          <button class="svc-btn" onclick="changeServings(-1)">−</button>
+          <span class="svc-num" id="svc-num">4</span>
+          <button class="svc-btn" onclick="changeServings(1)">+</button>
+        </div>
+        <div class="ing-grid" id="rd-ings">
+          <div class="loading-ings">Loading ingredients…</div>
+        </div>
+      </div>
 
-// ─── STATE ───────────────────────────────────────────────────────────────────
-const days = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"];
-const plan = {};
-days.forEach(d => plan[d] = null);
-let activeFilter = "all";
-let pendingDay = null;
-let currentRecipe = null;
-let currentServings = 4;
-let discoverPage = 0;
-const DISC_PER_PAGE = 5;
-let discoverOrder = shuffle([...Array(ALL_DISCOVER.length).keys()]);
+      <div class="rd-section">
+        <h4>Family Ratings</h4>
+        <div class="rating-row">
+          <div class="rating-box"><label>👨‍👩‍👧 Parents</label>
+            <div class="star-btns" id="p-stars"></div>
+          </div>
+          <div class="rating-box"><label>👦 Kids</label>
+            <div class="star-btns" id="k-stars"></div>
+          </div>
+        </div>
+      </div>
 
-// Ratings & notes (localStorage-backed)
-function loadData() {
-  try {
-    const r = JSON.parse(localStorage.getItem('mealplan_ratings') || '{}');
-    const n = JSON.parse(localStorage.getItem('mealplan_notes') || '{}');
-    const p = JSON.parse(localStorage.getItem('mealplan_plan') || '{}');
-    return { ratings: r, notes: n, savedPlan: p };
-  } catch { return { ratings: {}, notes: {}, savedPlan: {} }; }
-}
-function saveRatings() { localStorage.setItem('mealplan_ratings', JSON.stringify(ratings)); }
-function saveNotes() { localStorage.setItem('mealplan_notes', JSON.stringify(notes)); }
-function savePlan() { localStorage.setItem('mealplan_plan', JSON.stringify(plan)); }
+      <div class="rd-section">
+        <h4>Notes</h4>
+        <textarea class="notes-area" id="rd-notes" rows="3"
+          placeholder="e.g. kids prefer less spice, double the sauce next time…" onchange="saveNote()"></textarea>
+      </div>
 
-const { ratings, notes, savedPlan } = loadData();
-// Restore plan
-Object.entries(savedPlan).forEach(([day, rname]) => {
-  if (rname) { const r = RECIPES.find(x => x.name === rname); if (r) plan[day] = r; }
-});
+      <div class="rd-actions" id="rd-actions"></div>
+      <button class="btn sheet-close" onclick="closeRD()">Done</button>
+    </div>
+  </div>
 
-// ─── TAG HELPERS ─────────────────────────────────────────────────────────────
-const TAG_MAP = { quick:'tq', slow:'tslow', asian:'ta', mediterranean:'tmed', mexican:'tmx', comfort:'tc', seafood:'tf' };
-function tagCls(t) { return TAG_MAP[t] || 'tsrc'; }
-const ALL_TAGS = ["quick","slow","asian","mediterranean","mexican","comfort","seafood"];
+  <div class="toast" id="toast"></div>
 
-// ─── LIBRARY ─────────────────────────────────────────────────────────────────
-function renderLibrary() {
-  const fr = document.getElementById('filter-row');
-  fr.innerHTML = ["all",...ALL_TAGS].map(f =>
-    `<button class="fb ${activeFilter===f?'active':''}" onclick="setFilter('${f}')">${f==='all'?'All':cap(f)}</button>`
-  ).join('');
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js';
+    import { getFirestore, doc, onSnapshot, setDoc, getDoc } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js';
 
-  const grid = document.getElementById('recipe-grid');
-  const filtered = activeFilter === 'all' ? RECIPES : RECIPES.filter(r => r.tags.includes(activeFilter));
-  const inPlan = Object.values(plan).filter(Boolean).map(x => x.name);
+    // ═══════════════════════════════════════════════════════════════════
+    //  🔥 FIREBASE CONFIG — open this file in a text editor and replace
+    //     each placeholder value with the real value from Firebase
+    //     Project Settings → Your Apps → SDK setup → Config
+    // ═══════════════════════════════════════════════════════════════════
+    const firebaseConfig = {
+      apiKey: "AIzaSyCkz-no9UEXus8bdDAfjyvMHRwUfDP2rfw",
+      authDomain: "meal-planner-caf86.firebaseapp.com",
+      projectId: "meal-planner-caf86",
+      storageBucket: "meal-planner-caf86.firebasestorage.app",
+      messagingSenderId: "846256855473",
+      appId: "1:846256855473:web:d11715ec768277eb6ac590"
+    };
+    // ═══════════════════════════════════════════════════════════════════
 
-  grid.innerHTML = filtered.map(r => {
-    const rt = ratings[r.name] || {p:0,k:0};
-    const pStr = rt.p ? '★'.repeat(rt.p) : '—';
-    const kStr = rt.k ? '★'.repeat(rt.k) : '—';
-    return `<div class="rc ${inPlan.includes(r.name)?'in-plan':''}" onclick="openRecipe('${esc(r.name)}')">
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    // Single shared document — both phones read/write the same doc
+    const DATA_DOC = doc(db, 'mealplanner', 'shared');
+
+    // ─── DATA ────────────────────────────────────────────────────────────────────
+    const RECIPES = [
+      { name: "Glazed Miso Salmon Ramen Noodles", source: "Simple Home Edit", url: "https://simplehomeedit.com/recipe/glazed-miso-salmon-ramen-noodles/", tags: ["quick", "asian", "seafood"], ings4: ["4 salmon fillets (about 500g)", "2 tbsp miso paste", "2 tbsp tamari or soy sauce", "1 tbsp sesame oil", "1 tbsp brown sugar", "2 tbsp rice wine vinegar", "360g ramen noodles", "1 bunch Chinese broccoli (gai lan)", "5 spring onions", "1 tbsp fresh garlic, grated", "1 tbsp fresh ginger, grated", "½ cup neutral oil (for sauce)", "3 tbsp soy sauce (for sauce)", "1 tbsp sesame oil (for sauce)"] },
+      { name: "Baked Chorizo Fried Rice", source: "Simple Home Edit", url: "https://simplehomeedit.com/recipe/baked-chorizo-fried-rice/", tags: ["quick", "asian"], ings4: ["200g chorizo, sliced", "3 cups cooked rice (day-old)", "4 eggs", "1 cup frozen peas", "1 cup frozen corn", "3 tbsp soy sauce", "1 tbsp sesame oil", "4 spring onions, sliced", "3 garlic cloves, minced", "2 tbsp neutral oil", "Crispy chilli oil to serve (optional)"] },
+      { name: "Easy Homemade Sausage Rolls", source: "Simple Home Edit", url: "https://simplehomeedit.com/recipe/easy-homemade-sausage-rolls/", tags: ["comfort"], ings4: ["500g pork mince", "4 sheets puff pastry", "1 onion, grated", "3 garlic cloves, minced", "½ cup breadcrumbs", "1 egg (+ 1 for egg wash)", "2 tbsp Worcestershire sauce", "1 tbsp Dijon mustard", "1 tsp dried herbs (thyme/parsley)", "Salt & pepper", "Sesame seeds for topping", "Tomato sauce to serve"] },
+      { name: "Cheeseburger Pasta", source: "Simple Home Edit", url: "https://simplehomeedit.com/recipe/cheeseburger-pasta/", tags: ["quick", "comfort"], ings4: ["500g beef mince", "300g short pasta (penne/macaroni)", "1 onion, diced", "1 celery stalk, diced", "1 carrot, grated", "4 garlic cloves, minced", "2 tbsp tomato paste", "3 cups beef stock", "1 cup shredded cheddar", "100g cream cheese", "1 tbsp Dijon mustard", "1 tbsp Worcestershire sauce", "Salt & pepper"] },
+      { name: "Juicy Oven Baked Kebabs", source: "Simple Home Edit", url: "https://simplehomeedit.com/recipe/juicy-oven-baked-kebabs/", tags: ["mediterranean", "quick"], ings4: ["600g beef or lamb mince", "1 onion, grated", "4 garlic cloves, minced", "¼ cup fresh parsley, chopped", "1½ tsp cumin", "1 tsp paprika", "1 tsp coriander", "Salt & pepper", "1 cup Greek yoghurt", "1 tsp sumac", "1 red onion, thinly sliced", "Pita bread to serve", "Fresh parsley & lemon to serve"] },
+      { name: "Chicken Fajitas", source: "RecipeTin Eats", url: "https://www.recipetineats.com/chicken-fajitas/", tags: ["quick", "mexican"], ings4: ["600g chicken thighs", "2 capsicums (mixed colours), sliced", "2 onions, sliced", "8 flour tortillas", "2 limes (zest + juice)", "¼ cup olive oil", "1½ tsp cumin", "1 tsp smoked paprika", "1 tsp garlic powder", "1 tsp dried oregano", "¼ tsp chilli powder", "Sour cream & avocado to serve"] },
+      { name: "Filipino Beef Tapa", source: "Iankewks", url: "https://www.iankewks.com/filipino-beef-tapa/", tags: ["asian"], ings4: ["600g beef sirloin or rib eye, thinly sliced", "3 tbsp soy sauce", "2 tbsp white cane vinegar (or rice wine vinegar)", "1½ tbsp sugar", "6 garlic cloves, minced", "½ tsp black pepper", "Salt to taste", "2 tbsp neutral oil", "4 cups cooked garlic rice (sinangag)", "4 eggs", "Sliced tomatoes & cucumbers to serve"] },
+      { name: "Slow Cooker Chipotle-Honey Chicken Tacos", source: "NYT Cooking", url: "https://cooking.nytimes.com/recipes/1016832-slow-cooker-chipotle-honey-chicken-tacos", tags: ["slow", "mexican"], ings4: ["800g chicken thighs", "2 chipotle chillies in adobo, minced", "2 tbsp adobo sauce", "3 tbsp honey", "4 garlic cloves, minced", "1 tsp cumin", "1 tsp coriander", "1 lime (zest + juice)", "Salt & pepper", "8 flour tortillas", "2 cups shredded cabbage slaw", "Sour cream & lime to serve"] },
+      { name: "One-Pan Salmon and Broccoli Bake", source: "Taste.com.au", url: "https://www.taste.com.au/recipes/one-pan-roasted-salmon-broccolini/", tags: ["quick", "seafood"], ings4: ["4 salmon fillets", "400g broccoli, cut into florets", "3 tbsp olive oil", "4 garlic cloves, minced", "1 lemon (zest + juice)", "2 tbsp soy sauce", "1 tbsp honey", "1 tbsp sesame seeds", "Salt & pepper"] },
+      { name: "Soy-Glazed Mushroom Rice Bowl", source: "NYT Cooking", url: "https://cooking.nytimes.com/recipes/1021166-soy-glazed-mushrooms-with-bok-choy-and-rice", tags: ["quick", "asian"], ings4: ["600g mixed mushrooms (shiitake, cremini)", "3 heads bok choy, halved", "2 cups jasmine rice", "3 tbsp soy sauce", "2 tbsp sesame oil", "1 tbsp mirin", "4 garlic cloves, minced", "1 tbsp fresh ginger, grated", "4 spring onions, sliced", "2 tbsp sesame seeds", "2 tbsp neutral oil"] },
+      { name: "One-Pan Greek Chicken and Orzo", source: "Simple Home Edit", url: "https://simplehomeedit.com/recipe/one-pan-greek-chicken-and-risoni/", tags: ["mediterranean"], ings4: ["8 bone-in chicken thighs", "300g orzo/risoni", "2 cups chicken stock", "400g cherry tomatoes", "100g baby spinach", "½ cup kalamata olives", "1 lemon (zest + juice)", "6 garlic cloves, minced", "1 onion, diced", "2 tsp dried oregano", "100g feta, crumbled", "2 tbsp olive oil", "Salt & pepper"] },
+      { name: "Loaded Potato Taco Bowl", source: "Simple Home Edit", url: "https://simplehomeedit.com/recipe/loaded-potato-taco-bowl/", tags: ["quick", "mexican"], ings4: ["800g potatoes, diced", "500g beef mince", "1 packet (35g) taco seasoning", "400g canned diced tomatoes", "½ cup beef stock", "1 cup shredded cheese", "½ cup sour cream", "1 avocado, diced", "½ cup salsa", "4 spring onions, sliced", "2 tbsp olive oil", "Fresh coriander to serve"] },
+      { name: "Slow-Cooked Sticky Pork Belly", source: "Simple Home Edit", url: "https://simplehomeedit.com/recipe/slow-cooked-sticky-pork-belly/", tags: ["slow", "asian"], ings4: ["1kg pork belly, cut into pieces", "3 tbsp soy sauce", "2 tbsp hoisin sauce", "2 tbsp honey", "6 garlic cloves, minced", "1 tbsp fresh ginger, grated", "1 tsp Chinese five spice", "½ cup chicken stock", "4 heads bok choy", "Steamed rice to serve", "Sesame seeds & spring onions to garnish"] },
+      { name: "Gyros Smashed Tacos", source: "Simple Home Edit", url: "https://simplehomeedit.com/recipe/gyros-smashed-tacos/", tags: ["mediterranean", "quick"], ings4: ["600g lamb or beef mince", "8 small flour tortillas", "1 cup Greek yoghurt / tzatziki", "2 tomatoes, diced", "1 cucumber, diced", "½ red onion, thinly sliced", "2 tsp dried oregano", "4 garlic cloves, minced", "1 lemon (juice)", "1 tbsp olive oil", "Fresh parsley", "Salt & pepper"] },
+      { name: "Chicken Caesar Smashed Tacos", source: "Simple Home Edit", url: "https://simplehomeedit.com/recipe/chicken-caesar-smashed-tacos/", tags: ["quick"], ings4: ["600g chicken thighs", "8 small flour tortillas", "2 cups cos/romaine lettuce, shredded", "½ cup Caesar dressing", "½ cup parmesan, grated", "4 bacon rashers", "1 cup croutons", "3 garlic cloves", "1 lemon (squeeze)", "2 tbsp olive oil", "Salt & pepper"] },
+      { name: "Quick Coconut Chicken Curry", source: "Simple Home Edit", url: "https://simplehomeedit.com/recipe/quick-coconut-chicken-curry/", tags: ["quick", "asian"], ings4: ["700g chicken thighs, diced", "2 x 400ml cans coconut milk", "3 tbsp red or green curry paste", "1 onion, diced", "4 garlic cloves, minced", "1 tbsp fresh ginger, grated", "1 tbsp fish sauce", "1 lime (juice)", "Large handful fresh coriander", "2 cups jasmine rice", "2 cups baby spinach", "2 tbsp neutral oil"] },
+      { name: "Slow-Cooked Beef Ragù", source: "Simple Home Edit", url: "https://simplehomeedit.com/recipe/slow-cooked-beef-ragu/", tags: ["slow", "comfort"], ings4: ["800g beef chuck or blade, whole", "2 x 400g cans crushed tomatoes", "1 onion, diced", "1 carrot, diced", "2 celery stalks, diced", "6 garlic cloves, minced", "1 cup red wine", "1 cup beef stock", "2 tbsp tomato paste", "400g pappardelle or pasta", "Parmesan to serve", "2 tbsp olive oil", "Salt, pepper, fresh basil"] },
+      { name: "One-Pan Lemon Garlic Chicken and Potatoes", source: "Simple Home Edit", url: "https://simplehomeedit.com/recipe/one-pan-lemon-garlic-chicken-and-potatoes/", tags: ["quick", "mediterranean"], ings4: ["8 bone-in chicken thighs", "700g baby potatoes, halved", "8 garlic cloves, minced", "2 lemons (zest + juice)", "3 tbsp olive oil", "2 tbsp Dijon mustard", "½ cup chicken stock", "2 tsp fresh rosemary or thyme", "Fresh parsley to serve", "Salt & pepper"] },
+      { name: "Comforting Chunky Minestrone", source: "Simple Home Edit", url: "https://simplehomeedit.com/recipe/comforting-chunky-minestrone/", tags: ["comfort"], ings4: ["2 x 400g cans crushed tomatoes", "1.5L chicken or vegetable stock", "150g small pasta (ditalini)", "400g can cannellini beans, drained", "2 zucchini, diced", "2 carrots, diced", "2 celery stalks, diced", "1 onion, diced", "4 garlic cloves, minced", "Parmesan rind (optional)", "Parmesan to serve", "3 tbsp olive oil", "Fresh basil", "Salt & pepper"] },
+      { name: "Sticky Beef Noodles", source: "Simple Home Edit", url: "https://simplehomeedit.com/recipe/sticky-beef-noodles/", tags: ["quick", "asian"], ings4: ["500g beef mince", "300g noodles (hokkien or udon)", "3 tbsp soy sauce", "2 tbsp oyster sauce", "1 tbsp hoisin sauce", "1 tbsp sesame oil", "4 garlic cloves, minced", "1 tbsp fresh ginger, grated", "5 spring onions", "1 long red chilli, sliced", "200g bok choy or broccolini", "1 tbsp neutral oil"] },
+      { name: "Marry Me Chicken Meatballs with Orzo", source: "Simple Home Edit", url: "https://simplehomeedit.com/recipe/marry-me-chicken-meatballs-with-risoni/", tags: ["comfort", "quick"], ings4: ["600g chicken mince", "300g orzo/risoni", "½ cup sun-dried tomatoes, chopped", "1 cup thickened cream", "1 cup parmesan, grated (+ extra to serve)", "2 cups chicken stock", "4 garlic cloves, minced", "1 onion, diced", "Large handful fresh basil", "1 egg", "½ cup breadcrumbs", "2 cups baby spinach", "2 tbsp olive oil", "Salt & pepper"] }
+    ];
+
+    const ALL_DISCOVER = [
+      { name: "Butter Chicken", reason: "You love Quick Coconut Chicken Curry — butter chicken uses the same easy formula but with a richer, tomato-cream base. Guaranteed kid favourite.", url: "https://www.recipetineats.com/butter-chicken/", source: "RecipeTin Eats", tags: ["quick", "asian"] },
+      { name: "Korean Ground Beef Rice Bowl", reason: "Shares the same 15-min pantry-magic DNA as your Sticky Beef Noodles and Beef Tapa. Marinated beef over rice, huge family hit.", url: "https://simplehomeedit.com/recipe/korean-beef-rice-bowl/", source: "Simple Home Edit", tags: ["quick", "asian"] },
+      { name: "Spatchcock Lemon Herb Chicken", reason: "Weekend upgrade from your Lemon Garlic Chicken. One tray, looks impressive, same pantry basics you already own.", url: "https://www.recipetineats.com/spatchcock-chicken/", source: "RecipeTin Eats", tags: ["mediterranean"] },
+      { name: "Birria Tacos", reason: "You've got Gyros, Caesar & Chipotle tacos — birria is the next level. Slow-cooked beef, crispy-dipped tortillas. Weekend project, very rewarding.", url: "https://www.recipetineats.com/birria-tacos/", source: "RecipeTin Eats", tags: ["slow", "mexican"] },
+      { name: "Shakshuka", reason: "Your one blind spot: no egg-forward dinners. Shakshuka is a 20-min one-pan classic totally unlike anything else you make.", url: "https://simplehomeedit.com/recipe/shakshuka/", source: "Simple Home Edit", tags: ["quick", "mediterranean"] },
+      { name: "Chicken Shawarma", reason: "Bridges your Mediterranean and quick-cook love — marinated thighs, flatbread, garlic sauce. Same vibe as your gyros smashed tacos.", url: "https://simplehomeedit.com/recipe/chicken-shawarma/", source: "Simple Home Edit", tags: ["quick", "mediterranean"] },
+      { name: "Hainanese Chicken Rice", reason: "If your family loves Filipino Beef Tapa, they'll love this — poached chicken over silky flavoured rice, simple but deeply satisfying.", url: "https://www.recipetineats.com/hainanese-chicken-rice/", source: "RecipeTin Eats", tags: ["asian"] },
+      { name: "Baked Feta Pasta", reason: "One of the easiest pasta dishes ever. No browning, no stirring — just bake and toss. Different from your other pasta dishes in a good way.", url: "https://simplehomeedit.com/recipe/baked-feta-pasta/", source: "Simple Home Edit", tags: ["quick", "mediterranean"] },
+      { name: "Thai Basil Chicken (Pad Kra Pao)", reason: "If you love Coconut Curry and Sticky Beef Noodles, this is the next Asian weeknight staple. 15 mins, pantry ingredients, completely addictive.", url: "https://www.recipetineats.com/thai-basil-chicken/", source: "RecipeTin Eats", tags: ["quick", "asian"] },
+      { name: "Slow Cooker Lamb Shoulder", reason: "You already do Pork Belly and Beef Ragù — lamb shoulder is the weekend centrepiece you're missing. Falls apart beautifully, kids love it.", url: "https://simplehomeedit.com/recipe/slow-cooker-lamb-shoulder/", source: "Simple Home Edit", tags: ["slow", "mediterranean"] },
+      { name: "Crispy Smashed Potatoes", reason: "A killer side for kebabs or Greek chicken — but honestly so good people eat it as a main with sour cream and chives.", url: "https://www.recipetineats.com/crispy-smashed-potatoes/", source: "RecipeTin Eats", tags: ["quick", "comfort"] },
+      { name: "One-Pan Creamy Tomato Chicken", reason: "Dead simple, one pan, everything you love about your Marry Me Meatballs but even faster. Great mid-week rotation add.", url: "https://simplehomeedit.com/recipe/one-pan-creamy-tomato-chicken/", source: "Simple Home Edit", tags: ["quick", "comfort"] },
+      { name: "Japanese Karaage Chicken", reason: "Like your smashed tacos but crispier — bite-sized soy-ginger marinated fried chicken. Kids absolutely go feral for this.", url: "https://www.recipetineats.com/karaage-chicken/", source: "RecipeTin Eats", tags: ["quick", "asian"] },
+      { name: "Slow Cooker Massaman Beef Curry", reason: "The next step up from your Chipotle Chicken Tacos in terms of slow-cook flavour. Rich, nutty, fall-apart beef — set and forget.", url: "https://simplehomeedit.com/recipe/slow-cooker-massaman-beef/", source: "Simple Home Edit", tags: ["slow", "asian"] },
+      { name: "Sheet Pan Harissa Chicken", reason: "One tray, bold North African spice, roasted veggies. Nothing like it in your current library — easy to prep ahead.", url: "https://www.recipetineats.com/harissa-chicken/", source: "RecipeTin Eats", tags: ["quick", "mediterranean"] },
+      { name: "Beef Bulgogi Rice Bowl", reason: "Same quick-marinade DNA as Filipino Beef Tapa but Korean-style. Sweet, savoury, charred at the edges — kids devour it.", url: "https://www.recipetineats.com/beef-bulgogi/", source: "RecipeTin Eats", tags: ["quick", "asian"] },
+      { name: "San Choy Bow (Lettuce Cups)", reason: "A fun interactive dinner — fill your own lettuce cups with pork & veg mince. Kids love the DIY element and it's on the table in 20 min.", url: "https://simplehomeedit.com/recipe/san-choy-bow/", source: "Simple Home Edit", tags: ["quick", "asian"] },
+      { name: "Chicken Tikka Masala", reason: "Bridges your curry and comfort-food love. Creamy, spiced, kid-friendly at a mild level — serve with naan for a crowd-pleaser.", url: "https://www.recipetineats.com/chicken-tikka-masala/", source: "RecipeTin Eats", tags: ["quick", "asian", "comfort"] },
+      { name: "Baked Lemon Butter Fish", reason: "Simpler than your Salmon Ramen, different protein — white fish fillets baked in lemon butter, on the table in 15 minutes.", url: "https://www.recipetineats.com/baked-fish/", source: "RecipeTin Eats", tags: ["quick", "seafood", "mediterranean"] },
+      { name: "Slow Cooker Chicken Cacciatore", reason: "A hearty Italian braise — chicken thighs in tomatoes, olives and herbs. Same comfort-food family as your Beef Ragù but faster and lighter.", url: "https://simplehomeedit.com/recipe/chicken-cacciatore/", source: "Simple Home Edit", tags: ["slow", "comfort", "mediterranean"] },
+      { name: "Prawn Pad Thai", reason: "You have no noodle dish with prawns — this fills that gap perfectly. Sweet, tangy, street-food energy, ready in 15 mins.", url: "https://www.recipetineats.com/pad-thai/", source: "RecipeTin Eats", tags: ["quick", "asian", "seafood"] },
+      { name: "Smash Burgers", reason: "You've got smashed tacos — smash burgers are the weekend version. Crispy-edged patties, takes 20 mins, kids go absolutely wild.", url: "https://simplehomeedit.com/recipe/smash-burgers/", source: "Simple Home Edit", tags: ["quick", "comfort"] },
+      { name: "Greek Lamb Meatballs", reason: "A direct cousin of your Oven Baked Kebabs. Herby lamb meatballs in tomato sauce — serve over orzo for a full one-pan meal.", url: "https://www.recipetineats.com/greek-meatballs/", source: "RecipeTin Eats", tags: ["quick", "mediterranean"] },
+      { name: "Soy Garlic Crispy Tofu Bowl", reason: "Great for a meatless Monday — silken or firm tofu glazed in soy & garlic, served over rice with bok choy. Fills the veggie gap.", url: "https://simplehomeedit.com/recipe/crispy-tofu/", source: "Simple Home Edit", tags: ["quick", "asian"] }
+    ];
+
+    // ─── STATE ───────────────────────────────────────────────────────────────────
+    const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+    const plan = {};
+    days.forEach(d => plan[d] = null);
+    let ratings = {};
+    let notes = {};
+    let cooked = {};
+    let activeFilter = "all";
+    let pendingDay = null;
+    let currentRecipe = null;
+    let currentServings = 4;
+    let discoverPage = 0;
+    const DISC_PER_PAGE = 5;
+    let discoverOrder = shuffle([...Array(ALL_DISCOVER.length).keys()]);
+    let isSyncing = false;
+
+    // ─── SYNC HELPERS ────────────────────────────────────────────────────────────
+    function setSyncStatus(state) {
+      const dot = document.getElementById('sync-dot');
+      const label = document.getElementById('sync-label');
+      if (state === 'syncing') { dot.className = 'sync-dot syncing'; label.textContent = 'syncing…'; }
+      else if (state === 'ok') { dot.className = 'sync-dot ok'; label.textContent = 'synced ✓'; }
+      else if (state === 'err') { dot.className = 'sync-dot err'; label.textContent = 'offline — changes saved locally'; }
+    }
+
+    // ─── TAG HELPERS ─────────────────────────────────────────────────────────────
+    const TAG_MAP = { quick: 'tq', slow: 'tslow', asian: 'ta', mediterranean: 'tmed', mexican: 'tmx', comfort: 'tc', seafood: 'tf' };
+    function tagCls(t) { return TAG_MAP[t] || 'tsrc'; }
+    const ALL_TAGS = ["quick", "slow", "asian", "mediterranean", "mexican", "comfort", "seafood"];
+    function srcLabel(s) {
+      if (!s || s === '—') return s;
+      if (s.toLowerCase().includes('simple home edit')) return 'S.H.E.';
+      if (s.toLowerCase().includes('recipetineats') || s.toLowerCase().includes('recipetine eats')) return 'RecipeTin';
+      if (s.toLowerCase().includes('nyt')) return 'NYT';
+      if (s.toLowerCase().includes('taste.com')) return 'Taste';
+      return s.split(' ')[0];
+    }
+
+    // ─── FIRESTORE SAVE ───────────────────────────────────────────────────────────
+    // Debounce writes so rapid changes don't spam Firestore
+    let writeTimer = null;
+    function scheduleSave() {
+      clearTimeout(writeTimer);
+      writeTimer = setTimeout(commitToFirestore, 800);
+    }
+
+    async function commitToFirestore() {
+      setSyncStatus('syncing');
+      const planNames = {};
+      days.forEach(d => planNames[d] = plan[d] ? plan[d].name : null);
+      try {
+        await setDoc(DATA_DOC, { ratings, notes, cooked, plan: planNames }, { merge: true });
+        setSyncStatus('ok');
+      } catch (e) {
+        console.error('Firestore write failed:', e);
+        setSyncStatus('err');
+        // Fall back to localStorage so data isn't lost offline
+        localStorage.setItem('mealplan_offline', JSON.stringify({ ratings, notes, cooked, plan: planNames }));
+      }
+    }
+
+    // ─── FIRESTORE REALTIME LISTENER ─────────────────────────────────────────────
+    function startSync() {
+      setSyncStatus('syncing');
+      onSnapshot(DATA_DOC, (snap) => {
+        if (!snap.exists()) {
+          // First run — nothing in Firestore yet, try restoring from localStorage offline backup
+          const offline = localStorage.getItem('mealplan_offline');
+          if (offline) {
+            try {
+              const d = JSON.parse(offline);
+              applyRemoteData(d);
+              commitToFirestore(); // push it up
+            } catch { }
+          }
+          setSyncStatus('ok');
+          renderAll();
+          return;
+        }
+        applyRemoteData(snap.data());
+        setSyncStatus('ok');
+        renderAll();
+      }, (err) => {
+        console.error('Firestore listener error:', err);
+        setSyncStatus('err');
+        // Try localStorage offline backup
+        const offline = localStorage.getItem('mealplan_offline');
+        if (offline) { try { applyRemoteData(JSON.parse(offline)); } catch { } }
+        renderAll();
+      });
+    }
+
+    function applyRemoteData(data) {
+      ratings = data.ratings || {};
+      notes = data.notes || {};
+      cooked = data.cooked || {};
+      const savedPlan = data.plan || {};
+      days.forEach(d => {
+        const rname = savedPlan[d];
+        plan[d] = rname ? (RECIPES.find(r => r.name === rname) || null) : null;
+      });
+    }
+
+    function renderAll() {
+      renderLibrary();
+      renderPlanner();
+    }
+
+    // ─── LIBRARY ─────────────────────────────────────────────────────────────────
+    function renderLibrary() {
+      const fr = document.getElementById('filter-row');
+      fr.innerHTML = ["all", ...ALL_TAGS].map(f =>
+        `<button class="fb ${activeFilter === f ? 'active' : ''}" onclick="setFilter('${f}')">${f === 'all' ? 'All' : cap(f)}</button>`
+      ).join('');
+      const grid = document.getElementById('recipe-grid');
+      const filtered = activeFilter === 'all' ? RECIPES : RECIPES.filter(r => r.tags.includes(activeFilter));
+      const inPlan = Object.values(plan).filter(Boolean).map(x => x.name);
+      grid.innerHTML = filtered.map(r => {
+        const rt = ratings[r.name] || { p: 0, k: 0 };
+        const pStr = rt.p ? '★'.repeat(rt.p) : '—';
+        const kStr = rt.k ? '★'.repeat(rt.k) : '—';
+        return `<div class="rc ${inPlan.includes(r.name) ? 'in-plan' : ''}" onclick="openRecipe('${esc(r.name)}')">
       <div class="rname">${r.name}</div>
       <div class="rmeta">
-        ${r.tags.map(t=>`<span class="tag ${tagCls(t)}">${t}</span>`).join('')}
-        <span class="tag tsrc">${r.source.split(' ')[0]}</span>
+        ${r.tags.map(t => `<span class="tag ${tagCls(t)}">${t}</span>`).join('')}
+        <span class="tag tsrc">${srcLabel(r.source)}</span>
       </div>
       <div class="rating-mini">
         <span class="stars-gold">${pStr}</span> parents &nbsp;·&nbsp; <span class="stars-gold">${kStr}</span> kids
       </div>
+      ${cooked[r.name] ? `<div style="font-size:.62rem;color:var(--sage);margin-top:3px">🍳 ${formatCookedDate(cooked[r.name])}</div>` : ''}
     </div>`;
-  }).join('');
-}
+      }).join('');
+    }
+    function setFilter(f) { activeFilter = f; renderLibrary(); }
 
-function setFilter(f) { activeFilter = f; renderLibrary(); }
-
-// ─── PLANNER ─────────────────────────────────────────────────────────────────
-function renderPlanner() {
-  const grid = document.getElementById('week-grid');
-  grid.innerHTML = days.map(day => {
-    const meal = plan[day];
-    const sd = esc(day);
-    return `<div class="day-row">
+    // ─── PLANNER ─────────────────────────────────────────────────────────────────
+    function renderPlanner() {
+      const grid = document.getElementById('week-grid');
+      grid.innerHTML = days.map(day => {
+        const meal = plan[day];
+        const sd = esc(day);
+        return `<div class="day-row">
       <div class="day-hdr">
         <span>${day}</span>
         ${meal ? `<button class="rmv" onclick="removeMeal('${sd}')">✕ remove</button>` : ''}
       </div>
-      <div class="day-meal ${meal?'':'empty'}" onclick="${meal ? `openRecipe('${esc(meal.name)}')` : `openDayModal('${sd}')`}">
+      <div class="day-meal ${meal ? '' : 'empty'}" onclick="${meal ? `openRecipe('${esc(meal.name)}')` : `openDayModal('${sd}')`}">
         ${meal
-          ? `<div><div class="day-meal-name">${meal.name}</div><div class="day-meal-src">${meal.source}</div></div><span style="font-size:.8rem;color:var(--tl)">›</span>`
-          : '<span>+ Tap to add a meal</span>'}
+            ? `<div><div class="day-meal-name">${meal.name}</div><div class="day-meal-src">${meal.source}</div></div><span style="font-size:.8rem;color:var(--tl)">›</span>`
+            : '<span>+ Tap to add a meal</span>'}
       </div>
     </div>`;
-  }).join('');
+      }).join('');
+      const planned = Object.values(plan).filter(Boolean).length;
+      document.getElementById('planned-count').textContent = planned;
+      document.getElementById('free-count').textContent = 7 - planned;
+    }
 
-  const planned = Object.values(plan).filter(Boolean).length;
-  document.getElementById('planned-count').textContent = planned;
-  document.getElementById('free-count').textContent = 7 - planned;
-}
+    function removeMeal(day) { plan[day] = null; renderPlanner(); renderLibrary(); scheduleSave(); }
+    function clearPlan() { days.forEach(d => plan[d] = null); renderPlanner(); renderLibrary(); scheduleSave(); showToast('Week cleared'); }
+    function autoPlan() {
+      days.forEach(d => plan[d] = null);
+      const shuffled = [...RECIPES].sort(() => Math.random() - .5);
+      const slow = shuffled.find(r => r.tags.includes('slow'));
+      const rest = shuffled.filter(r => r !== slow);
+      ["Monday", "Tuesday", "Wednesday", "Thursday"].forEach((d, i) => { plan[d] = rest[i]; });
+      if (slow) plan["Saturday"] = slow;
+      renderPlanner(); renderLibrary(); scheduleSave(); showToast('Random week generated ✦');
+    }
 
-function removeMeal(day) {
-  plan[day] = null; savePlan(); renderPlanner(); renderLibrary();
-}
-function clearPlan() {
-  days.forEach(d => plan[d] = null); savePlan(); renderPlanner(); renderLibrary();
-  showToast('Week cleared');
-}
-function autoPlan() {
-  clearPlan();
-  const shuffled = [...RECIPES].sort(() => Math.random() - .5);
-  const slow = shuffled.find(r => r.tags.includes('slow'));
-  const rest = shuffled.filter(r => r !== slow);
-  ["Monday","Tuesday","Wednesday","Thursday"].forEach((d,i) => { plan[d] = rest[i]; });
-  if (slow) plan["Saturday"] = slow;
-  savePlan(); renderPlanner(); renderLibrary();
-  showToast('Random week generated ✦');
-}
+    // ─── STAPLES ─────────────────────────────────────────────────────────────────
+    const STAPLES = {
+      "Pantry": ["soy sauce", "tamari", "sesame oil", "fish sauce", "oyster sauce", "hoisin sauce", "miso paste", "rice wine vinegar", "canned crushed tomatoes", "tomato paste", "coconut milk", "chicken stock", "beef stock", "pasta", "rice", "orzo/risoni", "ramen/udon noodles", "cannellini beans"],
+      "Spices": ["cumin", "smoked paprika", "coriander", "dried oregano", "Chinese five spice", "curry paste (red/green)", "taco seasoning", "Dijon mustard", "Worcestershire sauce", "chilli flakes", "sumac"],
+      "Fridge": ["garlic", "ginger", "onions", "spring onions", "lemons & limes", "eggs", "parmesan", "Greek yoghurt", "sour cream", "cream cheese", "thickened cream"],
+      "Freezer": ["puff pastry", "small flour tortillas", "large flour tortillas", "frozen peas", "frozen corn", "chicken thighs", "beef mince", "chicken mince"]
+    };
+    function renderStaples() {
+      document.getElementById('staples-grid').innerHTML = Object.entries(STAPLES).map(([cat, items]) =>
+        `<div class="staples-card"><h3>${cat}</h3>${items.map(i => `<div class="staple-item"><div class="s-dot"></div><span>${i}</span></div>`).join('')}</div>`
+      ).join('');
+    }
 
-// ─── STAPLES ─────────────────────────────────────────────────────────────────
-const STAPLES = {
-  "Pantry":["soy sauce","tamari","sesame oil","fish sauce","oyster sauce","hoisin sauce","miso paste","rice wine vinegar","canned crushed tomatoes","tomato paste","coconut milk","chicken stock","pasta","rice","orzo/risoni","ramen/udon noodles","cannellini beans"],
-  "Spices":["cumin","smoked paprika","coriander","dried oregano","Chinese five spice","curry paste (red/green)","taco seasoning","Dijon mustard","Worcestershire sauce","chilli flakes","sumac"],
-  "Fridge":["garlic","ginger","onions","spring onions","lemons & limes","eggs","parmesan","Greek yoghurt","sour cream","cream cheese","thickened cream"],
-  "Freezer":["puff pastry","small flour tortillas","large flour tortillas","frozen peas","frozen corn","chicken thighs","beef mince","chicken mince"]
-};
-function renderStaples() {
-  document.getElementById('staples-grid').innerHTML = Object.entries(STAPLES).map(([cat,items]) =>
-    `<div class="staples-card"><h3>${cat}</h3>${items.map(i=>`<div class="staple-item"><div class="s-dot"></div><span>${i}</span></div>`).join('')}</div>`
-  ).join('');
-}
-
-// ─── DISCOVER ────────────────────────────────────────────────────────────────
-function shuffleDiscover() {
-  discoverOrder = shuffle([...Array(ALL_DISCOVER.length).keys()]);
-  discoverPage = 0;
-  renderDiscover();
-  showToast('New suggestions! 🔀');
-}
-function renderDiscover() {
-  const list = document.getElementById('disc-list');
-  const start = discoverPage * DISC_PER_PAGE;
-  const visible = discoverOrder.slice(start, start + DISC_PER_PAGE).map(i => ALL_DISCOVER[i]);
-  list.innerHTML = visible.map((d,i) => {
-    const realIdx = discoverOrder[start + i];
-    return `<div class="disc-card">
+    // ─── DISCOVER ────────────────────────────────────────────────────────────────
+    function shuffleDiscover() { discoverOrder = shuffle([...Array(ALL_DISCOVER.length).keys()]); discoverPage = 0; renderDiscover(); showToast('New suggestions! 🔀'); }
+    function renderDiscover() {
+      const list = document.getElementById('disc-list');
+      const start = discoverPage * DISC_PER_PAGE;
+      const visible = discoverOrder.slice(start, start + DISC_PER_PAGE).map(i => ALL_DISCOVER[i]);
+      list.innerHTML = visible.map((d, i) => {
+        const realIdx = discoverOrder[start + i];
+        return `<div class="disc-card">
       <h3>${d.name}</h3>
       <div class="rmeta" style="margin-bottom:6px">
-        ${d.tags.map(t=>`<span class="tag ${tagCls(t)}">${t}</span>`).join('')}
-        <span class="tag tsrc">${d.source.split(' ')[0]}</span>
+        ${d.tags.map(t => `<span class="tag ${tagCls(t)}">${t}</span>`).join('')}
+        <span class="tag tsrc">${srcLabel(d.source)}</span>
       </div>
       <div class="disc-reason">${d.reason}</div>
       <div class="disc-actions">
@@ -628,206 +1630,135 @@ function renderDiscover() {
         <button class="btn btn-gold btn-sm" onclick="addDiscoverToLibrary(${realIdx})">📚 Save to Library</button>
       </div>
     </div>`;
-  }).join('');
-}
-
-function addDiscoverToPlan(idx) {
-  const d = ALL_DISCOVER[idx];
-  const empty = days.find(day => !plan[day]);
-  if (!empty) { showToast("Week is full — remove a meal first"); return; }
-  // Create a lightweight recipe object
-  const r = { name: d.name, source: d.source, url: d.url, tags: d.tags, ings4: ["See recipe link for full ingredients"] };
-  plan[empty] = r;
-  savePlan(); renderPlanner(); renderLibrary();
-  showToast(`${d.name} added to ${empty}`);
-}
-
-function addDiscoverToLibrary(idx) {
-  const d = ALL_DISCOVER[idx];
-  if (RECIPES.find(r => r.name === d.name)) { showToast("Already in your Library!"); return; }
-  RECIPES.push({ name: d.name, source: d.source, url: d.url, tags: d.tags, ings4: ["See recipe link for full ingredients"] });
-  renderLibrary();
-  showToast(`${d.name} saved to Library 📚`);
-}
-
-// ─── DAY MODAL ───────────────────────────────────────────────────────────────
-function openDayModal(day) {
-  pendingDay = day;
-  document.getElementById('modal-day-label').textContent = `Choosing for ${day}`;
-  document.getElementById('modal-list').innerHTML = RECIPES.map(r =>
-    `<div class="mitem" onclick="assignMeal('${esc(r.name)}')">${r.name}<small>${r.source}</small></div>`
-  ).join('');
-  document.getElementById('modal-day').classList.add('open');
-}
-function closeDayModal() { document.getElementById('modal-day').classList.remove('open'); pendingDay = null; }
-function closeDayModalOutside(e) { if (e.target === document.getElementById('modal-day')) closeDayModal(); }
-
-function assignMeal(name) {
-  if (!pendingDay) return;
-  plan[pendingDay] = RECIPES.find(x => x.name === name);
-  savePlan(); closeDayModal(); renderPlanner(); renderLibrary();
-  showToast(`Added to ${pendingDay}`);
-}
-
-// ─── RECIPE DETAIL ───────────────────────────────────────────────────────────
-function openRecipe(name) {
-  const r = RECIPES.find(x => x.name === name);
-  if (!r) return;
-  currentRecipe = r;
-  currentServings = 4;
-
-  document.getElementById('rd-name').textContent = r.name;
-  const link = document.getElementById('rd-link');
-  if (r.url) { link.href = r.url; link.textContent = `View on ${r.source} →`; link.style.display = 'inline'; }
-  else { link.style.display = 'none'; }
-
-  document.getElementById('rd-tags').innerHTML =
-    r.tags.map(t => `<span class="tag ${tagCls(t)}">${t}</span>`).join('') +
-    `<span class="tag tsrc">${r.source}</span>`;
-
-  document.getElementById('svc-num').textContent = 4;
-  renderIngredients(r, 4);
-  renderStars('p-stars', 'p', r.name);
-  renderStars('k-stars', 'k', r.name);
-  document.getElementById('rd-notes').value = notes[r.name] || '';
-
-  // Actions
-  const inPlan = Object.values(plan).filter(Boolean).map(x=>x.name).includes(r.name);
-  document.getElementById('rd-actions').innerHTML = inPlan
-    ? `<button class="btn btn-sec" onclick="removeFromPlanByName('${esc(r.name)}')">Remove from week</button>`
-    : `<button class="btn btn-sage" onclick="addToPlanByName('${esc(r.name)}')">+ Add to this week</button>`;
-
-  document.getElementById('modal-recipe').classList.add('open');
-}
-
-function renderIngredients(r, servings) {
-  const factor = servings / 4;
-  const grid = document.getElementById('rd-ings');
-  if (!r.ings4 || r.ings4.length === 0) {
-    grid.innerHTML = `<div class="loading-ings">No ingredients saved — visit the recipe link above.</div>`;
-    return;
-  }
-  grid.innerHTML = r.ings4.map(ing => {
-    const scaled = scaleIngredient(ing, factor);
-    return `<div class="ing"><div class="ing-dot"></div>${scaled}</div>`;
-  }).join('');
-}
-
-function scaleIngredient(ing, factor) {
-  if (factor === 1) return ing;
-  return ing.replace(/(\d+(?:\.\d+)?(?:\/\d+)?)/g, (match) => {
-    const num = eval(match);
-    const scaled = num * factor;
-    // Format nicely
-    if (Number.isInteger(scaled)) return scaled;
-    const fracs = [[1/4,'¼'],[1/3,'⅓'],[1/2,'½'],[2/3,'⅔'],[3/4,'¾']];
-    const whole = Math.floor(scaled);
-    const frac = scaled - whole;
-    for (const [val, sym] of fracs) {
-      if (Math.abs(frac - val) < 0.05) return (whole ? whole + sym : sym);
+      }).join('');
     }
-    return Math.round(scaled * 10) / 10;
-  });
-}
 
-function changeServings(delta) {
-  currentServings = Math.max(1, Math.min(12, currentServings + delta));
-  document.getElementById('svc-num').textContent = currentServings;
-  if (currentRecipe) renderIngredients(currentRecipe, currentServings);
-}
+    function addDiscoverToPlan(idx) {
+      const d = ALL_DISCOVER[idx];
+      const empty = days.find(day => !plan[day]);
+      if (!empty) { showToast("Week is full — remove a meal first"); return; }
+      plan[empty] = { name: d.name, source: d.source, url: d.url, tags: d.tags, ings4: ["See recipe link for full ingredients"] };
+      scheduleSave(); renderPlanner(); renderLibrary();
+      showToast(`${d.name} added to ${empty}`);
+    }
+    function addDiscoverToLibrary(idx) {
+      const d = ALL_DISCOVER[idx];
+      if (RECIPES.find(r => r.name === d.name)) { showToast("Already in your Library!"); return; }
+      RECIPES.push({ name: d.name, source: d.source, url: d.url, tags: d.tags, ings4: ["See recipe link for full ingredients"] });
+      renderLibrary(); showToast(`${d.name} saved to Library 📚`);
+    }
 
-function renderStars(containerId, type, recipeName) {
-  const container = document.getElementById(containerId);
-  const current = (ratings[recipeName] || {})[type] || 0;
-  container.innerHTML = [1,2,3,4,5].map(n =>
-    `<button class="sbtn ${current >= n ? 'lit' : ''}" onclick="setRating('${esc(recipeName)}','${type}',${n})">★</button>`
-  ).join('');
-}
+    // ─── SHOPPING LIST ────────────────────────────────────────────────────────────
+    let shopChecked = new Set();
+    let shopVisible = false;
+    const ALWAYS_HAVE = new Set(['salt', 'pepper', 'salt & pepper', 'olive oil', 'neutral oil', 'water', 'oil', 'soy sauce', 'sesame oil', 'fish sauce', 'oyster sauce', 'hoisin sauce', 'miso paste', 'rice wine vinegar', 'tomato paste', 'chicken stock', 'beef stock', 'vegetable stock', 'cumin', 'paprika', 'smoked paprika', 'coriander', 'oregano', 'dried oregano', 'chinese five spice', 'chilli flakes', 'garlic powder', 'onion powder', 'sugar', 'brown sugar', 'honey', 'dijon mustard', 'worcestershire sauce', 'taco seasoning']);
+    const SHOP_CATS = { '🥩 Meat & Fish': r => /salmon|chicken|beef|lamb|pork|prawn|mince|fillet|thigh|sirloin|rib eye|chorizo/i.test(r), '🥦 Produce': r => /broccoli|zucchini|carrot|celery|onion|garlic|ginger|lemon|lime|tomato|capsicum|bok choy|spinach|lettuce|cucumber|potato|parsley|coriander|basil|spring onion|avocado|mushroom/i.test(r), '🧀 Dairy & Eggs': r => /egg|cheese|cream|parmesan|feta|yoghurt|sour cream|butter|milk/i.test(r), '🍝 Pantry & Dry': r => /pasta|rice|noodle|orzo|risoni|breadcrumb|coconut milk|canned|can |beans|stock|puff pastry|tortilla|pita/i.test(r), '🧂 Sauces': r => /caesar dressing|salsa|chilli oil|adobo sauce|sun-dried/i.test(r), '🧊 Freezer': r => /frozen/i.test(r), '🛍️ Other': () => true };
 
-function setRating(name, type, val) {
-  if (!ratings[name]) ratings[name] = {p:0,k:0};
-  ratings[name][type] = val;
-  saveRatings();
-  renderStars(type==='p'?'p-stars':'k-stars', type, name);
-  renderLibrary();
-  showToast('Rating saved ✓');
-}
+    function toggleShoppingList() { shopVisible = !shopVisible; document.getElementById('shop-section').style.display = shopVisible ? 'block' : 'none'; if (shopVisible) buildShoppingList(); }
+    function buildShoppingList() {
+      const planned = Object.values(plan).filter(Boolean);
+      const content = document.getElementById('shop-list-content');
+      if (!planned.length) { content.innerHTML = '<div class="shop-empty">No meals planned yet.</div>'; return; }
+      const allIngs = [];
+      planned.forEach(r => { (r.ings4 || []).forEach(ing => { const cl = ing.toLowerCase().replace(/\(.*?\)/g, '').trim(); const skip = [...ALWAYS_HAVE].some(s => cl.includes(s)); if (!skip && !cl.includes('to serve') && !cl.includes('to taste') && !cl.includes('optional')) allIngs.push({ raw: ing, clean: cl }); }); });
+      const cats = {};
+      allIngs.forEach(ing => { for (const [cat, test] of Object.entries(SHOP_CATS)) { if (test(ing.clean)) { if (!cats[cat]) cats[cat] = []; cats[cat].push(ing); break; } } });
+      content.innerHTML = Object.entries(cats).filter(([, it]) => it.length).map(([cat, items]) => `<div class="shop-category"><div class="shop-cat-title">${cat}</div>${items.map((ing, i) => { const id = `shop_${cat}_${i}`; const ck = shopChecked.has(id); return `<div class="shop-item ${ck ? 'checked' : ''}" onclick="toggleShopItem(this,'${id}')"><div class="shop-cb"></div><span>${ing.raw}</span></div>`; }).join('')}</div>`).join('');
+    }
+    function toggleShopItem(el, id) { el.classList.toggle('checked'); shopChecked.has(id) ? shopChecked.delete(id) : shopChecked.add(id); }
+    function copyShoppingList() { const planned = Object.values(plan).filter(Boolean); if (!planned.length) { showToast('No meals planned!'); return; } let text = '🛒 SHOPPING LIST\n\n'; document.getElementById('shop-list-content').querySelectorAll('.shop-category').forEach(cat => { text += cat.querySelector('.shop-cat-title').textContent + '\n'; cat.querySelectorAll('.shop-item:not(.checked)').forEach(item => { text += '• ' + item.querySelector('span').textContent + '\n'; }); text += '\n'; }); navigator.clipboard.writeText(text).then(() => showToast('Copied to clipboard! 📋')); }
 
-function saveNote() {
-  if (!currentRecipe) return;
-  notes[currentRecipe.name] = document.getElementById('rd-notes').value;
-  saveNotes();
-}
+    // ─── DAY MODAL ───────────────────────────────────────────────────────────────
+    function openDayModal(day) {
+      pendingDay = day;
+      document.getElementById('modal-day-label').textContent = `Choosing for ${day}`;
+      document.getElementById('modal-list').innerHTML = RECIPES.map(r =>
+        `<div class="mitem" onclick="assignMeal('${esc(r.name)}')">${r.name}<small>${r.source}</small></div>`
+      ).join('');
+      document.getElementById('modal-day').classList.add('open');
+    }
+    function closeDayModal() { document.getElementById('modal-day').classList.remove('open'); pendingDay = null; }
+    function closeDayModalOutside(e) { if (e.target === document.getElementById('modal-day')) closeDayModal(); }
+    function assignMeal(name) { if (!pendingDay) return; plan[pendingDay] = RECIPES.find(x => x.name === name); scheduleSave(); closeDayModal(); renderPlanner(); renderLibrary(); showToast(`Added to ${pendingDay}`); }
 
-function addToPlanByName(name) {
-  // Show inline day picker inside the recipe detail actions area
-  const r = RECIPES.find(x => x.name === name);
-  if (!r) return;
-  const actionsEl = document.getElementById('rd-actions');
-  const alreadyInPlan = days.filter(d => plan[d] && plan[d].name !== name);
-  const dayBtns = days.map(d => {
-    const occupied = plan[d] && plan[d].name !== name;
-    const isCurrent = plan[d] && plan[d].name === name;
-    if (isCurrent) return ''; // skip days already assigned to this recipe
-    return `<button class="btn btn-sm ${occupied ? 'btn-sec' : 'btn-sage'}" 
-      onclick="assignToPlanDay('${esc(name)}','${esc(d)}')" 
-      title="${occupied ? 'Replaces: '+plan[d].name : 'Add to '+d}">
-      ${d.slice(0,3)}${occupied ? ' ⚠️' : ''}
-    </button>`;
-  }).join('');
-  actionsEl.innerHTML = `
-    <div style="width:100%">
-      <div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--tl);margin-bottom:7px">Choose a day:</div>
-      <div style="display:flex;flex-wrap:wrap;gap:6px">${dayBtns}</div>
-      <button class="btn btn-sec btn-sm" style="margin-top:8px" onclick="openRecipe('${esc(name)}')">Cancel</button>
-    </div>`;
-}
+    // ─── RECIPE DETAIL ───────────────────────────────────────────────────────────
+    function openRecipe(name) {
+      const r = RECIPES.find(x => x.name === name);
+      if (!r) return;
+      currentRecipe = r; currentServings = 4;
+      document.getElementById('rd-name').textContent = r.name;
+      const link = document.getElementById('rd-link');
+      if (r.url) { link.href = r.url; link.textContent = `View on ${r.source} →`; link.style.display = 'inline'; } else { link.style.display = 'none'; }
+      document.getElementById('rd-tags').innerHTML = r.tags.map(t => `<span class="tag ${tagCls(t)}">${t}</span>`).join('') + `<span class="tag tsrc">${srcLabel(r.source)}</span>`;
+      document.getElementById('svc-num').textContent = 4;
+      renderIngredients(r, 4);
+      renderStars('p-stars', 'p', r.name);
+      renderStars('k-stars', 'k', r.name);
+      document.getElementById('rd-notes').value = notes[r.name] || '';
+      const inPlan = Object.values(plan).filter(Boolean).map(x => x.name).includes(r.name);
+      document.getElementById('rd-actions').innerHTML = `
+    ${inPlan
+          ? `<button class="btn btn-sec" onclick="removeFromPlanByName('${esc(r.name)}')">Remove from week</button>`
+          : `<button class="btn btn-sage" onclick="addToPlanByName('${esc(r.name)}')">+ Add to this week</button>`}
+    <span id="cooked-btn">${renderCookedBtn(r.name)}</span>`;
+      document.getElementById('modal-recipe').classList.add('open');
+    }
 
-function assignToPlanDay(name, day) {
-  const r = RECIPES.find(x => x.name === name);
-  if (!r) return;
-  const wasOccupied = plan[day] && plan[day].name !== name;
-  plan[day] = r;
-  savePlan(); renderPlanner(); renderLibrary();
-  document.getElementById('rd-actions').innerHTML =
-    `<button class="btn btn-sec" onclick="removeFromPlanByName('${esc(name)}')">✓ Remove from week</button>`;
-  showToast(wasOccupied ? `Replaced ${day}'s meal ✓` : `Added to ${day} ✓`);
-}
+    function renderIngredients(r, servings) { const factor = servings / 4; const grid = document.getElementById('rd-ings'); if (!r.ings4 || !r.ings4.length) { grid.innerHTML = `<div class="loading-ings">No ingredients saved — visit the recipe link above.</div>`; return; } grid.innerHTML = r.ings4.map(ing => `<div class="ing"><div class="ing-dot"></div>${scaleIngredient(ing, factor)}</div>`).join(''); }
+    function scaleIngredient(ing, factor) { if (factor === 1) return ing; return ing.replace(/(\d+(?:\.\d+)?(?:\/\d+)?)/g, (match) => { const num = eval(match); const scaled = num * factor; if (Number.isInteger(scaled)) return scaled; const fracs = [[1 / 4, '¼'], [1 / 3, '⅓'], [1 / 2, '½'], [2 / 3, '⅔'], [3 / 4, '¾']]; const whole = Math.floor(scaled); const frac = scaled - whole; for (const [val, sym] of fracs) { if (Math.abs(frac - val) < 0.05) return (whole ? whole + sym : sym); } return Math.round(scaled * 10) / 10; }); }
+    function changeServings(delta) { currentServings = Math.max(1, Math.min(12, currentServings + delta)); document.getElementById('svc-num').textContent = currentServings; if (currentRecipe) renderIngredients(currentRecipe, currentServings); }
+    function renderStars(cid, type, name) { const c = document.getElementById(cid); const cur = (ratings[name] || {})[type] || 0; c.innerHTML = [1, 2, 3, 4, 5].map(n => `<button class="sbtn ${cur >= n ? 'lit' : ''}" onclick="setRating('${esc(name)}','${type}',${n})">★</button>`).join(''); }
+    function setRating(name, type, val) { if (!ratings[name]) ratings[name] = { p: 0, k: 0 }; ratings[name][type] = val; scheduleSave(); renderStars(type === 'p' ? 'p-stars' : 'k-stars', type, name); renderLibrary(); showToast('Rating saved ✓'); }
+    function saveNote() { if (!currentRecipe) return; notes[currentRecipe.name] = document.getElementById('rd-notes').value; scheduleSave(); }
 
-function removeFromPlanByName(name) {
-  const day = days.find(d => plan[d] && plan[d].name === name);
-  if (day) { plan[day] = null; savePlan(); renderPlanner(); renderLibrary(); }
-  document.getElementById('rd-actions').innerHTML =
-    `<button class="btn btn-sage" onclick="addToPlanByName('${esc(name)}')">+ Add to this week</button>`;
-  showToast('Removed from week');
-}
+    // ─── COOKED ──────────────────────────────────────────────────────────────────
+    function renderCookedBtn(name) { const isCooked = !!cooked[name]; return isCooked ? `<button class="btn btn-sec" onclick="confirmUnmarkCooked('${esc(name)}')">🍳 ${formatCookedDate(cooked[name])} · Undo</button>` : `<button class="btn btn-gold" onclick="confirmMarkCooked('${esc(name)}')">🍳 Mark as cooked</button>`; }
+    function confirmMarkCooked(name) { if (!confirm(`Mark "${name}" as cooked today?`)) return; cooked[name] = new Date().toISOString().split('T')[0]; scheduleSave(); renderLibrary(); const cb = document.getElementById('cooked-btn'); if (cb) cb.innerHTML = renderCookedBtn(name); showToast('Marked as cooked 🍳'); }
+    function confirmUnmarkCooked(name) { if (!confirm(`Remove the "cooked" record for "${name}"?`)) return; delete cooked[name]; scheduleSave(); renderLibrary(); const cb = document.getElementById('cooked-btn'); if (cb) cb.innerHTML = renderCookedBtn(name); showToast('Cooked record removed'); }
+    function formatCookedDate(iso) { if (!iso) return null; const d = new Date(iso); const now = new Date(); const diff = Math.floor((now - d) / 86400000); if (diff === 0) return 'Cooked today'; if (diff === 1) return 'Cooked yesterday'; if (diff < 7) return `Cooked ${diff}d ago`; if (diff < 30) return `Cooked ${Math.floor(diff / 7)}w ago`; return `Cooked ${d.toLocaleDateString('en-AU', { day: 'numeric', month: 'short' })}`; }
 
-function closeRD() { document.getElementById('modal-recipe').classList.remove('open'); currentRecipe = null; }
-function closeRDOutside(e) { if (e.target === document.getElementById('modal-recipe')) closeRD(); }
+    // ─── ADD TO PLAN FROM DETAIL ─────────────────────────────────────────────────
+    function addToPlanByName(name) { const r = RECIPES.find(x => x.name === name); if (!r) return; const actionsEl = document.getElementById('rd-actions'); const dayBtns = days.map(d => { const occupied = plan[d] && plan[d].name !== name; const isCurrent = plan[d] && plan[d].name === name; if (isCurrent) return ''; return `<button class="btn btn-sm ${occupied ? 'btn-sec' : 'btn-sage'}" onclick="assignToPlanDay('${esc(name)}','${esc(d)}')" title="${occupied ? 'Replaces: ' + plan[d].name : 'Add to ' + d}">${d.slice(0, 3)}${occupied ? ' ⚠️' : ''}</button>`; }).join(''); actionsEl.innerHTML = `<div style="width:100%"><div style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--tl);margin-bottom:7px">Choose a day:</div><div style="display:flex;flex-wrap:wrap;gap:6px">${dayBtns}</div><button class="btn btn-sec btn-sm" style="margin-top:8px" onclick="openRecipe('${esc(name)}')">Cancel</button></div>`; }
+    function assignToPlanDay(name, day) { const r = RECIPES.find(x => x.name === name); if (!r) return; const wasOccupied = plan[day] && plan[day].name !== name; plan[day] = r; scheduleSave(); renderPlanner(); renderLibrary(); document.getElementById('rd-actions').innerHTML = `<button class="btn btn-sec" onclick="removeFromPlanByName('${esc(name)}')">✓ Remove from week</button><span id="cooked-btn">${renderCookedBtn(name)}</span>`; showToast(wasOccupied ? `Replaced ${day}'s meal ✓` : `Added to ${day} ✓`); }
+    function removeFromPlanByName(name) { const day = days.find(d => plan[d] && plan[d].name === name); if (day) { plan[day] = null; scheduleSave(); renderPlanner(); renderLibrary(); } document.getElementById('rd-actions').innerHTML = `<button class="btn btn-sage" onclick="addToPlanByName('${esc(name)}')">+ Add to this week</button><span id="cooked-btn">${renderCookedBtn(name)}</span>`; showToast('Removed from week'); }
+    function closeRD() { document.getElementById('modal-recipe').classList.remove('open'); currentRecipe = null; }
+    function closeRDOutside(e) { if (e.target === document.getElementById('modal-recipe')) closeRD(); }
 
-// ─── TABS ────────────────────────────────────────────────────────────────────
-function switchTab(tab) {
-  const tabNames = ['library','planner','staples','discover'];
-  document.querySelectorAll('.tab').forEach((t,i) => t.classList.toggle('active', tabNames[i] === tab));
-  tabNames.forEach(v => document.getElementById('view-'+v).classList.toggle('active', v === tab));
-  if (tab === 'planner') renderPlanner();
-  if (tab === 'library') renderLibrary();
-  if (tab === 'staples') renderStaples();
-  if (tab === 'discover') renderDiscover();
-}
+    // ─── SUBMIT / EXTRACT ────────────────────────────────────────────────────────
+    let extractedData = null;
+    async function extractRecipe() { const url = document.getElementById('submit-url').value.trim(); if (!url || !url.startsWith('http')) { showSubmitError('Please enter a valid URL starting with http'); return; } const btn = document.getElementById('extract-btn'); btn.innerHTML = '<span class="spin"></span> Extracting…'; btn.disabled = true; document.getElementById('submit-preview').style.display = 'none'; document.getElementById('submit-error').style.display = 'none'; try { const prompt = `You are a recipe extraction assistant. The user has provided this recipe URL: ${url}\n\nExtract the following and respond ONLY with valid JSON:\n{"name":"Full recipe name","source":"Website/blog name","tags":["only from: quick,slow,asian,mediterranean,mexican,comfort,seafood"],"ingredients_4_serves":["ingredient 1 with quantity for 4 serves","..."]}\n\nIf you cannot extract, respond: {"error":"Could not extract recipe from this URL"}`; const response = await fetch('https://api.anthropic.com/v1/messages', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1000, messages: [{ role: 'user', content: prompt }] }) }); const data = await response.json(); const text = data.content?.find(b => b.type === 'text')?.text || ''; const clean = text.replace(/```json|```/g, '').trim(); const parsed = JSON.parse(clean); if (parsed.error) throw new Error(parsed.error); extractedData = parsed; extractedData.url = url; document.getElementById('pre-name').value = parsed.name || ''; document.getElementById('pre-source').value = parsed.source || ''; document.getElementById('pre-ings').value = (parsed.ingredients_4_serves || []).join('\n'); document.getElementById('pre-tags').innerHTML = ALL_TAGS.map(t => { const active = (parsed.tags || []).includes(t); return `<button class="fb ${active ? 'active' : ''}" onclick="toggleExtractTag(this,'${t}')">${cap(t)}</button>`; }).join(''); document.getElementById('submit-preview').style.display = 'block'; } catch (e) { showSubmitError(`Couldn't extract: ${e.message}`); } finally { btn.innerHTML = '✨ Extract Recipe Details'; btn.disabled = false; } }
+    function toggleExtractTag(btn) { btn.classList.toggle('active'); }
+    function saveExtractedRecipe() { const name = document.getElementById('pre-name').value.trim(); const source = document.getElementById('pre-source').value.trim(); const ings = document.getElementById('pre-ings').value.trim().split('\n').filter(l => l.trim()); const tags = [...document.querySelectorAll('#pre-tags .fb.active')].map(b => b.textContent.toLowerCase()); const url = document.getElementById('submit-url').value.trim(); if (!name) { showSubmitError('Please enter a recipe name'); return; } if (RECIPES.find(r => r.name === name)) { showSubmitError('Already in your Library'); return; } RECIPES.push({ name, source: source || 'Custom', url, tags, ings4: ings }); renderLibrary(); resetSubmit(); switchTab('library'); showToast(`"${name}" added to Library! 📚`); }
+    function resetSubmit() { document.getElementById('submit-url').value = ''; document.getElementById('submit-preview').style.display = 'none'; document.getElementById('submit-error').style.display = 'none'; extractedData = null; }
+    function showSubmitError(msg) { const el = document.getElementById('submit-error'); el.textContent = msg; el.style.display = 'block'; }
 
-// ─── UTILITIES ───────────────────────────────────────────────────────────────
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg; t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2200);
-}
-function esc(s) { return (s||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'"); }
-function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
-function shuffle(arr) { for (let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}return arr; }
+    // ─── TABS ────────────────────────────────────────────────────────────────────
+    function switchTab(tab) { const tabNames = ['library', 'planner', 'staples', 'discover', 'submit']; document.querySelectorAll('.tab').forEach((t, i) => t.classList.toggle('active', tabNames[i] === tab)); tabNames.forEach(v => document.getElementById('view-' + v).classList.toggle('active', v === tab)); if (tab === 'planner') renderPlanner(); if (tab === 'library') renderLibrary(); if (tab === 'staples') renderStaples(); if (tab === 'discover') renderDiscover(); }
 
-// ─── INIT ────────────────────────────────────────────────────────────────────
-renderLibrary();
-</script>
+    // ─── UTILITIES ───────────────────────────────────────────────────────────────
+    function showToast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2200); }
+    function esc(s) { return (s || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'"); }
+    function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+    function shuffle(arr) { for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1));[arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
+
+    // Make functions available globally (needed since we're in a module)
+    window.setFilter = setFilter; window.openRecipe = openRecipe; window.switchTab = switchTab;
+    window.removeMeal = removeMeal; window.clearPlan = clearPlan; window.autoPlan = autoPlan;
+    window.openDayModal = openDayModal; window.closeDayModal = closeDayModal; window.closeDayModalOutside = closeDayModalOutside;
+    window.assignMeal = assignMeal; window.closeRD = closeRD; window.closeRDOutside = closeRDOutside;
+    window.changeServings = changeServings; window.setRating = setRating; window.saveNote = saveNote;
+    window.addToPlanByName = addToPlanByName; window.assignToPlanDay = assignToPlanDay; window.removeFromPlanByName = removeFromPlanByName;
+    window.confirmMarkCooked = confirmMarkCooked; window.confirmUnmarkCooked = confirmUnmarkCooked;
+    window.toggleShoppingList = toggleShoppingList; window.copyShoppingList = copyShoppingList; window.toggleShopItem = toggleShopItem;
+    window.shuffleDiscover = shuffleDiscover; window.addDiscoverToPlan = addDiscoverToPlan; window.addDiscoverToLibrary = addDiscoverToLibrary;
+    window.extractRecipe = extractRecipe; window.toggleExtractTag = toggleExtractTag; window.saveExtractedRecipe = saveExtractedRecipe; window.resetSubmit = resetSubmit;
+
+    // ─── INIT ────────────────────────────────────────────────────────────────────
+    renderLibrary();
+    startSync();
+  </script>
+
+
 </body>
+
 </html>
