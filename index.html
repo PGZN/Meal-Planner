@@ -1843,20 +1843,63 @@
     function addDynamicToPlan(idx) {
       const d = discoverResults[idx];
       if (!d) return;
+      // Reuse the existing day-picker flow from the recipe detail sheet
+      const stub = { name: d.name, source: d.source || '', url: d.url || '', tags: d.tags || [], ings4: ["See recipe link for full ingredients"] };
+      // Add to next free day directly, show toast
       const empty = days.find(day => !plan[day]);
       if (!empty) { showToast("Week is full — remove a meal first"); return; }
-      plan[empty] = { name: d.name, source: d.source || '', url: d.url || '', tags: d.tags || [], ings4: ["See recipe link for full ingredients"] };
+      plan[empty] = stub;
       scheduleSave(); renderPlanner(); renderLibrary();
       showToast(`${d.name} added to ${empty}`);
     }
 
-    function addDynamicToLibrary(idx) {
+    async function addDynamicToLibrary(idx) {
       const d = discoverResults[idx];
       if (!d) return;
       if (RECIPES.find(r => r.name === d.name)) { showToast("Already in your Library!"); return; }
-      RECIPES.push({ name: d.name, source: d.source || 'Custom', url: d.url || '', tags: d.tags || [], ings4: ["See recipe link for full ingredients"] });
+
+      // If we have a real URL, extract ingredients from it first
+      if (d.url && d.url.startsWith('http')) {
+        showToast('Fetching ingredients…');
+        try {
+          const response = await fetch(PROXY_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ extractUrl: d.url })
+          });
+          const data = await response.json();
+          if (!data.error) {
+            const text = data.content?.find(b => b.type === 'text')?.text || '';
+            const clean = text.replace(/```json|```/g, '').trim();
+            const parsed = JSON.parse(clean);
+            if (!parsed.error && parsed.ingredients_4_serves?.length) {
+              RECIPES.push({
+                name: d.name,
+                source: parsed.source || d.source || 'Custom',
+                url: d.url,
+                tags: d.tags || [],
+                ings4: parsed.ingredients_4_serves
+              });
+              renderLibrary();
+              showToast(`${d.name} saved to Library with ingredients 📚`);
+              return;
+            }
+          }
+        } catch (e) {
+          console.warn('Ingredient extraction failed, saving stub:', e);
+        }
+      }
+
+      // Fallback: save stub and tell user to add ingredients manually
+      RECIPES.push({
+        name: d.name,
+        source: d.source || 'Custom',
+        url: d.url || '',
+        tags: d.tags || [],
+        ings4: []
+      });
       renderLibrary();
-      showToast(`${d.name} saved to Library 📚`);
+      showToast(`${d.name} saved — tap card to add ingredients 📚`);
     }
 
     // ─── SHOPPING LIST ────────────────────────────────────────────────────────────
@@ -2026,8 +2069,24 @@
         (inPlan
           ? `<button class="btn btn-sec" onclick="removeFromPlanByName('${esc(r.name)}')">Remove from week</button>`
           : `<button class="btn btn-sage" onclick="addToPlanByName('${esc(r.name)}')">+ Add to this week</button>`) +
-        `<span id="cooked-btn">${renderCookedBtn(r.name)}</span>`;
+        `<span id="cooked-btn">${renderCookedBtn(r.name)}</span>` +
+        `<button class="btn" style="background:#fff0ed;color:var(--rust);border:1.5px solid var(--rust)" onclick="deleteFromLibrary('${esc(r.name)}')">🗑 Delete</button>`;
       document.getElementById('modal-recipe').classList.add('open');
+    }
+
+    function deleteFromLibrary(name) {
+      if (!confirm(`Remove "${name}" from your Library? This cannot be undone.`)) return;
+      const idx = RECIPES.findIndex(r => r.name === name);
+      if (idx === -1) return;
+      RECIPES.splice(idx, 1);
+      // Also remove from plan if scheduled
+      days.forEach(d => { if (plan[d]?.name === name) plan[d] = null; });
+      // Clear ratings/notes/cooked for this recipe
+      delete ratings[name]; delete notes[name]; delete cooked[name];
+      scheduleSave();
+      closeRD();
+      renderLibrary(); renderPlanner();
+      showToast(`${name} removed from Library`);
     }
 
     function renderIngredients(r, servings) {
@@ -2299,6 +2358,7 @@
     window.toggleShoppingList = toggleShoppingList; window.copyShoppingList = copyShoppingList; window.toggleShopItem = toggleShopItem;
     window.shuffleDiscover = shuffleDiscover; window.addDynamicToPlan = addDynamicToPlan; window.addDynamicToLibrary = addDynamicToLibrary;
     window.extractRecipe = extractRecipe; window.toggleExtractTag = toggleExtractTag; window.saveExtractedRecipe = saveExtractedRecipe; window.resetSubmit = resetSubmit;
+    window.deleteFromLibrary = deleteFromLibrary;
 
     // ─── INIT ────────────────────────────────────────────────────────────────────
     renderLibrary();
