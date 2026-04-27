@@ -1773,7 +1773,9 @@
           </div>
           <div class="disc-reason">${d.reason}</div>
           <div class="disc-actions">
-            ${d.url ? `<a href="${d.url}" target="_blank" class="btn btn-sec btn-sm">View recipe ↗</a>` : ''}
+            ${d.url
+              ? `<a href="${d.url}" target="_blank" class="btn btn-sec btn-sm">View recipe ↗</a>`
+              : `<a href="https://www.google.com/search?q=${encodeURIComponent(d.name + ' recipe')}" target="_blank" class="btn btn-sec btn-sm">Search recipe ↗</a>`}
             <button class="btn btn-sage btn-sm" onclick="addDynamicToPlan(${i})">+ Add to week</button>
             <button class="btn btn-gold btn-sm" onclick="addDynamicToLibrary(${i})">📚 Save to Library</button>
           </div>
@@ -1794,7 +1796,8 @@
         return `- ${r.name} (${r.tags.join(', ')}) | ${pRating}, ${kRating} | ${lc}`;
       }).join('\n');
 
-      const prompt = `You are a family meal discovery assistant. Here is this family's recipe library with ratings and cook history:\n\n${libraryContext}\n\nSuggest exactly 5 NEW recipes this family would love. Consider which cuisines are underrepresented, what got high ratings, what hasn't been cooked recently, and what works for a family with kids.\n\nRespond ONLY with a valid JSON array, no markdown:\n[\n  {\n    "name": "Recipe name",\n    "source": "Website name (e.g. RecipeTin Eats, Simple Home Edit, Taste.com.au, NYT Cooking)",\n    "url": "https://... (real URL to the recipe)",\n    "tags": ["only from: quick, slow, asian, mediterranean, mexican, comfort, seafood"],\n    "reason": "2-3 sentence personalised reason based on their actual ratings and cook history"\n  }\n]`;
+      // Don't ask Claude for URLs — it hallucinates them. We'll search for real ones after.
+      const prompt = `You are a family meal discovery assistant. Here is this family's recipe library with ratings and cook history:\n\n${libraryContext}\n\nSuggest exactly 5 NEW recipes this family would love. Consider which cuisines are underrepresented, what got high ratings, what hasn't been cooked recently, and what works for a family with kids.\n\nRespond ONLY with a valid JSON array, no markdown:\n[\n  {\n    "name": "Full recipe name",\n    "source": "Website name — pick from: RecipeTin Eats, Simple Home Edit, Taste.com.au, BBC Good Food, AllRecipes",\n    "tags": ["only from: quick, slow, asian, mediterranean, mexican, comfort, seafood"],\n    "reason": "2-3 sentence personalised reason based on their actual ratings and cook history"\n  }\n]`;
 
       try {
         const response = await fetch(PROXY_URL, {
@@ -1810,7 +1813,25 @@
         if (data.error) throw new Error(data.error.message);
         const text = data.content?.find(b => b.type === 'text')?.text || '';
         const clean = text.replace(/```json|```/g, '').trim();
-        discoverResults = JSON.parse(clean);
+        const suggestions = JSON.parse(clean);
+
+        // Resolve real URLs via Worker search — run in parallel
+        const withUrls = await Promise.all(suggestions.map(async (s) => {
+          try {
+            const searchQuery = `${s.name} ${s.source || ''}`.trim();
+            const res = await fetch(PROXY_URL, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ searchRecipeUrl: searchQuery })
+            });
+            const result = await res.json();
+            return { ...s, url: result.url || '' };
+          } catch {
+            return { ...s, url: '' };
+          }
+        }));
+
+        discoverResults = withUrls;
       } catch (e) {
         console.error('Discover error:', e);
         discoverResults = [{ name: 'Something went wrong', reason: `${e.message} — check your connection and try again.`, tags: [], url: '', source: '' }];
